@@ -1,0 +1,36 @@
+<div class="row">
+
+  <div class="col-md-8">
+    <div class="subtitles text-center">
+      <div class="row">
+        <div class="col-xs-12">
+            <span id="line1">{{videoComp.subtitle.line1}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+            <span id="line2">{{videoComp.subtitle.line2}}</span>
+        </div>
+      </div>
+    </div>
+    <video src="video/Downfall.mkv" controls autoplay></video>
+  </div>
+
+  <div class="col-md-4">
+    <div class="subtitle-edit-container">
+      <div class="row" ng-repeat="subtitle in videoComp.script track by $index">
+        <div class="col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-heading panel-title">
+              {{subtitle.duration}}
+            </div>
+            <div class="panel-body">
+              <input name="line1" type="text" class="form-control" ng-model="subtitle.line1"/>
+              <input name="line2" type="text" class="form-control" ng-model="subtitle.line2"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>M.E.A.N Coach</title>
+    <title>MEAN Coach</title>
     <base href="/">
 
     <!-- Dependencies -->
@@ -14,16 +14,11 @@
     <!-- Main App Script -->
     <script src="app/app.js"></script>
 
-
-
      <!-- Containers / Pages -->
-     <script src=""></script>
-
-    <!-- Materialize -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="/css/style.css">
+     <script src="app/containers/home/home.js"></script>
+     <script src="app/containers/login/login.js"></script>
+     <script src="app/containers/signup/signup.js"></script>
+     <script src="app/containers/profile/profile.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,11 +27,22 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+  <header>
+    <ul>
+      <li><a ui-sref="homeState()">Home</a></li>
+      <li><a ui-sref="loginState()">Login</a></li>
+      <li><a ui-sref="signupState()">Signup</a></li>
+      <li><a ui-sref="profileState()">Profile</a></li>
+    </ul>
+  </header>
 
   <body ng-app="App">
-    <p>Angular, what is 1 + 1? {{1 + 1}}</p>
+    Sanity Check: Angular what is 1+1? {{1+1}}
     <div class="container">
       <div ui-view></div>
     </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   </body>
 </html>

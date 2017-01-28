@@ -6,14 +6,27 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Agentscreech/MEAN-Coach.git"
+  },
   "author": "Travis, Donnie, Ryne",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Agentscreech/MEAN-Coach.git"
+  },
+  "homepage": "https://github.com/Agentscreech/MEAN-Coach.git",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.16.0",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "express-ejs-layouts": "^2.2.0",
+    "express-jwt": "^5.1.0",
+    "jsonwebtoken": "^7.2.1",
     "mongoose": "^4.7.8",
+    "morgan": "^1.7.0",
     "path": "^0.12.7"
   }
 }

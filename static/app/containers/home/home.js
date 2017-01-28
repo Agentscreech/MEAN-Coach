@@ -5,8 +5,7 @@ angular.module('App')
   controllerAs: 'homeComp'
 });
 
-function HomeCompCtrl(ScriptService) {
-
+function HomeCompCtrl() {
+  
 }
-
 HomeCompCtrl.$inject = [];
