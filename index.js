@@ -28,9 +28,9 @@ app.use(require('morgan')('dev'));
 
 //Restrict access unless the user passes the expressJWT
 
-app.use('/api/users', expressJWT({secret: secret}).unless({
-  path: [{ url: '/api/users', methods: ['POST'] }]
-}), require('./controllers/users'));
+// app.use('/api/users', expressJWT({secret: secret}).unless({
+//   path: [{ url: '/api/users', methods: ['POST'] }]
+// }), require('./controllers/users'));
 
 //Middleware to check if expressJWT did not authorize the user and display error message
 app.use(function (err, req, res, next) {
