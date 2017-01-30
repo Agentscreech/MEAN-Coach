@@ -10,7 +10,7 @@ var app = express();
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var secret = process.env.JWT_SECRET;
-// var secret = "GETHEALTHYGETFIT";
+
 
 //Mongoose models and connection
 var mongoose = require('mongoose');
