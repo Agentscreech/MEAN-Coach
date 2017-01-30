@@ -30,6 +30,7 @@ function UserSettingsCompCtrl($state) {
           return error;
         }
         // console.log(bmr);
+        bmr = Math.round(bmr, 1);
         userSettingsComp.bmr = bmr;
         // return bmr;
       };

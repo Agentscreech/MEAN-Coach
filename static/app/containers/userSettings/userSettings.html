@@ -9,10 +9,10 @@
         <h3>{{userSettingsComp.bmr}}</h3>
         <p>The following are suggestions to maintain your weight for a daily calorie goal based on activity level</p>
         <ul>
-            <li> Sedentary: {{userSettingsComp.bmr * 1.2}}</li>
-            <li>Low Activity (2-3 times/week): {{userSettingsComp.bmr * 1.37}}</li>
-            <li>Moderate Activity(4-5 times/week): {{userSettingsComp.bmr * 1.55}}</li>
-            <li>High Activity (6-7 times/week): {{userSettingsComp.bmr * 1.72}}</li>
+            <li> Sedentary: {{userSettingsComp.bmr * 1.2 | number:0}}</li>
+            <li>Low Activity (2-3 times/week): {{userSettingsComp.bmr * 1.4 | number:0}}</li>
+            <li>Moderate Activity(4-5 times/week): {{userSettingsComp.bmr * 1.6 | number:0}}</li>
+            <li>High Activity (6-7 times/week): {{userSettingsComp.bmr * 1.8 | number:0}}</li>
         </ul>
         <p>if you would like to lose 1 lb per week, you need to burn 500 more calories than you consume per day. </p>
     </div>
