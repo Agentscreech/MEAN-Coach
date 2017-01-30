@@ -15,6 +15,8 @@ var secret = "GETHEALTHYGETFIT";
 //Mongoose models and connection
 var mongoose = require('mongoose');
 var User = require('./models/user');
+var Activity = require('./models/activity');
+var Log = require('./models/log');
 mongoose.connect('mongodb://localhost/meancoach');
 
 //Setup Path directory (static)
