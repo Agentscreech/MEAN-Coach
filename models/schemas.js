@@ -72,7 +72,7 @@ var logSchema = Schema({
     collection: 'log'
 });
 
-var User = mongoose.model('User', userSchema);
+var User = mongoose.model('User', UserSchema);
 var Activity = mongoose.model('Activity', activitySchema);
 var Log = mongoose.model('Log', logSchema);
 
