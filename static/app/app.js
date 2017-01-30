@@ -12,7 +12,7 @@ angular.module('App', ['ui.router'])
     {
     $urlRouterProvider.otherwise('/');
 
-    // $httpProvider.interceptors.push('AuthInterceptor');
+    $httpProvider.interceptors.push('AuthInterceptor');
 
     //Setup states (routes)
     $stateProvider
