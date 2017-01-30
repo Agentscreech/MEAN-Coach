@@ -3,7 +3,7 @@ angular.module("App").run(function ($rootScope, $state, Auth) {
     console.log("root scope event: ", event, toState);
     if (toState.authenticate && !Auth.isAuthenticated()){
       // User isn’t authenticated
-      $state.transitionTo("home");
+      $state.transitionTo("homeState");
       event.preventDefault();
     }
   });

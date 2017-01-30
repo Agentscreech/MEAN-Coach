@@ -5,7 +5,7 @@ angular.module('App')
         controllerAs: 'loginComp'
     });
 
-function LoginCompCtrl($scope, $state, UserService) {
+function LoginCompCtrl($scope, $state, UserService, $window) {
     $scope.user = {
         email: '',
         password: ''
@@ -14,10 +14,13 @@ function LoginCompCtrl($scope, $state, UserService) {
         UserService.login($scope.user).then(function(user) {
             console.log("login response:", user);
             if (user !== false) {
-                $state.go('home');
+                $window.location.href='/profile/' + user.id;
+            }
+            else {
+                $state.go('homeState');
             }
         });
     };
 }
 
-LoginCompCtrl.$inject = ['$scope', '$state', 'UserService'];
+LoginCompCtrl.$inject = ['$scope', '$state', 'UserService', '$window'];

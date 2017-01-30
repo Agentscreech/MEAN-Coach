@@ -33,11 +33,11 @@ angular.module('App', ['ui.router'])
     .state('profileState', {
       url: '/profile/:id',
       component: 'profileComp',
-      authenticate: false
+      authenticate: true
     });
 
     //Redirect to login if url not found or not authenticated
-    $urlRouterProvider.otherwise("/login");
+    $urlRouterProvider.otherwise("/");
     // $urlRouterProvider.otherwise('/');
 
     //Removes # symbol for our routes
