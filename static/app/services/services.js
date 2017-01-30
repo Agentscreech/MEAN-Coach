@@ -26,10 +26,10 @@ angular.module('App')
         url: '/api/auth',
         method: 'POST',
         data: params
-      };
+    };
       return $http(req).then(function(res) {
         console.log("Got network", res);
-        return res.data;
+        // return res.data;
         Auth.saveToken(res.data.token);
         return res.data.user;
       });
@@ -64,7 +64,7 @@ angular.module('App')
         }
       }
     }
-  }
+  };
 }])
 
 //This does token interception over AJAX. Configures the header of the request to include authorization
@@ -77,5 +77,5 @@ angular.module('App')
       }
       return config;
     }
-  }
+  };
 }]);
