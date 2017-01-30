@@ -1,0 +1,22 @@
+<h1 class="center-align">ENTER USER SETTINGS HERE</h1>
+
+<h4>Fill out the following to get your estimated Base Metabolic Rate (BMR)</h4>
+<p>This is used to suggest a daily caloric intake value.</p>
+<!--TODO: maybe wrap this in an NG-if to show only when you have all the numbers needed-->
+<div class="center-align">
+    <h3>Your target daily caloric intake</h3>
+    <h3>{{BMR}}</h3>
+</div>
+
+<div class="row">
+    <div class="input-field col s12 m6 l4">
+        <form class="">
+            <label for="weight">Weight<input type="number" ng-model="weight" placeholder="in Kg"></label>
+            <!--TODO: have selector to choose kg/lbs-->
+            <label for="height">Height <input type="number" ng-model="height" placeholder="in cm"></label>
+            <!--TODO: have selector to choose cm/ft'in"-->
+            <label for="age">Age<input type="number" ng-model="age"></label>
+            <label for="goal">Goal <input type="number" ng-model="goal" placeholder="Calories per day"></label>
+        </form>
+    </div>
+</div>

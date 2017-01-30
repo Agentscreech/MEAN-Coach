@@ -32,6 +32,10 @@ angular.module('App', ['ui.router'])
       url: '/profile',
       component: 'profileComp'
     })
+    .state('userSettings', {
+        url: '/userSettings',
+        component: 'userSettingsComp'
+    });
 
     //Removes # symbol for our routes
     $locationProvider.html5Mode(true);
