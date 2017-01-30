@@ -17,16 +17,24 @@
         <p>if you would like to lose 1 lb per week, you need to burn 500 more calories than you consume per day. </p>
     </div>
 
+    <div class="switch">
+        <label>
+            Imperial
+            <input type="checkbox" ng-model="userSettingsComp.isMetric">
+            <span class="lever"></span>
+            Metric
+        </label>
+      </div>
     <div class="row">
         <form class="card-panel">
             <div class="row">
                 <div class="input-field col s12 m6 l4">
-                    <input type="number" ng-model="userSettingsComp.weight" placeholder="in Kg">
+                    <input type="number" ng-model="userSettingsComp.weight" placeholder="100">
                     <label for="weight">Weight:</label>
                 </div>
                 <!--TODO: have selector to choose kg/lbs-->
                 <div class="input-field col s12 m6 l4">
-                    <input type="number" ng-model="userSettingsComp.height" placeholder="in cm">
+                    <input type="number" ng-model="userSettingsComp.height" placeholder="75">
                     <label for="height">Height: </label>
                 </div>
                 <!--TODO: have selector to choose cm/ft'in"-->
@@ -43,13 +51,17 @@
                         <label for="Female"> Female</label>
                     </p>
                 </div>
-                <div class="input-field col s12 m6 l4">
-                    <input type="number" ng-model="userSettingsComp.goal" placeholder="Calories per day">
-                    <label for="goal">Goal: </label>
-                </div>
             </div>
+            <button class="btn" ng-click="userSettingsComp.calcBMR(userSettingsComp.weight, userSettingsComp.height, userSettingsComp.age, userSettingsComp.gender)">Calculate</button>
         </form>
-        <button class="btn" ng-click="userSettingsComp.calcBMR(userSettingsComp.weight, userSettingsComp.height, userSettingsComp.age, userSettingsComp.gender)">Calculate</button>
+        <div class="card-panel">
+        <div class="input-field col s12 m6 l4">
+            <input type="number" ng-model="userSettingsComp.goal" placeholder="Calories per day">
+            <label for="goal">Goal: </label>
+        </div>
+        <!-- <p>Set your target calories per day</p> -->
+        <button class="btn" ng-click="updateUser()">Set Target Calories</button>
+    </div>
     </div>
 
 </div>
