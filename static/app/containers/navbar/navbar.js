@@ -7,6 +7,7 @@ angular.module('App')
 
 function NavBarCompCtrl($scope, $state, Auth) {
   $scope.isLoggedIn = function() {
+    console.log("Am I still logged in?", Auth.isLoggedIn());
     return Auth.isLoggedIn()
   };
   $scope.logout = function() {
