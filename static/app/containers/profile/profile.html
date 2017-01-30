@@ -1,3 +1,31 @@
-<div>
+<div id="profile-container">
 	<h1>This is profile container</h1>
+
+	<span>
+		You haven't entered any information yet! Get started here:
+		<a ui-sref="userSettings()" ng-if="isLoggedIn()"><button>User Settings</button></a>
+	</span>
+
+	<div id="current-cals">
+		<h1>2046</h1>
+		<h3>calories</h3>
+	</div>
+
+	<div id="add-log-items">
+		<div class="add-container">
+			<h1>Foods</h1>
+			<hr/>
+			<form ng-submit="foodSearch()">
+				<input type="text" id="food-search" placeholder="Find a food">
+				<input type="submit">
+			</form>
+		</div>
+
+		<div class="add-container">
+			<h1>Activities</h1>
+			<hr/>
+
+		</div>
+	</div>
+
 </div>
