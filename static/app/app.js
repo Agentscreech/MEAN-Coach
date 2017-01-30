@@ -10,7 +10,6 @@ angular.module('App', ['ui.router'])
     $locationProvider,
     $httpProvider)
     {
-    $urlRouterProvider.otherwise('/');
 
     $httpProvider.interceptors.push('AuthInterceptor');
 
@@ -18,20 +17,28 @@ angular.module('App', ['ui.router'])
     $stateProvider
     .state('homeState', {
       url: '/',
-      component: 'homeComp'
+      component: 'homeComp',
+      authenticate: false
     })
     .state('signupState', {
       url: '/signup',
-      component: 'signupComp'
+      component: 'signupComp',
+      authenticate: false
     })
     .state('loginState', {
       url: '/login',
-      component: 'loginComp'
+      component: 'loginComp',
+      authenticate: false
     })
     .state('profileState', {
-      url: '/profile',
-      component: 'profileComp'
-    })
+      url: '/profile/:id',
+      component: 'profileComp',
+      authenticate: false
+    });
+
+    //Redirect to login if url not found or not authenticated
+    $urlRouterProvider.otherwise("/login");
+    // $urlRouterProvider.otherwise('/');
 
     //Removes # symbol for our routes
     $locationProvider.html5Mode(true);

@@ -9,8 +9,8 @@ var app = express();
 //JSON web token dependencies including secret keyboard
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
-// var secret = process.env.JWT_SECRET;
-var secret = "GETHEALTHYGETFIT";
+var secret = process.env.JWT_SECRET;
+// var secret = "GETHEALTHYGETFIT";
 
 //Mongoose models and connection
 var mongoose = require('mongoose');
@@ -30,9 +30,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require('morgan')('dev'));
 
 //Restrict access unless the user passes the expressJWT
-app.use('/api/users', expressJWT({secret: secret}).unless({
+app.use('/api/profile', expressJWT({ secret: secret }), require('./controllers/profile'));
+
+app.use('/api/users', expressJWT({ secret: secret }).unless({
   path: [{ url: '/api/users', methods: ['POST'] }]
 }), require('./controllers/users'));
+
+
 
 //Middleware to check if expressJWT did not authorize the user and display error message
 app.use(function (err, req, res, next) {

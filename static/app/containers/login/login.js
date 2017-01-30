@@ -9,12 +9,14 @@ function LoginCompCtrl($scope, $state, UserService) {
     $scope.user = {
         email: '',
         password: ''
-    };
+    }
     $scope.userLogin = function() {
-        UserService.login($scope.user);
-        console.log("This is user logging in: ", $scope.user);
-        //Redirect home on successful login
-        $state.go('homeState');
+        UserService.login($scope.user).then(function(user) {
+            console.log("login response:", user);
+            if (user !== false) {
+                $state.go('home');
+            }
+        });
     };
 }
 

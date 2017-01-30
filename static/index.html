@@ -13,12 +13,14 @@
 
     <!-- Main App Script -->
     <script src="app/app.js"></script>
+    <script src="app/rootScope.js"></script>
 
      <!-- Containers / Pages -->
      <script src="app/containers/home/home.js"></script>
      <script src="app/containers/login/login.js"></script>
      <script src="app/containers/signup/signup.js"></script>
      <script src="app/containers/profile/profile.js"></script>
+     <script src="app/containers/navbar/navbar.js"></script>
 
      <!-- Services -->
      <script src="app/services/services.js"></script>
@@ -30,16 +32,18 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <header>
-  <a ui-sref="homeState()">Home </a> |
-  <a ui-sref="loginState()"> Login </a> |
-  <a ui-sref="signupState()"> Signup </a> |
-  <a ui-sref="profileState()"> Profile </a>
-  </header>
+  <!-- <header>
+    <a ui-sref="homeState()">Home </a> |
+    <a ui-sref="loginState()" ng-hide="Auth.isLoggedIn()"> Login </a> |
+    <a ng-click="logout()" ng-show="Auth.isLoggedIn()"> Logout </a> |
+    <a ui-sref="signupState()" ng-hide="Auth.isLoggedIn()"> Signup </a> |
+    <a ui-sref="profileState()" ng-show="Auth.isLoggedIn()"> Profile</a>
+  </header> -->
 
   <body ng-app="App">
     Sanity Check: Angular what is 1+1? {{1+1}}
     <div class="container">
+      <div ng-include="'app/containers/navbar/navbar.html'"></div>
       <div ui-view></div>
     </div>
 

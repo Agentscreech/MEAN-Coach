@@ -5,8 +5,10 @@ angular.module('App')
   controllerAs: 'profileComp'
 });
 
-function ProfileCompCtrl() {
-
+function ProfileCompCtrl($scope, $state, Auth) {
+  $scope.isLoggedIn = function() {
+    return Auth.isLoggedIn();
+  }
 }
 
-ProfileCompCtrl.$inject = [];
+ProfileCompCtrl.$inject = ['$scope', '$state', 'Auth'];

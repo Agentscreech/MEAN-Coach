@@ -27,10 +27,12 @@ angular.module('App')
         method: 'POST',
         data: params
     };
+      console.log(req);
       return $http(req).then(function(res) {
         console.log("Got network", res);
         // return res.data;
         Auth.saveToken(res.data.token);
+        console.log("logged in?", Auth.isLoggedIn())
         return res.data.user;
       });
     }
@@ -42,6 +44,7 @@ angular.module('App')
   return {
     saveToken: function(token) {
       $window.localStorage['mean-user-token'] = token;
+      console.log("token has been saved: ", token);
     },
     getToken: function() {
       return $window.localStorage['mean-user-token'];
@@ -51,7 +54,13 @@ angular.module('App')
     },
     isLoggedIn: function() {
       var token = this.getToken();
-      return token ? true : false;
+      if (token) {
+        console.log("logged in", token);
+        return true;
+      } else {
+        console.log("not logged in", token);
+        return false;
+      }
     },
     currentUser: function() {
       if (this.isLoggedIn()) {
@@ -67,7 +76,7 @@ angular.module('App')
   };
 }])
 
-//This does token interception over AJAX. Configures the header of the request to include authorization
+//Token interception over AJAX. Configures the header of the request to include authorization
 .factory('AuthInterceptor', ['Auth', function(Auth) {
   return {
     request: function(config) {
