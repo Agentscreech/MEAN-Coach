@@ -34,9 +34,13 @@ angular.module('App', ['ui.router'])
       url: '/profile/:id',
       component: 'profileComp',
       authenticate: true
+    })
+    .state('userSettings', {
+        url: '/userSettings',
+        component: 'userSettingsComp'
     });
 
-    //Redirect to login if url not found or not authenticated
+    //Redirect to home if url not found or not authenticated
     $urlRouterProvider.otherwise("/");
     // $urlRouterProvider.otherwise('/');
 

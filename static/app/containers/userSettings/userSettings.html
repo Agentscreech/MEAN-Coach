@@ -1,0 +1,26 @@
+<h1 class="center-align">ENTER USER SETTINGS HERE</h1>
+
+<h4>Fill out the following to get your estimated Base Metabolic Rate (BMR)</h4>
+<p>This is used to suggest a daily caloric intake value.</p>
+<!--TODO: maybe wrap this in an NG-if to show only when you have all the numbers needed-->
+<div ng-if="userSettingsComp.bmr" class="center-align">
+    <h3>Your Basal Metobolic Rate</h3>
+    <h3>{{userSettingsComp.bmr}}</h3>
+</div>
+
+<div class="row">
+    <div class="input-field col s12 m6 l4">
+        <form class="">
+            <label for="weight">Weight:<input type="number" ng-model="userSettingsComp.weight" placeholder="in Kg"></label>
+            <!--TODO: have selector to choose kg/lbs-->
+            <label for="height">Height: <input type="number" ng-model="userSettingsComp.height" placeholder="in cm"></label>
+            <!--TODO: have selector to choose cm/ft'in"-->
+            <label for="age">Age:<input type="number" ng-model="userSettingsComp.age"></label>
+            <label for="gender">Gender: <input type="radio" ng-model="userSettingsComp.gender" value="Male">Male</label>
+            <label> <input type="radio" ng-model="userSettingsComp.gender" value="Female">Female</label>
+
+            <label for="goal">Goal: <input type="number" ng-model="userSettingsComp.goal" placeholder="Calories per day"></label>
+            <button ng-click="userSettingsComp.calcBMR(userSettingsComp.weight, userSettingsComp.height, userSettingsComp.age, userSettingsComp.gender)">Calculate</button>
+        </form>
+    </div>
+</div>
