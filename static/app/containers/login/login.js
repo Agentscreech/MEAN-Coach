@@ -14,7 +14,8 @@ function LoginCompCtrl($scope, $state, UserService, $window) {
         UserService.login($scope.user).then(function(user) {
             console.log("login response:", user);
             if (user !== false) {
-                $window.location.href='/profile/' + user.id;
+                // $window.location.href='/profile/' + user.id;
+                $state.go('profileState', { id: user.id});
             }
             else {
                 $state.go('homeState');
