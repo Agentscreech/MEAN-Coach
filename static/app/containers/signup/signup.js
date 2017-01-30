@@ -5,7 +5,7 @@ angular.module('App')
   controllerAs: 'signupComp'
 });
 
-function SignupCompCtrl($scope, $state) {
+function SignupCompCtrl($scope, $state, UserService) {
   $scope.user = {
     email: '',
     password: ''
@@ -25,11 +25,11 @@ function SignupCompCtrl($scope, $state) {
       }
       else {
         console.log("got user: ", user);
-        //Redirect after signup
-        $state.go('home');
+        //Redirect home after signup
+        $state.go('homeState');
       }
     });
   };
 }
 
-SignupCompCtrl.$inject = ['$scope', '$state'];
+SignupCompCtrl.$inject = ['$scope', '$state', 'UserService'];
