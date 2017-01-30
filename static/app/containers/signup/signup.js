@@ -25,7 +25,7 @@ function SignupCompCtrl($scope, $state, UserService) {
       }
       else {
         console.log("got user: ", user);
-        //Redirect home after signup
+        //Redirect home on successful signup
         $state.go('homeState');
       }
     });

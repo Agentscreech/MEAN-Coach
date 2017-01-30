@@ -5,8 +5,17 @@ angular.module('App')
   controllerAs: 'loginComp'
 });
 
-function LoginCompCtrl() {
-
+function LoginCompCtrl($scope, $state, UserService) {
+  $scope.user = {
+    email: '',
+    password: ''
+  };
+  $scope.userLogin = function() {
+    UserService.login($scope.user)
+    console.log("This is user logging in: ", $scope.user);
+    //Redirect home on successful login
+    $state.go('homeState');
+  }
 }
 
-LoginCompCtrl.$inject = [];
+LoginCompCtrl.$inject = ['$scope', '$state', 'UserService'];
