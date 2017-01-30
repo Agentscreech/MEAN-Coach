@@ -3,12 +3,16 @@ angular.module('App', ['ui.router'])
   '$stateProvider',
   '$urlRouterProvider',
   '$locationProvider',
+  '$httpProvider',
   function(
     $stateProvider,
     $urlRouterProvider,
-    $locationProvider
-  ) {
+    $locationProvider,
+    $httpProvider)
+    {
     $urlRouterProvider.otherwise('/');
+
+    $httpProvider.interceptors.push('AuthInterceptor');
 
     //Setup states (routes)
     $stateProvider
@@ -31,6 +35,5 @@ angular.module('App', ['ui.router'])
 
     //Removes # symbol for our routes
     $locationProvider.html5Mode(true);
-
   }
 ]);

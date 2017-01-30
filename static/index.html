@@ -20,6 +20,9 @@
      <script src="app/containers/signup/signup.js"></script>
      <script src="app/containers/profile/profile.js"></script>
 
+     <!-- Services -->
+     <script src="app/services/services.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -28,12 +31,10 @@
     <![endif]-->
   </head>
   <header>
-    <ul>
-      <li><a ui-sref="homeState()">Home</a></li>
-      <li><a ui-sref="loginState()">Login</a></li>
-      <li><a ui-sref="signupState()">Signup</a></li>
-      <li><a ui-sref="profileState()">Profile</a></li>
-    </ul>
+  <a ui-sref="homeState()">Home </a> |
+  <a ui-sref="loginState()"> Login </a> |
+  <a ui-sref="signupState()"> Signup </a> |
+  <a ui-sref="profileState()"> Profile </a>
   </header>
 
   <body ng-app="App">
