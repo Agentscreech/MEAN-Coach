@@ -1,4 +1,4 @@
-// angular.module('App', [])
+angular.module('UserServices', [])
 
 //POST new user to database, utilize Auth factory
 .factory('UserService', ['$http', 'Auth', function($http, Auth) {
