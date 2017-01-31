@@ -5,7 +5,7 @@ angular.module('App')
   controllerAs: 'profileComp'
 });
 
-function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $http) {
+function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $http, $interval) {
   var currentUser = Auth.currentUser();
   if ($stateParams.id !== currentUser.id) {
     $window.location.href='/profile/' + currentUser.id;
@@ -14,11 +14,24 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
     $scope.profile = Auth.currentUser();
     console.log("THIS IS SCOPE. PROFILE ", $scope.profile);
 
-
-  $scope.results = [];
   $scope.currentCals = 0;
-  $scope.chosenFood = undefined;
+  $scope.searchResults = [];
+  $scope.chosenFoods = [];
   $scope.searchTerm = "";
+  $scope.savedMeal = [];
+  $scope.savedMealDate = "";
+
+
+  //Delay search for 1 second after done typing
+  var interval = 1000;
+
+  $scope.delayBeforeSearch = function() {
+    $interval.cancel(interval);
+    interval = $interval(function() {
+      $scope.findFoods();
+      $interval.cancel(interval);
+    }, 1000);
+  };
 
 
   // Return list of available foods based on search term
@@ -29,7 +42,7 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
     };
 
     $http(req).then(function success(res) {
-      $scope.results = res.data.list.item;
+      $scope.searchResults = res.data.list.item;
     }, function failure(res) {
       console.log('failed');
     });
@@ -39,6 +52,9 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
   // Select one of the foods from the search results to retrieve calorie info
   $scope.addFood = function($event) {
 
+    $scope.searchResults = [];
+    $scope.searchTerm = "";
+
   	var foodID = event.target.id;
     var req = {
       url: '/addfood?foodId=' + foodID,
@@ -47,7 +63,7 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
 
     $http(req).then(function success(res) {
       $scope.chosen = res.data.report;
-      $scope.chosenFood = $scope.chosen.food.name;
+      $scope.chosenFoods.push({name: $scope.chosen.food.name, kCals: $scope.chosen.food.nutrients[1].value});
     }, function failure(res) {
       console.log('failed');
     });
@@ -56,11 +72,12 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
 
   // Add food to your log
   $scope.saveFood = function($event) {
-    $scope.currentCals += parseInt($scope.chosen.food.nutrients[1].value);
-    $scope.chosenFood = undefined;
+    $scope.savedMeal = $scope.chosenFoods;
+    $scope.savedMealDate = new Date();
+    console.log($scope.savedMeal);
   };
 
 }
 
 
-ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', '$http'];
+ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', '$http', '$interval'];

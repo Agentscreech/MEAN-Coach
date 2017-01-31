@@ -11,26 +11,36 @@
 		<h3>calories</h3>
 	</div>
 
+	<div ng-model="savedMeal" ng-show="savedMeal.length > 0">
+		<h5>Saved meal ({{savedMealDate}}):</h5>
+		<p ng-repeat="savedFood in savedMeal">{{savedFood.name}}</p>
+	</div>
+
 	<div id="add-log-items">
 		<div class="add-container">
 			<h1>Foods</h1>
 			<hr/>
-			<form ng-submit="findFoods()">
-				<input type="text" id="food-search" placeholder="Search for a food" ng-model="searchTerm">
-				<input type="submit">
-			</form>
-<!-- 			<p>{{result.food.ndbno}} {{result.food.name}}</p> -->
 
-			<div ng-show="chosenFood !== undefined" id="chosen-food">
-				<p>{{chosenFood}}</p>
-				<p>kCal: {{chosen.food.nutrients[1].value}}</p>
-				<a href="#current-cals"><button ng-click="saveFood()">SAVE FOOD</button></a>
+			<!-- Add a meal (chosen foods) section -->
+			<div id="chosen-foods" ng-show="chosenFoods.length > 0">
+				<h5>Add meal:</h5>
+				<span class="chosen-food-item" ng-repeat="chosenFood in chosenFoods">
+					<p class="chosen-food-item-name">{{chosenFood.name}}</p>
+					<p><strong>kCals:</strong> {{chosenFood.kCals}}</p>
+				</span>
+				<button ng-click="saveFood()">SAVE FOODS</button>
 			</div>
 
-			<ul id="food-results">
-				<li ng-repeat="result in results">
+			<!-- Search for foods -->
+			<form ng-submit="findFoods()" id="food-search-form">
+				<input type="text" id="food-search" placeholder="Search for a food" ng-model="searchTerm" ng-keydown="delayBeforeSearch()">
+			</form>
+
+			<!-- Search results -->
+			<ul id="food-results" ng-show="searchResults.length > 0">
+				<li ng-repeat="result in searchResults" ng-click="addFood(event)" id={{result.ndbno}}>
 					{{result.name}}
-					<button id={{result.ndbno}} ng-click="addFood(event)">Select</button>
+					<hr/>
 				</li>
 			</ul>
 

@@ -37,14 +37,49 @@ body {
 	background-color: #eee;
 	width: 49%;
 	padding: 10px 30px 35px 30px;
+	margin-bottom: 60px;
 }
 
 .add-container h1 {
 	margin-bottom: 0;
 }
 
-#chosen-food {
+#chosen-foods {
 	margin: 30px 0;
 	display: flex;
+	flex-direction: column;
+}
+
+.chosen-food-item {
+	display: flex;
+	align-items: flex-end;
 	justify-content: space-between;
+}
+
+.chosen-food-item-name {
+	max-width: 70%;
+}
+
+.search-submit-btn {
+	width: 400px;
+}
+
+#food-search-form {
+	margin-bottom: 0px;
+}
+
+#food-results {
+	margin-top: -20px;
+	background-color: white;
+	padding: 15px;
+	box-shadow: 0px 2px 7px rgba(0,0,0,.2);
+}
+
+#food-results li {
+	margin: 10px 0;
+	cursor: pointer;
+}
+
+#food-results li:hover {
+	color: #aaa;
 }
