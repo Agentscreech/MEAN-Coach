@@ -1,5 +1,20 @@
-body {
+@font-face {
+    font-family: SFSportsNight ;
+    src: url("../fonts/SFSportsNight.ttf");
+}
 
+.nav-wrapper {
+	background-color: gold;
+}
+
+.brand-logo {
+	font-family: "SFSportsNight";
+	font-style: italic;
+	color: black;
+	margin-left: 10px;
+}
+
+body {
 }
 
 /*** PROFILE PAGE STYLES ***/
@@ -41,10 +56,4 @@ body {
 
 .add-container h1 {
 	margin-bottom: 0;
-}
-
-#chosen-food {
-	margin: 30px 0;
-	display: flex;
-	justify-content: space-between;
 }

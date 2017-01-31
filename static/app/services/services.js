@@ -60,7 +60,6 @@ angular.module('App')
   return {
     saveToken: function(token, user) {
       $window.localStorage['mean-user-token'] = token;
-      $window.localStorage['mean-user-id'] = user.id;
       console.log("token has been saved: ", token);
     },
     getToken: function() {
@@ -68,14 +67,15 @@ angular.module('App')
     },
     removeToken: function() {
       $window.localStorage.removeItem('mean-user-token');
+      console.log("User token deleted", localStorage);
     },
     isLoggedIn: function() {
       var token = this.getToken();
       if (token) {
-        console.log("logged in", token);
+        // console.log("logged in", token);
         return true;
       } else {
-        console.log("not logged in", token);
+        // console.log("not logged in", token);
         return false;
       }
     },
@@ -84,7 +84,7 @@ angular.module('App')
         var token = this.getToken();
         try {
           var payload = JSON.parse($window.atob(token.split('.')[1]));
-          console.log("PAYLOAD:", payload);
+          // console.log("PAYLOAD:", payload);
           return payload;
         } catch(err) {
           return false;

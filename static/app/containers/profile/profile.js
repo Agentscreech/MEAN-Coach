@@ -12,7 +12,7 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
   }
   console.log("Current User; ", Auth.currentUser());
     $scope.profile = Auth.currentUser();
-    console.log("THIS IS SCOPE. PROFILE ", $scope.profile);
+    console.log("THIS IS SCOPE. PROFILE ", $scope.profile.id);
 
 
   $scope.results = [];

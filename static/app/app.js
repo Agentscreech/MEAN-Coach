@@ -40,6 +40,7 @@ angular.module('App', ['ui.router', 'ngResource'])
     .state('profileState', {
       url: '/profile/:id',
       component: 'profileComp'
+      // params: {id: profile.id}
     })
     .state('userSettingsState', {
         url: '/profile/:id/userSettings',
