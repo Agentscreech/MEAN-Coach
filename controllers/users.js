@@ -23,12 +23,33 @@ router.route('/').get(function(err, users) {
   });
 });
 
-router.get('/:id', function(req, res) {
+router.route('/:id')
+.get(function(req, res) {
   User.findById(req.params.id, function(err, user) {
     if (err) return res.status(500).send(err);
-    console.log("ASDFKJASDFKJASDFLKAJSDFKAJSDF!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11111");
     return res.send(user);
   });
 });
+router.route('/:id/userSettings')
+.get(function(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    if (err) return res.status(500).send(err);
+    return res.send(user);
+  });
+})
+.put(function(req,res){
+  console.log('trying to update', req.params.id);
+  User.findByIdAndUpdate(req.params.id, req.body, function(err){
+    if (err) return res.status(500).send(err);
+    return res.send({message: 'success'});
+  });
+})
+.delete(function(req, res) {
+    User.findByIdAndRemove(req.params.id, function(err) {
+      if (err) return res.status(500).send(err);
+
+      return res.send({ message: 'success' });
+    });
+  });
 
 module.exports = router;

@@ -10,7 +10,7 @@ function NavBarCompCtrl($state, Auth) {
   NavBarCompCtrl.isLoggedIn = function() {
   // Auth.isLoggedIn();
   console.log("In navbar ctrl:", Auth.isLoggedIn());
-  }
+};
 
   NavBarCompCtrl.logout = function() {
     Auth.removeToken();

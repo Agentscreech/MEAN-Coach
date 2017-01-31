@@ -1,15 +1,24 @@
-angular.module('App', ['ui.router'])
+angular.module('App', ['ui.router', 'ngResource'])
 .config([
   '$stateProvider',
   '$urlRouterProvider',
   '$locationProvider',
   '$httpProvider',
+  '$resourceProvider',
   function(
     $stateProvider,
     $urlRouterProvider,
     $locationProvider,
-    $httpProvider)
+    $httpProvider,
+    $resourceProvider)
     {
+      $resourceProvider.defaults.actions = {
+      create: {method: 'POST'},
+      get:    {method: 'GET'},
+      getAll: {method: 'GET', isArray:true},
+      update: {method: 'PUT'},
+      delete: {method: 'DELETE'}
+    };
       // console.log(Auth);
     $httpProvider.interceptors.push('AuthInterceptor');
 

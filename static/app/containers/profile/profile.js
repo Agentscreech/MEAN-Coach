@@ -18,7 +18,7 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
     var req = {
       url: '/usda?foodId=' + foodID,
       method: 'GET'
-    }
+    };
 
     $http(req).then(function success(res) {
       $scope.result = res.data.report;
