@@ -5,9 +5,7 @@ angular.module('App')
   controllerAs: 'profileComp'
 });
 
-
-function ProfileCompCtrl($scope, $state, $http, $stateParams, $window, Profile, Auth) {
-
+function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $http) {
   var currentUser = Auth.currentUser();
   if ($stateParams.id !== currentUser.id) {
     $window.location.href='/profile/' + currentUser.id;
