@@ -21,6 +21,7 @@ function ProfileCompCtrl($scope, $state, Auth, $http, $window) {
 
     $http(req).then(function success(res) {
       console.log(res.data.report.food.name);
+      $scope.result = res.data.report.food.name;
     }, function failure(res) {
       console.log('failed');
     });
