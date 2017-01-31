@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var path = require('path');
 var bodyParser = require('body-parser');
 var app = express();
+var request = require('request');
 
 //JSON web token dependencies including secret keyboard
 var expressJWT = require('express-jwt');
@@ -59,6 +60,18 @@ app.post('/api/auth', function(req, res) {
     //Sign the JWT with the user payload and secret
     var token = jwt.sign(user.toJSON(), secret);
     return res.send({ user: user, token: token });
+  });
+});
+
+//Proxy to send API request to USDA API 
+app.get('/usda', function(req, res) {
+
+  var id = req.query.foodId;
+  var url = "https://api.nal.usda.gov/ndb/reports/?ndbno=" + id + "&type=b&format=json&api_key=voDReYpFIe0hJoOxgqqfGU28oUAf3Yp1HbsfOGEg";
+  //res.send(url);
+
+  request(url, function(error, response, body) {
+    res.send(body);
   });
 });
 

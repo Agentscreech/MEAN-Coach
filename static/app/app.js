@@ -31,8 +31,8 @@ angular.module('App', ['ui.router'])
       url: '/profile/:id',
       component: 'profileComp'
     })
-    .state('userSettings', {
-        url: '/userSettings',
+    .state('userSettingsState', {
+        url: '/profile/:id/userSettings',
         component: 'userSettingsComp'
     })
     .state('navbarState', {
