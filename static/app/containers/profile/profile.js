@@ -18,11 +18,9 @@ function ProfileCompCtrl($scope, $state, Auth, $http, $window) {
       url: '/usda',
       method: 'GET'
     }
-    console.log('request: ', req);
-    // $window.location.href = req.url;
 
     $http(req).then(function success(res) {
-      console.log('SUCCESS');
+      console.log(res.data.report.food.name);
     }, function failure(res) {
       console.log('failed');
     });
