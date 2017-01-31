@@ -17,13 +17,13 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
   $scope.results = [];
   $scope.currentCals = 0;
   $scope.chosenFood = undefined;
+  $scope.searchTerm = "";
 
 
   // Return list of available foods based on search term
   $scope.findFoods = function() {
-    var searchTerm = 'raw broccoli';
     var req = {
-      url: '/foodresults?searchTerm=' + searchTerm,
+      url: '/foodresults?searchTerm=' + $scope.searchTerm,
       method: 'GET'
     }
 

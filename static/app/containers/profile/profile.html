@@ -16,7 +16,7 @@
 			<h1>Foods</h1>
 			<hr/>
 			<form ng-submit="findFoods()">
-				<input type="text" id="food-search" placeholder="Search for a food" value="Broccoli">
+				<input type="text" id="food-search" placeholder="Search for a food" ng-model="searchTerm">
 				<input type="submit">
 			</form>
 <!-- 			<p>{{result.food.ndbno}} {{result.food.name}}</p> -->
