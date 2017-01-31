@@ -14,19 +14,52 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
     $scope.profile = Auth.currentUser();
     console.log("THIS IS SCOPE. PROFILE ", $scope.profile);
 
-  $scope.foodSearch = function() {
-  	var foodID = 11090;
+
+  $scope.results = [];
+  $scope.currentCals = 0;
+  $scope.chosenFood = undefined;
+  $scope.searchTerm = "";
+
+
+  // Return list of available foods based on search term
+  $scope.findFoods = function() {
     var req = {
-      url: '/usda?foodId=' + foodID,
+      url: '/foodresults?searchTerm=' + $scope.searchTerm,
       method: 'GET'
     };
 
     $http(req).then(function success(res) {
-      $scope.result = res.data.report;
+      $scope.results = res.data.list.item;
     }, function failure(res) {
       console.log('failed');
     });
   };
+
+
+  // Select one of the foods from the search results to retrieve calorie info
+  $scope.addFood = function($event) {
+
+  	var foodID = event.target.id;
+    var req = {
+      url: '/addfood?foodId=' + foodID,
+      method: 'GET'
+    }
+
+    $http(req).then(function success(res) {
+      $scope.chosen = res.data.report;
+      $scope.chosenFood = $scope.chosen.food.name;
+    }, function failure(res) {
+      console.log('failed');
+    });
+  };
+
+
+  // Add food to your log
+  $scope.saveFood = function($event) {
+    $scope.currentCals += parseInt($scope.chosen.food.nutrients[1].value);
+    $scope.chosenFood = undefined;
+  };
+
 }
 
 

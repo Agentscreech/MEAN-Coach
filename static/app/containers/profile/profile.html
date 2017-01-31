@@ -7,7 +7,7 @@
 	</span>
 
 	<div id="current-cals">
-		<h1>2046</h1>
+		<h1 ng-model="currentCals">{{currentCals}}</h1>
 		<h3>calories</h3>
 	</div>
 
@@ -15,11 +15,25 @@
 		<div class="add-container">
 			<h1>Foods</h1>
 			<hr/>
-			<form ng-submit="foodSearch()">
-				<input type="text" id="food-search" placeholder="Test: Broccoli, raw">
+			<form ng-submit="findFoods()">
+				<input type="text" id="food-search" placeholder="Search for a food" ng-model="searchTerm">
 				<input type="submit">
 			</form>
-			<p>{{result.food.ndbno}} {{result.food.name}}</p>
+<!-- 			<p>{{result.food.ndbno}} {{result.food.name}}</p> -->
+
+			<div ng-show="chosenFood !== undefined" id="chosen-food">
+				<p>{{chosenFood}}</p>
+				<p>kCal: {{chosen.food.nutrients[1].value}}</p>
+				<a href="#current-cals"><button ng-click="saveFood()">SAVE FOOD</button></a>
+			</div>
+
+			<ul id="food-results">
+				<li ng-repeat="result in results">
+					{{result.name}}
+					<button id={{result.ndbno}} ng-click="addFood(event)">Select</button>
+				</li>
+			</ul>
+
 		</div>
 
 		<div class="add-container">
