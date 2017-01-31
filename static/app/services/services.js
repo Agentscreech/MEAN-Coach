@@ -1,4 +1,7 @@
 angular.module('App')
+.factory('User', ['$resource', function($resource){
+    return $resource('/api/users/:id/userSettings', {id: '@user_id'},{stripTrailingSlashes:false});
+}])
 .factory('Profile', ['$http', function($http) {
   return {
     getProfile: function(userId) {
@@ -9,7 +12,7 @@ angular.module('App')
       };
       return $http(req);
     }
-  }
+  };
 }])
 
 //POST new user to database, utilize Auth factory
@@ -44,8 +47,8 @@ angular.module('App')
         console.log("Got network", res);
         // return res.data;
         Auth.saveToken(res.data.token, res.data.user);
-        console.log("logged in?", Auth.isLoggedIn())
-        console.log("THIS IS IN token save", res.data.user)
+        // console.log("logged in?", Auth.isLoggedIn())
+        // console.log("THIS IS IN token save", res.data.user)
         return res.data.user;
       });
     }
