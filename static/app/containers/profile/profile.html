@@ -7,7 +7,7 @@
 	</span>
 
 	<div id="current-cals">
-		<h1>{{currentCals}}</h1>
+		<h1 ng-model="currentCals">{{currentCals}}</h1>
 		<h3>calories</h3>
 	</div>
 
@@ -21,13 +21,17 @@
 			</form>
 <!-- 			<p>{{result.food.ndbno}} {{result.food.name}}</p> -->
 
-			<div ng-show="searched" id="chosen-food">
-				SHOW RESULT
+			<div ng-show="chosenFood !== undefined" id="chosen-food">
+				<p>{{chosenFood}}</p>
+				<p>kCal: {{chosen.food.nutrients[1].value}}</p>
+				<a href="#current-cals"><button ng-click="saveFood()">SAVE FOOD</button></a>
 			</div>
 
-			<ul id="food-results" ng-repeat="result in results">
-				<li>{{result.name}}</li>
-				<button id={{result.ndbno}}>Select</button>
+			<ul id="food-results">
+				<li ng-repeat="result in results">
+					{{result.name}}
+					<button id={{result.ndbno}} ng-click="addFood(event)">Select</button>
+				</li>
 			</ul>
 
 		</div>

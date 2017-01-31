@@ -45,4 +45,6 @@ body {
 
 #chosen-food {
 	margin: 30px 0;
+	display: flex;
+	justify-content: space-between;
 }

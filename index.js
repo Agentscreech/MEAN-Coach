@@ -76,7 +76,7 @@ app.get('/foodresults', function(req, res) {
 });
 
 //Proxy to send API request to USDA API 
-app.get('/usda', function(req, res) {
+app.get('/addfood', function(req, res) {
 
   var id = req.query.foodId;
   var url = "https://api.nal.usda.gov/ndb/reports/?ndbno=" + id + "&type=b&format=json&api_key=voDReYpFIe0hJoOxgqqfGU28oUAf3Yp1HbsfOGEg";

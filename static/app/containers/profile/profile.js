@@ -13,9 +13,13 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
   console.log("Current User; ", Auth.currentUser());
     $scope.profile = Auth.currentUser();
 
-  $scope.results = [];
-  $scope.currentCals= 0;
 
+  $scope.results = [];
+  $scope.currentCals = 0;
+  $scope.chosenFood = undefined;
+
+
+  // Return list of available foods based on search term
   $scope.findFoods = function() {
     var searchTerm = 'raw broccoli';
     var req = {
@@ -30,19 +34,31 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
     });
   };
 
-  $scope.addFood = function() {
-  	var foodID = 11090;
+
+  // Select one of the foods from the search results to retrieve calorie info
+  $scope.addFood = function($event) {
+
+  	var foodID = event.target.id;
     var req = {
-      url: '/usda?foodId=' + foodID,
+      url: '/addfood?foodId=' + foodID,
       method: 'GET'
     }
 
     $http(req).then(function success(res) {
-      $scope.result = res.data.report;
+      $scope.chosen = res.data.report;
+      $scope.chosenFood = $scope.chosen.food.name;
     }, function failure(res) {
       console.log('failed');
     });
   };
+
+
+  // Add food to your log
+  $scope.saveFood = function($event) {
+    $scope.currentCals += parseInt($scope.chosen.food.nutrients[1].value);
+    $scope.chosenFood = undefined;
+  };
+
 }
 
 
