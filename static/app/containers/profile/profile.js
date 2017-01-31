@@ -5,20 +5,12 @@ angular.module('App')
   controllerAs: 'profileComp'
 });
 
-function ProfileCompCtrl($scope, $stateParams, Profile) {
-  $scope.profile = {};
-
-  //This is chained off of the call to the factory
-  Profile.getProfile($stateParams.id).then(function success(res){
-    console.log("YOUR PROFILE: ", res);
-    $scope.profile = {
-      email: res.data.email,
-      id: res.data.id
-    }
-    console.log("$SCOPE.PROFILE: ", $scope.profile);
-  }, function error(res){
-    console.log(res);
-  })
+function ProfileCompCtrl($scope, $stateParams, $window, Profile, Auth) {
+  var currentUser = Auth.currentUser()
+  if ($stateParams.id !== currentUser.id) {
+    $window.location.href='/profile/' + currentUser.id;
+  }
+  console.log("Current User; ", Auth.currentUser());
+    $scope.profile = Auth.currentUser();
 }
-
-ProfileCompCtrl.$inject = ['$scope', '$stateParams', 'Profile'];
+ProfileCompCtrl.$inject = ['$scope', '$stateParams', '$window', 'Profile', 'Auth'];

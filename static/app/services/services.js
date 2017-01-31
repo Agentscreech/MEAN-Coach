@@ -81,6 +81,7 @@ angular.module('App')
         var token = this.getToken();
         try {
           var payload = JSON.parse($window.atob(token.split('.')[1]));
+          console.log("PAYLOAD:", payload);
           return payload;
         } catch(err) {
           return false;

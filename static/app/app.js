@@ -34,6 +34,10 @@ angular.module('App', ['ui.router'])
     .state('userSettings', {
         url: '/userSettings',
         component: 'userSettingsComp'
+    })
+    .state('navbarState', {
+        url: '/',
+        component: 'navbarComp'
     });
 
     //Redirect to login if url not found or not authenticated
