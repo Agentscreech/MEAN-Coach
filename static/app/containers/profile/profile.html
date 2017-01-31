@@ -1,7 +1,38 @@
-<button class="btn" ui-sref="userSettingsState({id:profile.id})">UserSettings</button>
+
+<div id="profile-container">
+	<h1>This is profile container</h1>
+
+	<span>
+			{{user.id}}, you haven't entered any information yet! Get started here:
+		<button class="btn" ui-sref="userSettingsState({id:profile.id})">UserSettings</button>
+	</span>
+
+	<div id="current-cals">
+		<h1>2046</h1>
+		<h3>calories</h3>
+	</div>
+
+	<div id="add-log-items">
+		<div class="add-container">
+			<h1>Foods</h1>
+			<hr/>
+			<form ng-submit="foodSearch()">
+				<input type="text" id="food-search" placeholder="Test: Broccoli, raw">
+				<input type="submit">
+			</form>
+			<p>{{result.food.ndbno}} {{result.food.name}}</p>
+		</div>
+
+		<div class="add-container">
+			<h1>Activities</h1>
+			<hr/>
+
+		</div>
+	</div>
 
 <div>
 	<h1>This is profile container</h1>
 	User Email: {{profile.email}}
 	Use Id: {{profile.id}}
+
 </div>
