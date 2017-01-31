@@ -11,24 +11,21 @@ function ProfileCompCtrl($scope, $state, Auth, $http, $window) {
   }
 
   $scope.foodSearch = function() {
+  	var APIkey = 'voDReYpFIe0hJoOxgqqfGU28oUAf3Yp1HbsfOGEg';
+  	var foodID = 11090;
+
     var req = {
-      url: 'http://api.nal.usda.gov/ndb/reports/?ndbno=01009&type=b&format=json&api_key=voDReYpFIe0hJoOxgqqfGU28oUAf3Yp1HbsfOGEg',
-      method: "GET"
+      url: '/usda',
+      method: 'GET'
     }
-    console.log("request: ", req);
+    console.log('request: ', req);
     // $window.location.href = req.url;
 
     $http(req).then(function success(res) {
-    	console.log("response: ", res.data);
-    //   if (res.data.Error === "Movie not found!") {
-    //     $scope.results = [];
-    //   } else {
-    //     $scope.results = res.data.data;
-    //   }
-    // }, function failure(res) {
-    //   $scope.results = [];
+      console.log('SUCCESS');
+    }, function failure(res) {
+      console.log('failed');
     });
-
   };
 }
 

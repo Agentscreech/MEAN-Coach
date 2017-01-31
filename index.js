@@ -10,7 +10,7 @@ var app = express();
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var secret = process.env.JWT_SECRET;
-// var secret = "GETHEALTHYGETFIT";
+
 
 //Mongoose models and connection
 var mongoose = require('mongoose');
@@ -59,6 +59,16 @@ app.post('/api/auth', function(req, res) {
     //Sign the JWT with the user payload and secret
     var token = jwt.sign(user.toJSON(), secret);
     return res.send({ user: user, token: token });
+  });
+});
+
+//Proxy to send API request to USDA API 
+app.get('/usda', function(req, res) {
+  res.send("OK");
+  var id = req.params.foodId;
+  var url = "http://usda.gov/whatever/api?food_id" + id + '&type=b&format=json&api_key=voDReYpFIe0hJoOxgqqfGU28oUAf3Yp1HbsfOGEg';
+  request(url, function(err, response, body) {
+    res.send(response);
   });
 });
 
