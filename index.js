@@ -32,11 +32,9 @@ app.use(require('morgan')('dev'));
 
 //Restrict access unless the user passes the expressJWT
 app.use('/api/profile', expressJWT({ secret: secret }), require('./controllers/profile'));
-
 app.use('/api/users', expressJWT({ secret: secret }).unless({
   path: [{ url: '/api/users', methods: ['POST'] }]
 }), require('./controllers/users'));
-
 
 
 //Middleware to check if expressJWT did not authorize the user and display error message
@@ -75,7 +73,7 @@ app.get('/foodresults', function(req, res) {
   });
 });
 
-//Proxy to send API request to USDA API 
+//Proxy to send API request to USDA API
 app.get('/addfood', function(req, res) {
 
   var id = req.query.foodId;

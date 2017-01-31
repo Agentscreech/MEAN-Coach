@@ -11,6 +11,7 @@ angular.module('App', ['ui.router', 'ngResource'])
     $locationProvider,
     $httpProvider,
     $resourceProvider)
+    // specify custom types for $resource
     {
       $resourceProvider.defaults.actions = {
       create: {method: 'POST'},
