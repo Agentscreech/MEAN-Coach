@@ -11,17 +11,14 @@ function ProfileCompCtrl($scope, $state, Auth, $http, $window) {
   }
 
   $scope.foodSearch = function() {
-  	var APIkey = 'voDReYpFIe0hJoOxgqqfGU28oUAf3Yp1HbsfOGEg';
   	var foodID = 11090;
-
     var req = {
-      url: '/usda',
+      url: '/usda?foodId=' + foodID,
       method: 'GET'
     }
 
     $http(req).then(function success(res) {
-      console.log(res.data.report.food.name);
-      $scope.result = res.data.report.food.name;
+      $scope.result = res.data.report;
     }, function failure(res) {
       console.log('failed');
     });

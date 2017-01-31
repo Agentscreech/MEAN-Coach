@@ -66,8 +66,9 @@ app.post('/api/auth', function(req, res) {
 //Proxy to send API request to USDA API 
 app.get('/usda', function(req, res) {
 
-  var id = req.params.foodId;
-  var url = "https://api.nal.usda.gov/ndb/reports/?ndbno=11090&type=b&format=json&api_key=voDReYpFIe0hJoOxgqqfGU28oUAf3Yp1HbsfOGEg";
+  var id = req.query.foodId;
+  var url = "https://api.nal.usda.gov/ndb/reports/?ndbno=" + id + "&type=b&format=json&api_key=voDReYpFIe0hJoOxgqqfGU28oUAf3Yp1HbsfOGEg";
+  //res.send(url);
 
   request(url, function(error, response, body) {
     res.send(body);
