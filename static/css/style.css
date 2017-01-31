@@ -3,8 +3,27 @@
     src: url("../fonts/SFSportsNight.ttf");
 }
 
+.home-flex-container {
+  display: flex;
+  flex-direction: row;
+	justify-content: space-around;
+}
+
 .nav-wrapper {
 	background-color: gold;
+}
+
+.hero-card {
+	width: 900px !important;
+	margin: 0 auto;
+	color: white;
+}
+.hero-image {
+	background-image: url("../images/hero-background.png");
+}
+
+.divider {
+	height: 50px;
 }
 
 .brand-logo {
@@ -12,6 +31,22 @@
 	font-style: italic;
 	color: black;
 	margin-left: 10px;
+}
+
+.card {
+	width: 200px;
+}
+
+.card-image {
+	height: 75px;
+	width:75px;
+	display: block;
+	margin: auto;
+}
+
+.bottom-card {
+	width: 80%;
+	margin: 0 auto;
 }
 
 body {
