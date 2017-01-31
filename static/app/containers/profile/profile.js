@@ -5,10 +5,13 @@ angular.module('App')
   controllerAs: 'profileComp'
 });
 
-function ProfileCompCtrl($scope, $state, Auth, $http, $window) {
-  $scope.isLoggedIn = function() {
-    return Auth.isLoggedIn();
+function ProfileCompCtrl($scope, $stateParams, $window, Profile, Auth) {
+  var currentUser = Auth.currentUser();
+  if ($stateParams.id !== currentUser.id) {
+    $window.location.href='/profile/' + currentUser.id;
   }
+  console.log("Current User; ", Auth.currentUser());
+    $scope.profile = Auth.currentUser();
 
   $scope.foodSearch = function() {
   	var foodID = 11090;
@@ -26,4 +29,4 @@ function ProfileCompCtrl($scope, $state, Auth, $http, $window) {
 }
 
 
-ProfileCompCtrl.$inject = ['$scope', '$state', 'Auth', '$http', '$window'];
+ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', '$http'];

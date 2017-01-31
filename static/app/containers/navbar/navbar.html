@@ -1,24 +1,12 @@
-<nav class="navbar navbar-default" role="navigation">
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="/">M.E.A.N Coach</a>
-  </div>
-
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse navbar-ex1-collapse">
-    <ul class="nav navbar-nav navbar-right">
-      <li><a ui-sref="homeState()">Home </a></li>
-      <li><a ui-sref="signupState()" ng-if="!isLoggedIn()">Signup</a></li>
-      <li><a ui-sref="loginState()" ng-if="!isLoggedIn()">Login</a></li>
-      <li><a ng-click="logout()" ng-if="isLoggedIn()">Logout</a></li>
-      <li><a ui-sref="profileState()" ng-if="isLoggedIn()"> Profile</a></li>
-      <li><a ui-sref="userSettings()" ng-if="isLoggedIn()">User Settings</a></li>
+<nav>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">M.E.A.N Coach</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a class="black-text" ui-sref="homeState()">Home </a></li>
+      <li><a class="black-text" ui-sref="signupState()" ng-if="!NavBarCompCtrl.isLoggedIn">Signup</a></li>
+      <li><a class="black-text" ui-sref="loginState()" ng-if="!NavBarCompCtrl.isLoggedIn">Login</a></li>
+      <li><a class="black-text" ng-click="logout()" ng-if="!NavBarCompCtrl.isLoggedIn">Logout</a></li>
+      <li><a class="black-text" ui-sref="profileState()" ng-if="!NavBarCompCtrl.isLoggedIn"> Profile</a></li>
     </ul>
-  </div><!-- /.navbar-collapse -->
+  </div>
 </nav>

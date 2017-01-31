@@ -7,16 +7,20 @@ angular.module('App')
 
 function UserSettingsCompCtrl($state) {
       var userSettingsComp = this;
-
-      userSettingsComp.weight = 70;
-      userSettingsComp.height = 180;
-      userSettingsComp.age = 21;
+      userSettingsComp.isMetric = false;
+      userSettingsComp.weight = null;
+      userSettingsComp.height = null;
+      userSettingsComp.age = null;
       userSettingsComp.gender = 'male';
-      userSettingsComp.goal = 0;
+      userSettingsComp.goal = null;
       userSettingsComp.bmr = false;
 
    userSettingsComp.calcBMR = function (weight, height, age, gender) {
         console.log('trying to calculate');
+        if(!userSettingsComp.isMetric){
+          weight = weight * 0.4536;
+          height = height * 2.54;
+        }
         if (gender == 'Male'){
           bmr = (10 * weight) + (6.25 * height) - (5* age) + 5;
         } else if (gender == 'Female'){
@@ -26,9 +30,12 @@ function UserSettingsCompCtrl($state) {
           return error;
         }
         // console.log(bmr);
+        bmr = Math.round(bmr, 1);
         userSettingsComp.bmr = bmr;
         // return bmr;
       };
+      //need to right a service to update user
+
 }
 
 UserSettingsCompCtrl.$inject = ['$state'];

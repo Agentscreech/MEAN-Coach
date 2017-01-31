@@ -10,37 +10,37 @@ angular.module('App', ['ui.router'])
     $locationProvider,
     $httpProvider)
     {
-
+      // console.log(Auth);
     $httpProvider.interceptors.push('AuthInterceptor');
 
     //Setup states (routes)
     $stateProvider
     .state('homeState', {
       url: '/',
-      component: 'homeComp',
-      authenticate: false
+      component: 'homeComp'
     })
     .state('signupState', {
       url: '/signup',
-      component: 'signupComp',
-      authenticate: false
+      component: 'signupComp'
     })
     .state('loginState', {
       url: '/login',
-      component: 'loginComp',
-      authenticate: false
+      component: 'loginComp'
     })
     .state('profileState', {
       url: '/profile/:id',
-      component: 'profileComp',
-      authenticate: true
+      component: 'profileComp'
     })
-    .state('userSettings', {
-        url: '/userSettings',
+    .state('userSettingsState', {
+        url: '/profile/:id/userSettings',
         component: 'userSettingsComp'
+    })
+    .state('navbarState', {
+        url: '/',
+        component: 'navbarComp'
     });
 
-    //Redirect to home if url not found or not authenticated
+    //Redirect to login if url not found or not authenticated
     $urlRouterProvider.otherwise("/");
     // $urlRouterProvider.otherwise('/');
 

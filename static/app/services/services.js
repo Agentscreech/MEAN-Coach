@@ -1,4 +1,16 @@
 angular.module('App')
+.factory('Profile', ['$http', function($http) {
+  return {
+    getProfile: function(userId) {
+      var URL = '/api/profile/' + userId;
+      var req = {
+        url: URL,
+        method: "GET"
+      };
+      return $http(req);
+    }
+  }
+}])
 
 //POST new user to database, utilize Auth factory
 .factory('UserService', ['$http', 'Auth', function($http, Auth) {
@@ -31,8 +43,9 @@ angular.module('App')
       return $http(req).then(function(res) {
         console.log("Got network", res);
         // return res.data;
-        Auth.saveToken(res.data.token);
+        Auth.saveToken(res.data.token, res.data.user);
         console.log("logged in?", Auth.isLoggedIn())
+        console.log("THIS IS IN token save", res.data.user)
         return res.data.user;
       });
     }
@@ -42,8 +55,9 @@ angular.module('App')
 //Authenicate user via token
 .factory('Auth', ['$window', function($window) {
   return {
-    saveToken: function(token) {
+    saveToken: function(token, user) {
       $window.localStorage['mean-user-token'] = token;
+      $window.localStorage['mean-user-id'] = user.id;
       console.log("token has been saved: ", token);
     },
     getToken: function() {
@@ -67,6 +81,7 @@ angular.module('App')
         var token = this.getToken();
         try {
           var payload = JSON.parse($window.atob(token.split('.')[1]));
+          console.log("PAYLOAD:", payload);
           return payload;
         } catch(err) {
           return false;

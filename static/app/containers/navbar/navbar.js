@@ -5,12 +5,14 @@ angular.module('App')
   controllerAs: 'navbarComp'
 });
 
-function NavBarCompCtrl($scope, $state, Auth) {
-  $scope.isLoggedIn = function() {
-    console.log("Am I still logged in?", Auth.isLoggedIn());
-    return Auth.isLoggedIn()
-  };
-  $scope.logout = function() {
+function NavBarCompCtrl($state, Auth) {
+  var NavBarCompCtrl = this;
+  NavBarCompCtrl.isLoggedIn = function() {
+  // Auth.isLoggedIn();
+  console.log("In navbar ctrl:", Auth.isLoggedIn());
+  }
+
+  NavBarCompCtrl.logout = function() {
     Auth.removeToken();
     $state.go('login');
   };

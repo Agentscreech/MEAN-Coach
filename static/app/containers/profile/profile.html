@@ -1,9 +1,10 @@
+
 <div id="profile-container">
 	<h1>This is profile container</h1>
 
 	<span>
 			{{user.id}}, you haven't entered any information yet! Get started here:
-		<a ui-sref="userSettings()" ng-if="isLoggedIn()"><button>User Settings</button></a>
+		<button class="btn" ui-sref="userSettingsState({id:profile.id})">UserSettings</button>
 	</span>
 
 	<div id="current-cals">
@@ -28,4 +29,10 @@
 
 		</div>
 	</div>
+
+<div>
+	<h1>This is profile container</h1>
+	User Email: {{profile.email}}
+	Use Id: {{profile.id}}
+
 </div>
