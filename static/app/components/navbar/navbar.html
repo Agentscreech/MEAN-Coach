@@ -1,12 +1,12 @@
 <nav>
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo left">M.E.A.N Coach</a> 
+    <a href="#" class="brand-logo left">M.E.A.N Coach</a>
     <ul class="right">
       <li><a class="black-text" ui-sref="homeState()">Home </a></li>
-      <li><a class="black-text" ui-sref="signupState()" ng-if="!isLoggedIn()">Signup</a></li>
-      <li><a class="black-text" ui-sref="loginState()" ng-if="!isLoggedIn()">Login</a></li>
-      <li><a class="black-text" ng-click="logout()" ng-if="isLoggedIn()">Logout</a></li>
-      <li><a class="black-text" ui-sref="profileState({id: {navId}})" ng-if="isLoggedIn()"> Profile</a></li>
+      <li><a class="black-text" ui-sref="signupState()" ng-if="!vm.isLoggedIn">Signup</a></li>
+      <li><a class="black-text" ui-sref="loginState()" ng-if="!vm.isLoggedIn">Login</a></li>
+      <li><a class="black-text" ng-click="logout()" ng-if="vm.isLoggedIn">Logout</a></li>
+      <li><a class="black-text" ui-sref="profileState({id: vm.id })" ng-if="vm.isLoggedIn"> Profile</a></li>
     </ul>
   </div>
 </nav>

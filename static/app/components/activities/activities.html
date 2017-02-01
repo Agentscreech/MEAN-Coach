@@ -1,7 +1,15 @@
 <div class="add-container">
   <h3>Activities</h3>
   <hr/>
-  <button ng-click="findActivities()" type="submit" name="activity-button">List Activities</button>
+
+  <button ng-click="findActivities()" type="submit" name="activity-button" class="wide-button" id="all-activities-btn">List All Activities</button>
+  <ul id="all-activities" ng-show="allActivitiesClicked">
+    <li ng-repeat="Activity in allActivities">
+      {{Activity.name}}
+      <hr/>
+    </li>
+  </ul>
+
   <form ng-submit="searchActivities()" id="activity-search-form">
     <input type="text" id="activity-search" placeholder="Search activities" ng-model="activitySearchTerm">
     <button type="submit" name="activity-search">Search</button>

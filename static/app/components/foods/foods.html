@@ -26,11 +26,11 @@
                     </span>
                     <p>Choose quantity:</p>
                     <form ng-submit="findFoods()" class="food-measure" ng-repeat="measure in chosenFoodMeasures">
-                        <label>{{measure.label}}</label>
+                        <label>{{measure.qty}} {{measure.label}}</label>
                         <hr/>
                             <div class="adjust-measure">
                                 <span class="measure-qty">
-                                    <p><strong>Qty:</strong></p>
+                                    <p><strong>Serving:</strong></p>
                                     <input type="text" class="food-measure-input" ng-model="measureQty">
                                 </span>
                                 <p><strong>kCals:</strong> {{measureQty * measure.value}}</p>
@@ -44,7 +44,7 @@
 
         <!-- Search for foods -->
         <form ng-submit="findFoods()" id="food-search-form">
-            <input type="text" id="food-search" placeholder="Add a food" ng-model="searchTerm" ng-keydown="delayBeforeSearch()">
+            <input type="text" id="food-search" placeholder="Search foods" ng-model="searchTerm" ng-keydown="delayBeforeSearch()">
         </form>
         <p ng-show="searchResults === null && searchTerm !== '' ">No results found for "{{searchTerm}}"</p>
 

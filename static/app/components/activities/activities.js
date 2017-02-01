@@ -20,8 +20,9 @@ function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User){
 
   //Return all activities
   $scope.findActivities = function(activity) {
+    $scope.allActivitiesClicked = !$scope.allActivitiesClicked;
     Activity.getActivities().then(function(activity) {
-      console.log("All activities: ", activity);
+      $scope.allActivities = activity.data;
     });
   }
 
@@ -32,6 +33,8 @@ function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User){
       $scope.userWeight = user.weight;
     })
   }
+
+
 
   //Return activity based on user search term
   $scope.searchActivities = function(activity) {

@@ -7,11 +7,8 @@ angular
         // bindToController: true
     });
 
-function FoodsCtrl($scope, $http, $interval) {
+function FoodsCtrl($scope, $http, $interval, Auth) {
     var activity = this;
-
-
-
 
     $scope.currentCals = 0;
     $scope.searchTerm = undefined;
@@ -19,7 +16,8 @@ function FoodsCtrl($scope, $http, $interval) {
     $scope.chosenFoodMeasures = [];
     $scope.mealList = {
         time: "",
-        foods: []
+        foods: [],
+        userId: Auth.currentUser().id
     };
     $scope.measureQty = 1;
     $scope.savedMeals = [];
@@ -28,7 +26,6 @@ function FoodsCtrl($scope, $http, $interval) {
 
     //Delay search for 1 second after done typing
     var interval = 1000;
-
     $scope.delayBeforeSearch = function() {
         $interval.cancel(interval);
         interval = $interval(function() {
@@ -95,6 +92,8 @@ function FoodsCtrl($scope, $http, $interval) {
         });
     };
 
+
+    // Add food to meal and reset search
     $scope.addFood = function($event) {
         var qtyCals = parseInt(event.target.id);
         $scope.mealList.foods.push({
@@ -107,7 +106,8 @@ function FoodsCtrl($scope, $http, $interval) {
         $scope.searchTerm = undefined;
     };
 
-    // Add food to your log
+
+    // Save food to your daily log
     $scope.saveFood = function() {
 
         // Get timestamp
@@ -117,6 +117,8 @@ function FoodsCtrl($scope, $http, $interval) {
         $scope.mealList.time = time;
         $scope.savedMeals.push($scope.mealList);
         console.log($scope.savedMeals);
+        
+        // mealList is what gets submitted to DB:
         $scope.mealList = {
             time: "",
             foods: []
@@ -124,12 +126,15 @@ function FoodsCtrl($scope, $http, $interval) {
         $scope.chosenFoods = [];
     };
 
-    // Remove food from Add meal list
+
+    // Exit food quantity options
     $scope.remove = function() {
         document.querySelector('#currentChosenFood').remove();
         $scope.chosenFoods.pop();
     };
 
+
+    // Remove food from meal
     $scope.removeChosenFood = function() {
         document.querySelector('#savedFood').remove();
         $scope.mealList.foods.pop();
@@ -137,4 +142,4 @@ function FoodsCtrl($scope, $http, $interval) {
 
 }
 
-FoodsCtrl.$inject = ['$scope', '$http', '$interval'];
+FoodsCtrl.$inject = ['$scope', '$http', '$interval', 'Auth'];
