@@ -15,7 +15,6 @@ function FoodsCtrl($scope, $http, $interval) {
 
     $scope.currentCals = 0;
     $scope.searchTerm = undefined;
-    $scope.searchResults = [];
     $scope.chosenFoods = [];
     $scope.chosenFoodMeasures = [];
     $scope.mealList = {
@@ -41,18 +40,25 @@ function FoodsCtrl($scope, $http, $interval) {
 
     // Return list of available foods based on search term
     $scope.findFoods = function() {
-        if ($scope.searchTerm !== undefined) {
+        if ($scope.searchTerm !== undefined && $scope.searchTerm !== "") {
             var req = {
                 url: '/foodresults?searchTerm=' + $scope.searchTerm,
                 method: 'GET'
             };
 
             $http(req).then(function success(res) {
-                $scope.searchResults = res.data.list.item;
+                if (res.data.list === undefined) {
+                    $scope.searchResults = null;
+                } else {
+                    $scope.searchResults = res.data.list.item;
+                }
             }, function failure(res) {
                 console.log('failed');
             });
+        } else {
+            $scope.searchResults = undefined;
         }
+        return $scope.searchResults;
     };
 
 
@@ -67,7 +73,7 @@ function FoodsCtrl($scope, $http, $interval) {
             url: '/addfood?foodId=' + foodID,
             method: 'GET'
         };
-        console.log(req);
+
         $http(req).then(function success(res) {
             $scope.chosen = res.data.report;
             $scope.chosenFoods.push({
@@ -130,4 +136,5 @@ function FoodsCtrl($scope, $http, $interval) {
     };
 
 }
+
 FoodsCtrl.$inject = ['$scope', '$http', '$interval'];
