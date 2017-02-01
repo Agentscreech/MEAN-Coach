@@ -5,7 +5,7 @@ angular.module('App')
   controllerAs: 'profileComp'
 });
 
-function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $http) {
+function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, Activity, $http) {
   var currentUser = Auth.currentUser();
   if ($stateParams.id !== currentUser.id) {
     $window.location.href='/profile/' + currentUser.id;
@@ -60,7 +60,15 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
     $scope.chosenFood = undefined;
   };
 
+//Return all activities
+$scope.findActivities = function(activity) {
+  Activity.getActivities().then(function(activity) {
+    console.log(activity);
+  });
 }
 
 
-ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', '$http'];
+}
+
+
+ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', 'Activity', '$http'];

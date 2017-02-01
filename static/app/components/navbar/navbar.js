@@ -11,8 +11,9 @@ angular
     $scope.isLoggedIn = function() {
       return Auth.isLoggedIn()
     }
-    var navToken = Auth.getToken();
-    console.log("This is nav token: ", navToken);
+    $scope.navId = Auth.currentUser().id;
+    console.log("This is nav current user: ", $scope.navId);
+
 
 
     // console.log("NavBar: ", $scope.isLoggedIn());

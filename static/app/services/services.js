@@ -1,7 +1,21 @@
 angular.module('App')
-.factory('User', ['$resource', function($resource){
+.factory('User', ['$resource', function($resource) {
     return $resource('/api/users/:id/userSettings', {id: '@user_id'},{stripTrailingSlashes:false});
 }])
+
+  .factory('Activity', ['$http', function($http) {
+    return {
+      getActivities: function() {
+        var URL = '/api/activities'
+        var req = {
+          url: URL,
+          method: "GET"
+        };
+        return $http(req)
+      }
+    };
+  }])
+
 .factory('Profile', ['$http', function($http) {
   return {
     getProfile: function(userId) {
