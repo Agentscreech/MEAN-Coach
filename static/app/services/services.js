@@ -2,7 +2,7 @@ angular.module('App')
 .factory('User', ['$resource', function($resource) {
     return $resource('/api/users/:id/userSettings', {id: '@user_id'},{stripTrailingSlashes:false});
 }])
-
+  //Get all activities
   .factory('Activity', ['$http', function($http) {
     return {
       getActivities: function() {
@@ -13,7 +13,20 @@ angular.module('App')
         };
         return $http(req)
       }
-    };
+    }
+    //Get activities by user search term
+    console.log("Services search term: ", $scope.activitySearchTerm);
+    return {
+      searchActivity: function() {
+        var URL = '/api/activities'
+        var req = {
+          url: URL,
+          searchTerm: $scope.activitySearchTerm,
+          method: "GET"
+        };
+        return $http(req)
+      }
+    }
   }])
 
 .factory('Profile', ['$http', function($http) {

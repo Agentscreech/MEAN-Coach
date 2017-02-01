@@ -16,6 +16,8 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
     $scope.profile = Auth.currentUser();
     console.log("THIS IS SCOPE. PROFILE ", $scope.profile.id);
 
+  $scope.activitySearchTerm = undefined;
+
   $scope.currentCals = 0;
   $scope.searchTerm = undefined;
   $scope.searchResults = [];
@@ -108,6 +110,19 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
       console.log(activity);
     });
   }
+
+  $scope.searchActivities = function(activity) {
+    if ($scope.activitySearchTerm !== undefined) {
+      console.log("Activity Search Term: ", $scope.activitySearchTerm);
+      Activity.searchActivity($scope.activitySearchTerm).then(function(activity) {
+        console.log(activity);
+      });
+    }
+  }
+
+
+
+
 }
 
 ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', 'Activity', '$http', '$interval'];
