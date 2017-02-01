@@ -42,7 +42,7 @@ function FoodsCtrl($scope, $http, $interval) {
     $scope.findFoods = function() {
         if ($scope.searchTerm !== undefined && $scope.searchTerm !== "") {
             var req = {
-                url: '/foodresults?searchTerm=' + $scope.searchTerm,
+                url: 'api/foods/foodresults?searchTerm=' + $scope.searchTerm,
                 method: 'GET'
             };
 
@@ -70,7 +70,7 @@ function FoodsCtrl($scope, $http, $interval) {
 
         var foodID = event.target.id;
         var req = {
-            url: '/addfood?foodId=' + foodID,
+            url: 'api/foods/addfood?foodId=' + foodID,
             method: 'GET'
         };
 
