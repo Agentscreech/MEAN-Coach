@@ -1,5 +1,15 @@
 <div class="add-container">
-    <h3>Activities</h3>
-    <hr/>
-    <button ng-click="findActivities()" type="submit" name="activity-button">List Activities</button>
+  <h3>Activities</h3>
+  <hr/>
+  <button ng-click="findActivities()" type="submit" name="activity-button">List Activities</button>
+  <form ng-submit="searchActivities()" id="activity-search-form">
+    <input type="text" id="activity-search" placeholder="Search activities" ng-model="activitySearchTerm">
+    <button type="submit" name="activity-search">Search</button>
+  </form>
+  <div ng-repeat="Activity in activitySearchResults">
+    <li>
+      <p>{{Activity.name}}</p>
+      <p>Calories: {{Activity.calFactor}}</p>
+    </li>
+  </div>
 </div>

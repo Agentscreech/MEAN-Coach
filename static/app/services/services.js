@@ -14,20 +14,24 @@ angular.module('App')
         return $http(req)
       }
     }
-    //Get activities by user search term
-    console.log("Services search term: ", $scope.activitySearchTerm);
+  }])
+
+  //Get activities by user search term
+  .factory('ActivitySearch', ['$http', function($http) {
     return {
-      searchActivity: function() {
-        var URL = '/api/activities'
+      search: function(serviceActivitySearch) {
+        var URL = '/api/activities/search/' + serviceActivitySearch;
         var req = {
           url: URL,
-          searchTerm: $scope.activitySearchTerm,
+          query: serviceActivitySearch,
           method: "GET"
         };
+        console.log("inf factory: ", serviceActivitySearch);
         return $http(req)
       }
     }
   }])
+
 
 .factory('Profile', ['$http', function($http) {
   return {

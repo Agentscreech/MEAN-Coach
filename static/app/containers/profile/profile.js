@@ -16,8 +16,6 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
     $scope.profile = Auth.currentUser();
     console.log("THIS IS SCOPE. PROFILE ", $scope.profile.id);
 
-  $scope.activitySearchTerm = undefined;
-
   $scope.currentCals = 0;
   $scope.searchTerm = undefined;
   $scope.searchResults = [];
@@ -120,24 +118,6 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
   $scope.removeChosenFood = function() {
     document.querySelector('#savedFood').remove();
     $scope.mealList.foods.pop();
-  }
-
-
-//Return all activities
-  $scope.findActivities = function(activity) {
-    Activity.getActivities().then(function(activity) {
-      console.log(activity);
-    });
-  }
-
-  //Return activity based on user search term
-  $scope.searchActivities = function(activity) {
-    if ($scope.activitySearchTerm !== undefined) {
-      console.log("Activity Search Term: ", $scope.activitySearchTerm);
-      Activity.searchActivity($scope.activitySearchTerm).then(function(activity) {
-        console.log(activity);
-      });
-    }
   }
 
 }
