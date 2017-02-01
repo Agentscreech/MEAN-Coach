@@ -12,9 +12,9 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
   if ($stateParams.id !== currentUser.id) {
     $window.location.href='/profile/' + currentUser.id;
   }
-  console.log("Current User; ", Auth.currentUser());
+  // console.log("Current User; ", Auth.currentUser());
     $scope.profile = Auth.currentUser();
-    console.log("THIS IS SCOPE. PROFILE ", $scope.profile.id);
+    // console.log("THIS IS SCOPE. PROFILE ", $scope.profile.id);
 
   $scope.currentCals = 0;
   $scope.searchTerm = undefined;
