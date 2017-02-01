@@ -12,13 +12,12 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
   if ($stateParams.id !== currentUser.id) {
     $window.location.href='/profile/' + currentUser.id;
   }
-  // console.log("Current User; ", Auth.currentUser());
+  console.log("Current User; ", Auth.currentUser());
     $scope.profile = Auth.currentUser();
-    // console.log("THIS IS SCOPE. PROFILE ", $scope.profile.id);
+    console.log("THIS IS SCOPE. PROFILE ", $scope.profile.id);
 
   $scope.currentCals = 0;
   $scope.searchTerm = undefined;
-  $scope.searchResults = [];
   $scope.chosenFoods = [];
   $scope.chosenFoodMeasures = [];
   $scope.mealList = {time: "", foods: []};
@@ -41,18 +40,27 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
 
   // Return list of available foods based on search term
   $scope.findFoods = function() {
-    if ($scope.searchTerm !== undefined) {
+    if ($scope.searchTerm !== undefined && $scope.searchTerm !== "") {
       var req = {
         url: '/foodresults?searchTerm=' + $scope.searchTerm,
         method: 'GET'
       };
 
       $http(req).then(function success(res) {
-        $scope.searchResults = res.data.list.item;
+        if (res.data.list === undefined) {
+          $scope.searchResults = null;
+        } 
+        else {
+          $scope.searchResults = res.data.list.item;
+        }
       }, function failure(res) {
         console.log('failed');
       });
     }
+    else {
+      $scope.searchResults = undefined;
+    }
+    return $scope.searchResults;
   };
 
 
@@ -62,7 +70,7 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
     $scope.searchResults = [];
     $scope.searchTerm = "";
 
-  	var foodID = event.target.id;
+    var foodID = event.target.id;
     var req = {
       url: '/addfood?foodId=' + foodID,
       method: 'GET'
