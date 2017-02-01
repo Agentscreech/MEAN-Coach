@@ -5,7 +5,11 @@ angular.module('App')
   controllerAs: 'profileComp'
 });
 
+<<<<<<< HEAD
 function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $http, $interval) {
+=======
+function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, Activity, $http) {
+>>>>>>> activities
   var currentUser = Auth.currentUser();
   if ($stateParams.id !== currentUser.id) {
     $window.location.href='/profile/' + currentUser.id;
@@ -95,6 +99,7 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
     $scope.chosenFoods = [];
   };
 
+<<<<<<< HEAD
 
   // Remove food from Add meal list
   $scope.remove = function($event) {
@@ -107,3 +112,17 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
 
 
 ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', '$http', '$interval'];
+=======
+//Return all activities
+$scope.findActivities = function(activity) {
+  Activity.getActivities().then(function(activity) {
+    console.log(activity);
+  });
+}
+
+
+}
+
+
+ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', 'Activity', '$http'];
+>>>>>>> activities
