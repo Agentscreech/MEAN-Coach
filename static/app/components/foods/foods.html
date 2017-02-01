@@ -26,11 +26,11 @@
                     </span>
                     <p>Choose quantity:</p>
                     <form ng-submit="findFoods()" class="food-measure" ng-repeat="measure in chosenFoodMeasures">
-                        <label>{{measure.label}}</label>
+                        <label>{{measure.qty}} {{measure.label}}</label>
                         <hr/>
                             <div class="adjust-measure">
                                 <span class="measure-qty">
-                                    <p><strong>Qty:</strong></p>
+                                    <p><strong>Serving:</strong></p>
                                     <input type="text" class="food-measure-input" ng-model="measureQty">
                                 </span>
                                 <p><strong>kCals:</strong> {{measureQty * measure.value}}</p>
