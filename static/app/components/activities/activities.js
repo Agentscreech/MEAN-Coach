@@ -14,10 +14,11 @@ function ActivityCtrl($scope, Activity, ActivitySearch){
 
   //Return all activities
   $scope.findActivities = function(activity) {
+    $scope.allActivitiesClicked = !$scope.allActivitiesClicked;
     Activity.getActivities().then(function(activity) {
-      console.log("All activities: ", activity);
-      });
-    }
+      $scope.allActivities = activity.data;
+    });
+  }
 
   //Return activity based on user search term
   $scope.searchActivities = function(activity) {
