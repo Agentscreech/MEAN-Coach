@@ -2,7 +2,7 @@ angular.module('App')
 .factory('User', ['$resource', function($resource) {
     return $resource('/api/users/:id/userSettings', {id: '@user_id'},{stripTrailingSlashes:false});
 }])
-
+  //Get all activities
   .factory('Activity', ['$http', function($http) {
     return {
       getActivities: function() {
@@ -13,8 +13,25 @@ angular.module('App')
         };
         return $http(req)
       }
-    };
+    }
   }])
+
+  //Get activities by user search term
+  .factory('ActivitySearch', ['$http', function($http) {
+    return {
+      search: function(serviceActivitySearch) {
+        var URL = '/api/activities/search/' + serviceActivitySearch;
+        var req = {
+          url: URL,
+          query: serviceActivitySearch,
+          method: "GET"
+        };
+        console.log("inf factory: ", serviceActivitySearch);
+        return $http(req)
+      }
+    }
+  }])
+
 
 .factory('Profile', ['$http', function($http) {
   return {

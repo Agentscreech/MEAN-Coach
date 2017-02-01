@@ -36,6 +36,12 @@ app.use('/api/users', expressJWT({ secret: secret }).unless({
   path: [{ url: '/api/users', methods: ['POST'] }]
 }), require('./controllers/users'));
 
+//GET routes to retrieve activities
+//Get all activities
+app.use('/api/activities', require('./controllers/activities'));
+//Get activities matching search term
+app.use('/api/activities/search', require('./controllers/activities'));
+
 //Middleware to check if expressJWT did not authorize the user and display error message
 app.use(function (err, req, res, next) {
   if (err.name === 'UnauthorizedError') {
@@ -65,8 +71,6 @@ app.post('/api/auth', function(req, res) {
     return res.send({ user: user, token: token });
   });
 });
-
-
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'static/index.html'));

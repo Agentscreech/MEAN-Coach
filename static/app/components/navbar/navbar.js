@@ -10,16 +10,13 @@ angular
 function NavbarzCtrl($scope, $state, Auth) {
     var vm = this;
     $scope.isLoggedIn = function() {
-        if(Auth.isLoggedIn()){
-        $scope.navId = Auth.currentUser().id;
-        }
-        return Auth.isLoggedIn();
-    };
+         if(Auth.isLoggedIn()){
+         $scope.navId = Auth.currentUser().id;
+         }
+         return Auth.isLoggedIn();
+     };
+
     console.log("This is nav current user: ", $scope.navId);
-
-
-
-    // console.log("NavBar: ", $scope.isLoggedIn());
 
     $scope.logout = function() {
         Auth.removeToken();

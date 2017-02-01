@@ -18,13 +18,6 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
 
     $scope.currentCals = 0;
 
-    //Return all activities
-    $scope.findActivities = function(activity) {
-        Activity.getActivities().then(function(activity) {
-            console.log(activity);
-        });
-    };
-
 }
 
 ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', 'Activity', '$http', '$interval'];
