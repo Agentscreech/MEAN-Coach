@@ -21,15 +21,16 @@ function UserSettingsCompCtrl($state, $stateParams, $window, $resource, $locatio
     userSettingsComp.bmr = false;
 
     User.get({id: currentUser.id}, function success(settings){
-        console.log(settings);
+        // console.log(settings);
+            userSettingsComp.weight = settings.weight;
+            userSettingsComp.height = settings.height;
+            userSettingsComp.age = settings.age;
+            userSettingsComp.gender = settings.gender;
+            userSettingsComp.goal = settings.goal;
+            userSettingsComp.bmr = true;
         if(settings.isMetric){
             userSettingsComp.isMetric = true;
         }
-        userSettingsComp.weight = settings.weight;
-        userSettingsComp.height = settings.height;
-        userSettingsComp.age = settings.age;
-        userSettingsComp.gender = settings.gender;
-        userSettingsComp.goal = settings.goal;
     }, function error(data){
         console.log(data);
     });

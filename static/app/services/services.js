@@ -6,14 +6,14 @@ angular.module('App')
   .factory('Activity', ['$http', function($http) {
     return {
       getActivities: function() {
-        var URL = '/api/activities'
+        var URL = '/api/activities';
         var req = {
           url: URL,
           method: "GET"
         };
-        return $http(req)
+        return $http(req);
       }
-    }
+  };
   }])
 
   //Get activities by user search term
@@ -27,9 +27,9 @@ angular.module('App')
           method: "GET"
         };
         console.log("inf factory: ", serviceActivitySearch);
-        return $http(req)
-      }
+        return $http(req);
     }
+  };
   }])
 
 
@@ -58,13 +58,14 @@ angular.module('App')
       };
       return $http(req).then(function(res) {
         if(res.status !== 200) {
-          console.log("Couldn't create user");
+          // console.log("Couldn't create user");
           return false;
         }
-        console.log("User create response: ", res.data);
+        // console.log("User create response: ", res.data);
         return res.data;
       }, function error(res) {
-        console.log("Error response: ", res);
+        // console.log("Error response: ", res);
+        return res;
       });
     },
     login: function(params) {
@@ -73,9 +74,9 @@ angular.module('App')
         method: 'POST',
         data: params
     };
-      console.log(req);
+      // console.log(req);
       return $http(req).then(function(res) {
-        console.log("Got network", res);
+        // console.log("Got network", res);
         // return res.data;
         Auth.saveToken(res.data.token, res.data.user);
         // console.log("logged in?", Auth.isLoggedIn())
@@ -91,14 +92,14 @@ angular.module('App')
   return {
     saveToken: function(token, user) {
       $window.localStorage['mean-user-token'] = token;
-      console.log("token has been saved: ", token);
+      // console.log("token has been saved: ", token);
     },
     getToken: function() {
       return $window.localStorage['mean-user-token'];
     },
     removeToken: function() {
       $window.localStorage.removeItem('mean-user-token');
-      console.log("User token deleted", localStorage);
+      // console.log("User token deleted", localStorage);
     },
     isLoggedIn: function() {
       var token = this.getToken();
