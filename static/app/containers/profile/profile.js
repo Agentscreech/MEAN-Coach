@@ -5,7 +5,9 @@ angular.module('App')
   controllerAs: 'profileComp'
 });
 
-function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $http, $interval) {
+
+function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, Activity, $http, $interval) {
+
   var currentUser = Auth.currentUser();
   if ($stateParams.id !== currentUser.id) {
     $window.location.href='/profile/' + currentUser.id;
@@ -93,7 +95,6 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
     $scope.searchTerm = undefined;
   };
 
-
   // Add food to your log
   $scope.saveFood = function() {
 
@@ -108,7 +109,6 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
     $scope.chosenFoods = [];
   };
 
-
   // Remove food from Add meal list
   $scope.remove = function() {
     document.querySelector('#currentChosenFood').remove();
@@ -120,7 +120,14 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
     $scope.mealList.foods.pop();
   }
 
+
+//Return all activities
+  $scope.findActivities = function(activity) {
+    Activity.getActivities().then(function(activity) {
+      console.log(activity);
+    });
+  }
+
 }
 
-
-ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', '$http', '$interval'];
+ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', 'Activity', '$http', '$interval'];
