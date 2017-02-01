@@ -19,6 +19,16 @@ describe('GET /*', function() {
     });
 });
 
+describe('GET Unauthorized', function(){
+    it('should return a message token needed', function(done){
+        request(app).get('/api/users')
+        .end(function(err, response){
+            expect(response.body.message,"You need an authorization token to view this information.");
+            done();
+        });
+    });
+});
+
 describe('POST /api/auth', function(){
     it('should return message User not found', function(done){
         request(app).post('/api/auth')
