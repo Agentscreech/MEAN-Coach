@@ -14,8 +14,10 @@ var UserSchema = mongoose.Schema({
     },
     weight: Number, // in kg
     height: Number, // in cm
+    gender: String,
     age: Number,
-    goal: Number
+    goal: Number,
+    isMetric: Boolean
 }, {
     collection: 'users'
 });
@@ -25,7 +27,12 @@ UserSchema.set('toJSON', {
         var returnJson = {
             id: ret._id,
             email: ret.email,
-            name: ret.name
+            weight: ret.weight,
+            height: ret.height,
+            gender: ret.gender,
+            age: ret.age,
+            goal: ret.goal,
+            isMetric: ret.isMetric
         };
         return returnJson;
     }
