@@ -11,7 +11,7 @@ function UserSettingsCompCtrl($state, $stateParams, $window, $resource, $locatio
         $window.location.href = '/profile/' + currentUser.id;
     }
     var userSettingsComp = this;
-    userSettingsComp.user = $stateParams.id;
+    userSettingsComp.user = currentUser.id;
     userSettingsComp.isMetric = false;
     userSettingsComp.weight = null;
     userSettingsComp.height = null;
@@ -19,6 +19,23 @@ function UserSettingsCompCtrl($state, $stateParams, $window, $resource, $locatio
     userSettingsComp.gender = 'male';
     userSettingsComp.goal = null;
     userSettingsComp.bmr = false;
+
+    User.get({id: currentUser.id}, function success(settings){
+        console.log(settings);
+        if(settings.isMetric){
+            userSettingsComp.isMetric = true;
+        }
+        userSettingsComp.weight = settings.weight;
+        userSettingsComp.height = settings.height;
+        userSettingsComp.age = settings.age;
+        userSettingsComp.gender = settings.gender;
+        userSettingsComp.goal = settings.goal;
+    }, function error(data){
+        console.log(data);
+    });
+
+
+
 
     userSettingsComp.calcBMR = function(weight, height, age, gender) {
         console.log('trying to calculate');
@@ -42,17 +59,18 @@ function UserSettingsCompCtrl($state, $stateParams, $window, $resource, $locatio
     //need to right a service to update use
     userSettingsComp.updateUser = function() {
         userSettingsComp.settings = {
-            user_id: userSettingsComp.user,
+            user_id: currentUser.id,
             weight: userSettingsComp.weight,
             height: userSettingsComp.height,
             age: userSettingsComp.age,
             gender: userSettingsComp.gender,
-            goal: userSettingsComp.goal
+            goal: userSettingsComp.goal,
+            isMetric: userSettingsComp.isMetric
         };
-        if (!userSettingsComp.isMetric) {
-            userSettingsComp.settings.weight = userSettingsComp.settings.weight  * 0.4536;
-            userSettingsComp.settings.height = userSettingsComp.settings.height * 2.54;
-        }
+        // if (!userSettingsComp.isMetric) {
+        //     userSettingsComp.settings.weight = userSettingsComp.settings.weight  * 0.4536;
+        //     userSettingsComp.settings.height = userSettingsComp.settings.height * 2.54;
+        // }
         console.log('trying to send', userSettingsComp.settings);
         User.update(userSettingsComp.settings, function success(data) {
             $location.path('/profile/' + currentUser.id);
