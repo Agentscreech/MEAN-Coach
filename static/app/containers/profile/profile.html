@@ -59,7 +59,7 @@
 
 			<!-- Search results -->
 			<ul id="food-results" ng-show="searchResults.length > 0">
-				<li ng-repeat="result in searchResults" ng-click="chooseFood(event)" id={{result.ndbno}}>
+				<li ng-repeat="result in searchResults" ng-click="chooseFood(event)">
 					{{result.name}}
 					<hr/>
 				</li>
@@ -67,9 +67,6 @@
 
 		</div>
 
-		<div class="add-container">
-			<h3>Activities</h3>
-			<hr/>
-			<button ng-click="findActivities()" type="submit" name="activity-button">List Activities</button>
-		</div>
 	</div>
+	<activities></activities>
+</div>
