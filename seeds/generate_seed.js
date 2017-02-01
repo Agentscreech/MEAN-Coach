@@ -1,5 +1,6 @@
 var models = require('../models/schemas');
 var mongoose = require('mongoose');
+
 mongoose.connect('mongodb://localhost/meancoach');
 
 
@@ -19,21 +20,6 @@ var testUsers = [
         weight: 50,
         height: 150,
         age: 27
-    }
-];
-
-var testActivites = [
-    {
-        name: 'light rowing',
-        calFactor: 6
-    },
-    {
-        name: 'lap swimming',
-        calFactor: 3
-    },
-    {
-        name: 'running 6mph',
-        calFactor: 2
     }
 ];
 
@@ -58,7 +44,7 @@ var testLogs = [
         food: {
             name: 'carrots',
             kcals: 100
-        }
+        },
     },
     {
         user_id: 3463421166,
@@ -84,20 +70,18 @@ testUsers.forEach(function(usr){
     });
 });
 
-testActivites.forEach(function (activity){
-    models.Activity.create({
-        name: activity.name,
-        calFactor: activity.calFactor
-    });
-});
+// testActivites.forEach(function (activity){
+//     models.Activity.create({
+//         name: activity.name,
+//         calFactor: activity.calFactor
+//     });
+// });
 
 testLogs.forEach(function (log){
-    console.log(log.activities);
-    console.log(log.food);
     models.Log.create({
         user_id: log.user_id,
         activities: log.activities,
-        foods: log.food
+        foods: log.food,
     });
 });
 
