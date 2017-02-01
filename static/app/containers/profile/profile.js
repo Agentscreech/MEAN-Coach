@@ -31,7 +31,6 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
     }, function failure(res) {
       console.log('failed');
     });
-  };
 
   $scope.addFood = function($event) {
     var qtyCals = parseInt(event.target.id);
