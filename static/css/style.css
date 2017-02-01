@@ -107,6 +107,16 @@ body {
 	width: 100%;
 }
 
+.saved-food-item {
+	display: flex;
+	align-items: center;
+	width: 70%;
+}
+
+.saved-food-item h6 {
+	margin-left: 10px;
+}
+
 .chosen-food-item {
 	display: flex;
 	align-items: flex-start;
@@ -132,7 +142,7 @@ body {
 	padding-left: 40px;
 	background-color: white;
 	margin-top: 10px;
-	width: 100%;
+	width: 80%;
 	font-weight: 500;
 }
 
