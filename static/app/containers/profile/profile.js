@@ -23,7 +23,7 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
   $scope.searchResults = [];
   $scope.chosenFoods = [];
   $scope.chosenFoodMeasures = [];
-  $scope.mealList = [];
+  $scope.mealList = {time: "", foods: []};
   $scope.measureQty = 1;
   $scope.savedMeals = [];
   $scope.savedMealDate = "";
@@ -73,9 +73,16 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
     $http(req).then(function success(res) {
       $scope.chosen = res.data.report;
       $scope.chosenFoods.push({name: $scope.chosen.food.name, kCals: $scope.chosen.food.nutrients[1].value});
-      $scope.chosenFoodMeasures = $scope.chosen.food.nutrients[1].measures;
+
+      var nutrients = $scope.chosen.food.nutrients;
+      for (var i = 0; i < nutrients.length; i++) {
+        if (nutrients[i].name == "Energy") {
+          $scope.chosenFoodMeasures = $scope.chosen.food.nutrients[i].measures;
+        }
+      };
+
       $scope.chosenFoodName = $scope.chosen.food.name;
-      console.log($scope.chosenFoodMeasures);
+
     }, function failure(res) {
       console.log('failed');
     });
@@ -83,7 +90,7 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
 
   $scope.addFood = function($event) {
     var qtyCals = parseInt(event.target.id);
-    $scope.mealList.push({name: $scope.chosenFoodName, kCals: qtyCals});
+    $scope.mealList.foods.push({name: $scope.chosenFoodName, kCals: qtyCals});
     $scope.chosenFoodName = "";
     $scope.chosenFoods = [];
     document.querySelector('#currentChosenFood').remove();
@@ -91,18 +98,30 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
   };
 
   // Add food to your log
-  $scope.saveFood = function($event) {
+  $scope.saveFood = function() {
+
+    // Get timestamp
+    var date = new Date();
+    var time = date.getHours() + ":" + date.getMinutes();
+
+    $scope.mealList.time = time;
     $scope.savedMeals.push($scope.mealList);
     console.log($scope.savedMeals);
-    $scope.mealList = [];
+    $scope.mealList = {time: "", foods: []};
     $scope.chosenFoods = [];
   };
 
   // Remove food from Add meal list
-  $scope.remove = function($event) {
+  $scope.remove = function() {
     document.querySelector('#currentChosenFood').remove();
     $scope.chosenFoods.pop();
   };
+
+  $scope.removeChosenFood = function() {
+    document.querySelector('#savedFood').remove();
+    $scope.mealList.foods.pop();
+  }
+
 
 //Return all activities
   $scope.findActivities = function(activity) {
@@ -111,6 +130,7 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
     });
   }
 
+  //Return activity based on user search term
   $scope.searchActivities = function(activity) {
     if ($scope.activitySearchTerm !== undefined) {
       console.log("Activity Search Term: ", $scope.activitySearchTerm);
@@ -119,9 +139,6 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
       });
     }
   }
-
-
-
 
 }
 

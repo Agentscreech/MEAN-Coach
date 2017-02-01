@@ -1,12 +1,13 @@
 angular
-  .module("App")
-  .component('navbarz', {
-    templateUrl: 'app/components/navbar/navbar.html',
-    controller:NavbarzCtrl,
-    controllerAs: "vm",
-    bindToController: true
-  })
-  function NavbarzCtrl($scope, $state, Auth) {
+    .module("App")
+    .component('navbarz', {
+        templateUrl: 'app/components/navbar/navbar.html',
+        controller: NavbarzCtrl,
+        controllerAs: "vm",
+        bindToController: true
+    });
+
+function NavbarzCtrl($scope, $state, Auth) {
     var vm = this;
     $scope.isLoggedIn = function() {
          if(Auth.isLoggedIn()){
@@ -15,12 +16,14 @@ angular
          return Auth.isLoggedIn();
      };
 
+    console.log("This is nav current user: ", $scope.navId);
+
     $scope.logout = function() {
-      Auth.removeToken();
-      $state.go('loginState');
-    }
+        Auth.removeToken();
+        $state.go('loginState');
+    };
     vm.$onInit = function() {
-      vm.currentNavItem = "/home"
-    }
-  }
-  NavbarzCtrl.$inject = ['$scope', '$state', 'Auth'];
+        vm.currentNavItem = "/home";
+    };
+}
+NavbarzCtrl.$inject = ['$scope', '$state', 'Auth'];

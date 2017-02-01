@@ -17,13 +17,16 @@
 			<hr/>
 
 			<!-- Add a meal (chosen foods) section -->
-			<div id="chosen-foods" ng-show="chosenFoods.length > 0 || mealList.length > 0">
+			<div id="chosen-foods" ng-show="chosenFoods.length > 0 || mealList.foods.length > 0">
 				<h4>Add meal:</h4>
 
 					<!-- Saved foods -->
 					<div id="saved-foods">
-						<div ng-repeat="food in mealList" class="chosen-food-header">
-							<h6 class="chosen-food-item-name"><strong>{{food.name}}</strong></h6>
+						<div ng-repeat="food in mealList.foods" class="chosen-food-header" id="savedFood">
+							<span class="saved-food-item">
+								<button ng-click="removeChosenFood()">X</button>
+								<h6 class="chosen-food-item-name"><strong>{{food.name}}</strong></h6>
+							</span>
 							<p><strong>kCals:</strong> {{food.kCals}}</p>
 						</div>
 					</div>
@@ -59,21 +62,35 @@
 
 			<!-- Search results -->
 			<ul id="food-results" ng-show="searchResults.length > 0">
-				<li ng-repeat="result in searchResults" ng-click="chooseFood(event)" id={{result.ndbno}}>
+				<li ng-repeat="result in searchResults" ng-click="chooseFood(event)">
 					{{result.name}}
 					<hr/>
 				</li>
 			</ul>
 
-		</div>
+			<!-- Meal log list -->
+			<div id="foods-log">
+				<div ng-repeat="log in savedMeals">
+					<h6><strong>{{log.time}}</strong></h6>
+					<hr/>
+					<div ng-repeat="food in log.foods" class="chosen-food-header">
+						<p class="chosen-food-item-name">{{food.name}}</p>
+						<p><strong>kCals:</strong> {{food.kCals}}</p>
+					</div>
+				</div>
+			</div>
+
 
 		<div class="add-container">
-			<h3>Activities</h3>
+			<!-- <h3>Activities</h3>
 			<hr/>
 			<button ng-click="findActivities()" type="submit" name="activity-button">List Activities</button>
 			<form ng-submit="searchActivities()" id="activity-search-form">
 				<input type="text" id="activity-search" placeholder="Search activities" ng-model="activitySearchTerm">
 				<button type="submit" name="activity-search">Search</button>
-			</form>
+			</form> -->
 		</div>
+
 	</div>
+	<activities></activities>
+</div>
