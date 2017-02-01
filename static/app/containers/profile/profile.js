@@ -5,11 +5,9 @@ angular.module('App')
   controllerAs: 'profileComp'
 });
 
-<<<<<<< HEAD
-function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $http, $interval) {
-=======
-function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, Activity, $http) {
->>>>>>> activities
+
+function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, Activity, $http, $interval) {
+
   var currentUser = Auth.currentUser();
   if ($stateParams.id !== currentUser.id) {
     $window.location.href='/profile/' + currentUser.id;
@@ -90,7 +88,6 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
     $scope.searchTerm = undefined;
   };
 
-
   // Add food to your log
   $scope.saveFood = function($event) {
     $scope.savedMeals.push($scope.mealList);
@@ -99,30 +96,18 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, A
     $scope.chosenFoods = [];
   };
 
-<<<<<<< HEAD
-
   // Remove food from Add meal list
   $scope.remove = function($event) {
     document.querySelector('#currentChosenFood').remove();
     $scope.chosenFoods.pop();
   };
 
-
-}
-
-
-ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', '$http', '$interval'];
-=======
 //Return all activities
-$scope.findActivities = function(activity) {
-  Activity.getActivities().then(function(activity) {
-    console.log(activity);
-  });
+  $scope.findActivities = function(activity) {
+    Activity.getActivities().then(function(activity) {
+      console.log(activity);
+    });
+  }
 }
 
-
-}
-
-
-ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', 'Activity', '$http'];
->>>>>>> activities
+ProfileCompCtrl.$inject = ['$scope', '$state', '$stateParams', '$window', 'Profile', 'Auth', 'Activity', '$http', '$interval'];
