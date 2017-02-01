@@ -15,10 +15,13 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
     console.log("THIS IS SCOPE. PROFILE ", $scope.profile);
 
   $scope.currentCals = 0;
+  $scope.searchTerm = undefined;
   $scope.searchResults = [];
   $scope.chosenFoods = [];
-  $scope.searchTerm = "";
-  $scope.savedMeal = [];
+  $scope.chosenFoodMeasures = [];
+  $scope.mealList = [];
+  $scope.measureQty = 1;
+  $scope.savedMeals = [];
   $scope.savedMealDate = "";
 
 
@@ -36,21 +39,23 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
 
   // Return list of available foods based on search term
   $scope.findFoods = function() {
-    var req = {
-      url: '/foodresults?searchTerm=' + $scope.searchTerm,
-      method: 'GET'
-    };
+    if ($scope.searchTerm !== undefined) {
+      var req = {
+        url: '/foodresults?searchTerm=' + $scope.searchTerm,
+        method: 'GET'
+      };
 
-    $http(req).then(function success(res) {
-      $scope.searchResults = res.data.list.item;
-    }, function failure(res) {
-      console.log('failed');
-    });
+      $http(req).then(function success(res) {
+        $scope.searchResults = res.data.list.item;
+      }, function failure(res) {
+        console.log('failed');
+      });
+    }
   };
 
 
   // Select one of the foods from the search results to retrieve calorie info
-  $scope.addFood = function($event) {
+  $scope.chooseFood = function($event) {
 
     $scope.searchResults = [];
     $scope.searchTerm = "";
@@ -64,18 +69,39 @@ function ProfileCompCtrl($scope, $state, $stateParams, $window, Profile, Auth, $
     $http(req).then(function success(res) {
       $scope.chosen = res.data.report;
       $scope.chosenFoods.push({name: $scope.chosen.food.name, kCals: $scope.chosen.food.nutrients[1].value});
+      $scope.chosenFoodMeasures = $scope.chosen.food.nutrients[1].measures;
+      $scope.chosenFoodName = $scope.chosen.food.name;
+      console.log($scope.chosenFoodMeasures);
     }, function failure(res) {
       console.log('failed');
     });
   };
 
+  $scope.addFood = function($event) {
+    var qtyCals = parseInt(event.target.id);
+    $scope.mealList.push({name: $scope.chosenFoodName, kCals: qtyCals});
+    $scope.chosenFoodName = "";
+    $scope.chosenFoods = [];
+    document.querySelector('#currentChosenFood').remove();
+    $scope.searchTerm = undefined;
+  };
+
 
   // Add food to your log
   $scope.saveFood = function($event) {
-    $scope.savedMeal = $scope.chosenFoods;
-    $scope.savedMealDate = new Date();
-    console.log($scope.savedMeal);
+    $scope.savedMeals.push($scope.mealList);
+    console.log($scope.savedMeals);
+    $scope.mealList = [];
+    $scope.chosenFoods = [];
   };
+
+
+  // Remove food from Add meal list
+  $scope.remove = function($event) {
+    document.querySelector('#currentChosenFood').remove();
+    $scope.chosenFoods.pop();
+  };
+
 
 }
 
