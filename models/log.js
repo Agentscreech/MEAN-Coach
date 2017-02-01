@@ -1,7 +1,8 @@
 var mongoose = require('mongoose'), Schema = mongoose.Schema;
+var moment = require('moment');
 
 var logSchema = Schema({
-    user_id: Number, //USER "FOREIGN KEY" reference should look like [{ type: Schema.Types.ObjectId, ref: 'User' }] in production
+    user_id:[{ type: Schema.Types.ObjectId, ref: 'User' }], //USER "FOREIGN KEY" reference should look like [{ type: Schema.Types.ObjectId, ref: 'User' }] in production
     activities: [{
         name: String,
         caloriesBurned: String
@@ -19,5 +20,6 @@ var logSchema = Schema({
 });
 
 var Log = mongoose.model('Log', logSchema);
+
 
 module.exports = {Log: Log};
