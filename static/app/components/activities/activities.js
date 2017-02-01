@@ -7,7 +7,7 @@ angular
         // bindToController: true
     });
 
-function ActivityCtrl($scope, Activity, ActivitySearch){
+function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User){
   $scope.activitySearchTerm = undefined;
   $scope.activitySearchResults = [];
   var activity = this;
@@ -19,8 +19,19 @@ function ActivityCtrl($scope, Activity, ActivitySearch){
       });
     }
 
+  //Return currentUser weight to calculate respective calories per activity
+  $scope.findWeight = function() {
+    $scope.currentUser = Auth.currentUser();
+    console.log("Current user: ", $scope.currentUser.id);
+    User.get({id: $scope.currentUser.id }, function success(user) {
+      console.log("Got user weight: ", user);
+    })
+  }
+
+
   //Return activity based on user search term
   $scope.searchActivities = function(activity) {
+    $scope.findWeight()
     if ($scope.activitySearchTerm !== undefined) {
       var serviceActivitySearch = $scope.activitySearchTerm;
       ActivitySearch.search(serviceActivitySearch).then(function(activity) {
@@ -31,4 +42,4 @@ function ActivityCtrl($scope, Activity, ActivitySearch){
   }
 }
 
-ActivityCtrl.$inject = ['$scope', 'Activity', 'ActivitySearch'];
+ActivityCtrl.$inject = ['$scope', 'Activity', 'ActivitySearch', 'Auth', 'User'];
