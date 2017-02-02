@@ -3,7 +3,7 @@ angular
     .component('foods', {
         templateUrl: 'app/components/foods/foods.html',
         controller: FoodsCtrl,
-        controllerAs: "food",
+        controllerAs: "foodComp",
         // bindToController: true
     });
 
