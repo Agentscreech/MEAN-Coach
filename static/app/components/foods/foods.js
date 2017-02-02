@@ -1,20 +1,26 @@
 angular
     .module("App")
     .component('foods', {
+        bindings: {
+            foodList: '<'
+        },
         templateUrl: 'app/components/foods/foods.html',
         controller: FoodsCtrl,
         controllerAs: "foodComp",
         // bindToController: true
     });
 
-function FoodsCtrl($scope, $http, $interval, Auth, Log) {
-    var food = this;
+function FoodsCtrl($http, $interval, Auth, Log) {
+    var foodComp = this;
+
+    // console.log(food.foodList);
+    console.log(foodComp.foodList);
 
     var today = moment().format('MMMM Do YYYY');
-    $scope.currentCals = 0;
-    $scope.searchTerm = undefined;
-    $scope.chosenFoods = [];
-    $scope.chosenFoodMeasures = [];
+    foodComp.currentCals = 0;
+    foodComp.searchTerm = undefined;
+    foodComp.chosenFoods = [];
+    foodComp.chosenFoodMeasures = [];
     var log = {
         user_id: Auth.currentUser().id,
         logs: {
@@ -22,52 +28,52 @@ function FoodsCtrl($scope, $http, $interval, Auth, Log) {
             foods: []
         }
     };
-    $scope.mealList = log.logs;
-    $scope.measureQty = 1;
-    $scope.savedMeals = [];
-    $scope.savedMealDate = "";
+    foodComp.mealList = log.logs;
+    foodComp.measureQty = 1;
+    foodComp.savedMeals = [];
+    foodComp.savedMealDate = "";
 
 
     //Delay search for 1 second after done typing
     var interval = 1000;
-    $scope.delayBeforeSearch = function() {
+    foodComp.delayBeforeSearch = function() {
         $interval.cancel(interval);
         interval = $interval(function() {
-            $scope.findFoods();
+            foodComp.findFoods();
             $interval.cancel(interval);
         }, 1000);
     };
 
 
     // Return list of available foods based on search term
-    $scope.findFoods = function() {
-        if ($scope.searchTerm !== undefined && $scope.searchTerm !== "") {
+    foodComp.findFoods = function() {
+        if (foodComp.searchTerm !== undefined && foodComp.searchTerm !== "") {
             var req = {
-                url: 'api/foods/foodresults?searchTerm=' + $scope.searchTerm,
+                url: 'api/foods/foodresults?searchTerm=' + foodComp.searchTerm,
                 method: 'GET'
             };
 
             $http(req).then(function success(res) {
                 if (res.data.list === undefined) {
-                    $scope.searchResults = null;
+                    foodComp.searchResults = null;
                 } else {
-                    $scope.searchResults = res.data.list.item;
+                    foodComp.searchResults = res.data.list.item;
                 }
             }, function failure(res) {
                 console.log('failed');
             });
         } else {
-            $scope.searchResults = undefined;
+            foodComp.searchResults = undefined;
         }
-        return $scope.searchResults;
+        return foodComp.searchResults;
     };
 
 
     // Select one of the foods from the search results to retrieve calorie info
-    $scope.chooseFood = function($event) {
+    foodComp.chooseFood = function($event) {
 
-        $scope.searchResults = [];
-        $scope.searchTerm = "";
+        foodComp.searchResults = [];
+        foodComp.searchTerm = "";
 
         var foodID = event.target.id;
         var req = {
@@ -76,20 +82,21 @@ function FoodsCtrl($scope, $http, $interval, Auth, Log) {
         };
 
         $http(req).then(function success(res) {
-            $scope.chosen = res.data.report;
-            $scope.chosenFoods.push({
-                name: $scope.chosen.food.name,
-                kCals: $scope.chosen.food.nutrients[1].value
+            foodComp.chosen = res.data.report;
+            console.log(foodComp.chosen);
+            foodComp.chosenFoods.push({
+                name: foodComp.chosen.food.name,
+                kCals: foodComp.chosen.food.nutrients[1].value
             });
 
-            var nutrients = $scope.chosen.food.nutrients;
+            var nutrients = foodComp.chosen.food.nutrients;
             for (var i = 0; i < nutrients.length; i++) {
                 if (nutrients[i].name == "Energy") {
-                    $scope.chosenFoodMeasures = $scope.chosen.food.nutrients[i].measures;
+                    foodComp.chosenFoodMeasures = foodComp.chosen.food.nutrients[i].measures;
                 }
             }
 
-            $scope.chosenFoodName = $scope.chosen.food.name;
+            foodComp.chosenFoodName = foodComp.chosen.food.name;
 
         }, function failure(res) {
             console.log('failed');
@@ -98,34 +105,34 @@ function FoodsCtrl($scope, $http, $interval, Auth, Log) {
 
 
     // Add food to meal and reset search
-    $scope.addFood = function($event) {
+    foodComp.addFood = function($event) {
         var qtyCals = parseInt(event.target.id);
-        $scope.mealList.foods.push({
-            name: $scope.chosenFoodName,
+        foodComp.mealList.foods.push({
+            name: foodComp.chosenFoodName,
             kcals: qtyCals
         });
-        $scope.chosenFoodName = "";
-        $scope.chosenFoods = [];
+        foodComp.chosenFoodName = "";
+        foodComp.chosenFoods = [];
         document.querySelector('#currentChosenFood').remove();
-        $scope.searchTerm = undefined;
-        console.log($scope.mealList.foods[0]);
+        foodComp.searchTerm = undefined;
+        console.log(foodComp.mealList.foods[0]);
     };
 
 
     // Save food to your daily log
-    $scope.saveFood = function() {
+    foodComp.saveFood = function() {
 
         // Get timestamp
         var date = new Date();
         var time = date.getHours() + ":" + date.getMinutes();
 
-        // $scope.mealList.time = time;
-        // $scope.mealList.user_id = Auth.currentUser().id;
-        $scope.savedMeals.push($scope.mealList);
-        console.log($scope.savedMeals);
+        // foodComp.mealList.time = time;
+        // foodComp.mealList.user_id = Auth.currentUser().id;
+        foodComp.savedMeals.push(foodComp.mealList);
+        console.log(foodComp.savedMeals);
 
         // mealList is what gets submitted to DB:
-        // $scope.mealList = {
+        // foodComp.mealList = {
         //     time: "",
         //     foods: []
         // };
@@ -133,7 +140,7 @@ function FoodsCtrl($scope, $http, $interval, Auth, Log) {
         // var req = {
         //     url: 'api/logs',
         //     method: 'POST',
-        //     body: $scope.mealList
+        //     body: foodComp.mealList
         // };
         console.log('trying to send ', log);
         Log.update(log, function success(data){
@@ -143,23 +150,23 @@ function FoodsCtrl($scope, $http, $interval, Auth, Log) {
         });
 
 
-        $scope.chosenFoods = [];
+        foodComp.chosenFoods = [];
     };
 
 
     // Exit food quantity options
-    $scope.remove = function() {
+    foodComp.remove = function() {
         document.querySelector('#currentChosenFood').remove();
-        $scope.chosenFoods.pop();
+        foodComp.chosenFoods.pop();
     };
 
 
     // Remove food from meal
-    $scope.removeChosenFood = function() {
+    foodComp.removeChosenFood = function() {
         document.querySelector('#savedFood').remove();
-        $scope.mealList.foods.pop();
+        foodComp.mealList.foods.pop();
     };
 
 }
 
-FoodsCtrl.$inject = ['$scope', '$http', '$interval', 'Auth', 'Log'];
+FoodsCtrl.$inject = ['$http', '$interval', 'Auth', 'Log'];

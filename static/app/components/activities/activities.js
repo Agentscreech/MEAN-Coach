@@ -33,7 +33,7 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log){
     Activity.getActivities().then(function(activity) {
       activityComp.allActivities = activity.data;
     });
-  }
+};
 
   activityComp.clickSearch = function($event) {
     activityComp.clickSearchTerm = event.srcElement.innerText;
@@ -63,9 +63,10 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log){
         console.log("Computed calories array: ", activityComp.activitySearchResults);
       });
     }
-  }
+};
 
   //Add activity to current user log
+
   activityComp.addActivity = function($index) {
     activityComp.newActivity = activityComp.activitySearchResults[$index];
     var userTimeFactor = activityComp.activityduration / 60;
@@ -82,7 +83,7 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log){
     }, function error(data){
         console.log('error', data);
     });
-  }
+};
 
 }
 

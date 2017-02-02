@@ -45,6 +45,18 @@ angular.module('App')
         method: "GET"
       };
       return $http(req);
+    },
+    getLogs: function(userId){
+      var URL = '/api/logs/' +userId;
+      var req = {
+        url:URL,
+        method: "GET"
+      };
+      return $http(req);
+      // then(function(res){
+      //   console.log('this is the response to get logs ', res.data );
+        // return res.data;
+      // });
     }
   };
 }])
