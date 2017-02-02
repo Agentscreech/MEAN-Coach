@@ -3,12 +3,11 @@ angular
     .component('foods', {
         templateUrl: 'app/components/foods/foods.html',
         controller: FoodsCtrl,
-        controllerAs: "activity",
+        controllerAs: "foods",
         // bindToController: true
     });
 
 function FoodsCtrl($scope, $http, $interval, Auth) {
-    var activity = this;
 
     $scope.currentCals = 0;
     $scope.searchTerm = undefined;
@@ -117,7 +116,7 @@ function FoodsCtrl($scope, $http, $interval, Auth) {
         $scope.mealList.time = time;
         $scope.savedMeals.push($scope.mealList);
         console.log($scope.savedMeals);
-        
+
         // mealList is what gets submitted to DB:
         $scope.mealList = {
             time: "",

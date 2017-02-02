@@ -5,7 +5,7 @@ var logSchema = Schema({
     user_id:[{ type: Schema.Types.ObjectId, ref: 'User' }], //USER "FOREIGN KEY" reference should look like [{ type: Schema.Types.ObjectId, ref: 'User' }] in production
     activities: [{
         name: String,
-        caloriesBurned: String
+        caloriesBurned: Number
     }],
     foods: [{
         name: String,

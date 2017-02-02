@@ -4,19 +4,15 @@ angular
         templateUrl: 'app/components/activities/activities.html',
         controller: ActivityCtrl,
         controllerAs: "activity",
-        // bindToController: true
     });
 
 function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User){
   $scope.activitySearchTerm = undefined;
+  $scope.activity.duration;
   $scope.activitySearchResults = [];
-  // var activity = this;
+  $scope.newActivity = {};
+  $scope.loggedActivities = [];
   $scope.userWeight = null;
-
-  $scope.$watch('computedCalories', function(newVal, oldVal) {
-    console.log('New Value', newVal);
-    console.log('Old Value', oldVal);
-  });
 
   //Return all activities
   $scope.findActivities = function(activity) {
@@ -34,8 +30,6 @@ function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User){
     })
   }
 
-
-
   //Return activity based on user search term
   $scope.searchActivities = function(activity) {
     $scope.findWeight()
@@ -50,6 +44,20 @@ function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User){
       });
     }
   }
+
+  //Add activity to current user log
+  $scope.addActivity = function($index) {
+    $scope.newActivity = $scope.activitySearchResults[$index];
+    var userTimeFactor = $scope.activity.duration / 60;
+    $scope.newActivity.caloriesBurned = Math.round($scope.activitySearchResults[$index].calFactor * userTimeFactor);
+    delete $scope.activitySearchResults[$index].calFactor;
+    delete $scope.activitySearchResults[$index]._id;
+    $scope.loggedActivities.push($scope.newActivity);
+    console.log($scope.loggedActivities);
+    $scope.searchActivities();
+    return $scope.loggedActivities;
+  }
+
 }
 
 ActivityCtrl.$inject = ['$scope', 'Activity', 'ActivitySearch', 'Auth', 'User'];

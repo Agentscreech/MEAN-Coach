@@ -20,6 +20,7 @@ function NavbarzCtrl($scope, $state, Auth) {
 
     $scope.logout = function() {
         Auth.removeToken();
+        vm.isLoggedIn = false;
         $state.go('loginState');
     };
     vm.$onInit = function() {
