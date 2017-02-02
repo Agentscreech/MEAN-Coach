@@ -2,12 +2,12 @@
 	<h1>This is profile container</h1>
 
 	<span>
-			{{profile.email}}, you haven't entered any information yet! Get started here:
+			{{profileComp.profile.email}}, you haven't entered any information yet! Get started here:
 		<button class="btn" ui-sref="userSettingsState({id:profile.id})"><i class="large material-icons">settings_applications</i></button>
 	</span>
 
 	<div id="current-cals">
-		<h1 ng-model="currentCals">{{currentCals}}</h1>
+		<h1 ng-model="profileComp.currentCals">{{profileComp.currentCals}}</h1>
 		<h3>calories</h3>
 	</div>
 

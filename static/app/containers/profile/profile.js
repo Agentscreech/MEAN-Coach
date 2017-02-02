@@ -6,7 +6,7 @@ angular.module('App')
     });
 
 
-function ProfileCompCtrl($scope, $stateParams, $window, Profile, Auth, Log) {
+function ProfileCompCtrl($stateParams, $window, Profile, Auth) {
     var todaysLogs = {};
     var profileComp = this;
     var today = moment().format('MMMM Do YYYY');
@@ -16,6 +16,8 @@ function ProfileCompCtrl($scope, $stateParams, $window, Profile, Auth, Log) {
     if ($stateParams.id !== currentUser.id) {
         $window.location.href = '/profile/' + currentUser.id;
     }
+
+    profileComp.currentCals = 0;
     profileComp.foods = [];
     profileComp.activities = [];
     Profile.getLogs(user_id).then(function(res){
@@ -24,9 +26,12 @@ function ProfileCompCtrl($scope, $stateParams, $window, Profile, Auth, Log) {
             if(log.date == today){
                 log.foods.forEach(function (food){
                     profileComp.foods.push(food);
+                    profileComp.currentCals += food.kcals;
                 });
                 log.activities.forEach(function(activity){
                     profileComp.activities.push(activity);
+                    profileComp.currentCals -= activity.caloriesBurned;
+
                 });
         }
     });
@@ -34,10 +39,9 @@ function ProfileCompCtrl($scope, $stateParams, $window, Profile, Auth, Log) {
         console.log('to activities component',profileComp.activities);
     });
     // console.log("Current User; ", Auth.currentUser());
-    $scope.profile = Auth.currentUser();
-    // console.log("THIS IS SCOPE. PROFILE ", $scope.profile.id);
+    profileComp.profile = Auth.currentUser();
+    // console.log("THIS IS SCOPE. PROFILE ", profileComp.profile.id);
 
-    $scope.currentCals = 0;
 
     //trying to get the logs for the day
     // console.log(todaysLogs);
@@ -45,4 +49,4 @@ function ProfileCompCtrl($scope, $stateParams, $window, Profile, Auth, Log) {
 
 }
 
-ProfileCompCtrl.$inject = ['$scope', '$stateParams', '$window', 'Profile', 'Auth', 'Log'];
+ProfileCompCtrl.$inject = ['$stateParams', '$window', 'Profile', 'Auth'];
