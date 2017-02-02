@@ -18,7 +18,7 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Acti
     profileComp.goal = 0;
     profileComp.foods = [];
     profileComp.isOver = false;
-    profileComp
+    profileComp.overBy = null;
     profileComp.activities = [];
     profileComp.suggestion = '';
     profileComp.duration = null;
@@ -33,29 +33,14 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Acti
                 log.activities.forEach(function(activity) {
                     profileComp.activities.push(activity);
                     profileComp.currentCals -= activity.caloriesBurned;
-
                 });
             }
         });
-
-        // if(profileComp.currentCals && profileComp.goal) {
-        //     if (profileComp.currentCals > profileComp.goal){
-        //         var over = profileComp.currentCals - profileComp.goal;
-        //         console.log('over by ', over);
-        //     } else if (profileComp.currentCals < profileComp.goal){
-        //         console.log('not over,', profileComp.currentCals);
-        //     } else {
-        //         console.log('¯\\_(ツ)_/¯');
-        //     }
-        // }
-        // console.log('to foods component', profileComp.foods);
-        // console.log('to activities component', profileComp.activities);
     });
 
     User.get({id: profileComp.profile.id}, function success(userData){
         console.log('this is user goal', userData.goal);
         profileComp.goal = userData.goal;
-
         if(profileComp.currentCals && profileComp.goal) {
             if (profileComp.currentCals > profileComp.goal){
                 profileComp.isOver = true;
@@ -65,7 +50,7 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Acti
                     var actv = list.data[Math.floor(Math.random()*list.data.length)];
                     console.log('Activity chosen', actv);
                     profileComp.suggestion = actv.name;
-                    profileComp.duration = Math.round(profileComp.overBy  /(actv.calFactor * 60)*60);
+                    profileComp.duration = Math.round(profileComp.overBy /(actv.calFactor * 60)*60);
                     console.log('length of thing', profileComp.duration);
                 });
             } else if (profileComp.currentCals < profileComp.goal){
