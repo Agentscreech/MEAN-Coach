@@ -1,6 +1,6 @@
 var models = require('../models/schemas');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/meancoach');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/meancoach');
 
 var activities = [{
         name: "Backpacking",

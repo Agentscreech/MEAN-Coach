@@ -1,7 +1,7 @@
 <div class="add-container">
   <h3>Activities</h3>
   <hr/>
-  <button ng-click="activityComp.findActivities(); activityComp.allActivitiesClicked = true" type="submit" name="activity-button" class="wide-button" id="all-activities-btn">List All Activities</button><span><button ng-click="activityComp.allActivitiesClicked">X</button></span>
+  <button ng-click="activityComp.findActivities(); activityComp.allActivitiesClicked = true" type="submit" name="activity-button" class="wide-button" id="all-activities-btn">List All Activities</button><span><button ng-click="activityComp.allActivitiesClicked = false">X</button></span>
   <ul id="all-activities" ng-if="activityComp.allActivitiesClicked">
     <li ng-repeat="Activity in activityComp.allActivities" ng-click="activityComp.clickSearch(event); activityComp.allActivitiesClicked = false">
       {{Activity.name}}
@@ -9,11 +9,10 @@
     </li>
   </ul>
   <form ng-submit="activityComp.searchActivities()" id="activity-search-form">
-    <input type="text" id="activity-search" placeholder="Search activities" ng-model="activityComp.activitySearchTerm">
-    <button type="submit" name="activity-search" ng-click="activityAddButton = true">Search</button>
+    <input type="text" id="activity-search" placeholder="Search activities" ng-model="activityComp.activitySearchTerm" ng-keydown="activityComp.delayBeforeSearch()">
   </form>
 
-  <div ng-repeat="Activity in activityComp.activitySearchResults track by $index" class="can-add-activity">
+  <div ng-repeat="Activity in activityComp.activitySearchResults track by $index" class="can-add-activity" ng-show="activityComp.activitySearchResults.length > 0 ">
       <p><strong>{{Activity.name}}</strong></p>
       <span>Calories / Hour: <span><strong>{{Activity.calFactor}}</strong></span>
       <a class="btn-floating btn-small waves-effect waves-light blue" ng-click="activityTimeInput = true; activityAddButton = false" type="sumbit"><i class="material-icons">add</i></a>

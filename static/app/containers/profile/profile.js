@@ -6,43 +6,79 @@ angular.module('App')
     });
 
 
-function ProfileCompCtrl($scope, $stateParams, $window, Profile, Auth, Log) {
+function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User) {
     var todaysLogs = {};
     var profileComp = this;
     var today = moment().format('MMMM Do YYYY');
-
-    var currentUser = Auth.currentUser();
-    var user_id = currentUser.id;
-    if ($stateParams.id !== currentUser.id) {
-        $window.location.href = '/profile/' + currentUser.id;
+    profileComp.profile = Auth.currentUser();
+    var user_id = profileComp.profile.id;
+    if ($stateParams.id !== profileComp.profile.id) {
+        $window.location.href = '/profile/' + profileComp.profile.id;
     }
-    profileComp.foods = [];
-    profileComp.activities = [];
-    Profile.getLogs(user_id).then(function(res){
-        var logs = res.data;
-        logs.forEach(function(log){
-            if(log.date == today){
-                log.foods.forEach(function (food){
-                    profileComp.foods.push(food);
-                });
-                log.activities.forEach(function(activity){
-                    profileComp.activities.push(activity);
-                });
+    profileComp.currentCals = 0;
+    profileComp.goal = 0;
+    $scope.$watch('profileComp.currentCals', function(newVal, oldVal){
+        if(profileComp.currentCals && profileComp.goal){
+            if (profileComp.currentCal > profileComp.goal){
+                var over = profileComp.currentCals - profileComp.goal;
+                console.log('over by ', over);
+            } else if (profileComp.currentCal < profileComp.goal){
+                console.log('not over,', profileComp.currentCals);
+            } else {
+                console.log('¯\\_(ツ)_/¯');
+            }
         }
     });
-        console.log('to foods component', profileComp.foods);
-        console.log('to activities component',profileComp.activities);
+    $scope.$watch('profileComp.goal', function(newVal, oldVal){
+        if(profileComp.currentCals && profileComp.goal){
+            if (profileComp.currentCal > profileComp.goal){
+                var over = profileComp.currentCals - profileComp.goal;
+                console.log('over by ', over);
+            } else if (profileComp.currentCal < profileComp.goal){
+                console.log('not over,', profileComp.currentCals);
+            } else {
+                console.log('¯\\_(ツ)_/¯');
+            }
+        }
     });
-    // console.log("Current User; ", Auth.currentUser());
-    $scope.profile = Auth.currentUser();
-    // console.log("THIS IS SCOPE. PROFILE ", $scope.profile.id);
 
-    $scope.currentCals = 0;
+    profileComp.foods = [];
+    profileComp.activities = [];
+    Profile.getLogs(user_id).then(function(res) {
+        var logs = res.data;
+        logs.forEach(function(log) {
+            if (log.date == today) {
+                log.foods.forEach(function(food) {
+                    profileComp.foods.push(food);
+                    profileComp.currentCals += food.kcals;
+                });
+                log.activities.forEach(function(activity) {
+                    profileComp.activities.push(activity);
+                    profileComp.currentCals -= activity.caloriesBurned;
 
-    //trying to get the logs for the day
-    // console.log(todaysLogs);
+                });
+            }
+        });
+        // console.log('to foods component', profileComp.foods);
+        // console.log('to activities component', profileComp.activities);
+    });
+
+    User.get({id: profileComp.profile.id}, function success(userData){
+        console.log('this is user goal', userData.goal);
+        profileComp.goal = userData.goal;
+        // if (profileComp.currentCal > profileComp.goal){
+        //     var over = profileComp.currentCals - profileComp.goal;
+        //     console.log('over by ', over);
+        // } else if (profileComp.currentCal < profileComp.goal){
+        //     console.log('not over,', profileComp.currentCals);
+        // } else {
+        //     console.log('¯\\_(ツ)_/¯');
+        // }
+    }, function error(data){
+        console.log(data);
+    });
 
 
 }
 
-ProfileCompCtrl.$inject = ['$scope', '$stateParams', '$window', 'Profile', 'Auth', 'Log'];
+ProfileCompCtrl.$inject = ['$scope','$stateParams', '$window', 'Profile', 'Auth', 'User'];
