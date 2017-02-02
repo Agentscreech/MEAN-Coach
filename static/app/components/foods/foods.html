@@ -34,7 +34,7 @@
                                     <input type="text" class="food-measure-input" ng-model="foodComp.measureQty">
                                 </span>
                                 <p><strong>kCals:</strong> {{foodComp.measureQty * measure.value}}</p>
-                                <button ng-click="foodComp.addFood(event)" id="{{foodComp.measureQty * measure.value}}">ADD</button>
+                                <button ng-click="foodComp.addFood(event); foodComp.soloFoodSearch = true" id="{{foodComp.measureQty * measure.value}}">ADD</button>
                             </div>
                     </form>
                 </div>
@@ -43,14 +43,14 @@
         </div>
 
         <!-- Search for foods -->
-        <form ng-submit="foodComp.findFoods()" id="food-search-form">
+        <form ng-submit="foodComp.findFoods()" id="food-search-form" ng-if="foodComp.soloFoodSearch">
             <input type="text" id="food-search" placeholder="Search foods" ng-model="foodComp.searchTerm" ng-keydown="foodComp.delayBeforeSearch()">
         </form>
         <p ng-show="foodComp.searchResults === null && foodComp.searchTerm !== '' ">No results found for "{{foodComp.searchTerm}}"</p>
 
         <!-- Search results -->
         <ul id="food-results" ng-show="foodComp.searchResults.length > 0">
-            <li ng-repeat="result in foodComp.searchResults" ng-click="foodComp.chooseFood(event)" id={{result.ndbno}}>
+            <li ng-repeat="result in foodComp.searchResults" ng-click="foodComp.chooseFood(event); foodComp.soloFoodSearch = false" id={{result.ndbno}}>
                 {{result.name}}
                 <hr/>
             </li>

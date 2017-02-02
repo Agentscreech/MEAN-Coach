@@ -1,7 +1,7 @@
 <div class="add-container">
   <h3>Activities</h3>
   <hr/>
-  <button ng-click="activityComp.findActivities(); activityComp.allActivitiesClicked = true" type="submit" name="activity-button" class="wide-button" id="all-activities-btn">List All Activities</button>
+  <button ng-click="activityComp.findActivities(); activityComp.allActivitiesClicked = true" type="submit" name="activity-button" class="wide-button" id="all-activities-btn">List All Activities</button><span><button ng-click="activityComp.allActivitiesClicked">X</button></span>
   <ul id="all-activities" ng-if="activityComp.allActivitiesClicked">
     <li ng-repeat="Activity in activityComp.allActivities" ng-click="activityComp.clickSearch(event); activityComp.allActivitiesClicked = false">
       {{Activity.name}}
@@ -10,15 +10,15 @@
   </ul>
   <form ng-submit="activityComp.searchActivities()" id="activity-search-form">
     <input type="text" id="activity-search" placeholder="Search activities" ng-model="activityComp.activitySearchTerm">
-    <button type="submit" name="activity-search">Search</button>
+    <button type="submit" name="activity-search" ng-click="activityAddButton = true">Search</button>
   </form>
 
   <div ng-repeat="Activity in activityComp.activitySearchResults track by $index" class="can-add-activity">
       <p><strong>{{Activity.name}}</strong></p>
       <span>Calories / Hour: <span><strong>{{Activity.calFactor}}</strong></span>
-      <a class="btn-floating btn-small waves-effect waves-light blue" ng-click="activityTimeInput = true" type="sumbit"><i class="material-icons">add</i></a>
+      <a class="btn-floating btn-small waves-effect waves-light blue" ng-click="activityTimeInput = true; activityAddButton = false" type="sumbit"><i class="material-icons">add</i></a>
       <input type="integer" ng-model="activityComp.activityduration" ng-show="activityTimeInput" style="width: 60px;"><span ng-show="activityTimeInput">(Minutes)</span>
-      <button ng-click="activityComp.addActivity($index); activityTimeInput = false" ng-show="activityTimeInput" type="submit" name="addActivity">Add</button>
+      <button ng-click="activityComp.addActivity($index); activityTimeInput = false" ng-if="activityAddButton = true" ng-show="activityTimeInput" type="submit" name="addActivity">Add</button>
   </div>
 
   <!-- Activity log list -->
