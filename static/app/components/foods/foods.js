@@ -14,7 +14,7 @@ function FoodsCtrl($http, $interval, Auth, Log) {
     var foodComp = this;
 
     // console.log(food.foodList);
-    console.log(foodComp.foodList);
+    // console.log(foodComp.foodList);
 
     var today = moment().format('MMMM Do YYYY');
     foodComp.currentCals = 0;

@@ -27,7 +27,7 @@ function UserSettingsCompCtrl($state, $stateParams, $window, $resource, $locatio
             userSettingsComp.age = settings.age;
             userSettingsComp.gender = settings.gender;
             userSettingsComp.goal = settings.goal;
-            userSettingsComp.bmr = true;
+            userSettingsComp.calcBMR(userSettingsComp.weight, userSettingsComp.height, userSettingsComp.age, userSettingsComp.gender);
         if(settings.isMetric){
             userSettingsComp.isMetric = true;
         }
