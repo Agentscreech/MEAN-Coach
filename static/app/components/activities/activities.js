@@ -3,61 +3,91 @@ angular
     .component('activities', {
         templateUrl: 'app/components/activities/activities.html',
         controller: ActivityCtrl,
-        controllerAs: "activity",
+        controllerAs: "activityComp",
+        bindings: {
+          activityList: '<'
+        }
     });
 
-function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User){
-  $scope.activitySearchTerm = undefined;
-  $scope.activity.duration;
-  $scope.activitySearchResults = [];
-  $scope.newActivity = {};
-  $scope.loggedActivities = [];
-  $scope.userWeight = null;
+function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log){
+  activityComp = this;
+
+  var today = moment().format('MMMM Do YYYY');
+  activityComp.activitySearchTerm = undefined;
+  activityComp.activityduration = 0;
+  activityComp.activitySearchResults = [];
+  activityComp.newActivity = {};
+  // activityComp.loggedActivities = [];
+  activityComp.userWeight = null;
+  activityComp.clickSearchTerm = null;
+
+  var log = {
+      user_id: Auth.currentUser().id,
+      logs: {
+          date: today,
+          activities: []
+      }
+  };
+  activityComp.loggedActivities = log.logs;
 
   //Return all activities
-  $scope.findActivities = function(activity) {
-    $scope.allActivitiesClicked = !$scope.allActivitiesClicked;
+  activityComp.findActivities = function(activity) {
+    activityComp.allActivitiesClicked = !activityComp.allActivitiesClicked;
     Activity.getActivities().then(function(activity) {
-      $scope.allActivities = activity.data;
+      activityComp.allActivities = activity.data;
     });
+};
+
+  activityComp.clickSearch = function($event) {
+    activityComp.clickSearchTerm = event.srcElement.innerText;
+    activityComp.activitySearchTerm = activityComp.clickSearchTerm;
+    console.log(activityComp.activitySearchTerm);
+    activityComp.searchActivities();
   }
 
   //Return currentUser weight to calculate respective calories per activity
-  $scope.findWeight = function() {
-    $scope.currentUser = Auth.currentUser();
-    User.get({id: $scope.currentUser.id }, function success(user) {
-      $scope.userWeight = user.weight;
+  activityComp.findWeight = function() {
+    activityComp.currentUser = Auth.currentUser();
+    User.get({id: activityComp.currentUser.id }, function success(user) {
+      activityComp.userWeight = user.weight;
     })
   }
 
   //Return activity based on user search term
-  $scope.searchActivities = function(activity) {
-    $scope.findWeight()
-    if ($scope.activitySearchTerm !== undefined) {
-      var serviceActivitySearch = $scope.activitySearchTerm;
+  activityComp.searchActivities = function(activity) {
+    activityComp.findWeight()
+    if (activityComp.activitySearchTerm !== undefined) {
+      var serviceActivitySearch = activityComp.activitySearchTerm;
       ActivitySearch.search(serviceActivitySearch).then(function(activity) {
-        $scope.activitySearchResults = activity.data;
-        for(var i = 0; i < $scope.activitySearchResults.length; i++){
-          $scope.activitySearchResults[i].calFactor = Math.round($scope.activitySearchResults[i].calFactor * $scope.userWeight);
+        activityComp.activitySearchResults = activity.data;
+        for(var i = 0; i < activityComp.activitySearchResults.length; i++){
+          activityComp.activitySearchResults[i].calFactor = Math.round(activityComp.activitySearchResults[i].calFactor * activityComp.userWeight);
         }
-        console.log("Computed calories array: ", $scope.activitySearchResults);
+        console.log("Computed calories array: ", activityComp.activitySearchResults);
       });
     }
-  }
+};
 
   //Add activity to current user log
-  $scope.addActivity = function($index) {
-    $scope.newActivity = $scope.activitySearchResults[$index];
-    var userTimeFactor = $scope.activity.duration / 60;
-    $scope.newActivity.caloriesBurned = Math.round($scope.activitySearchResults[$index].calFactor * userTimeFactor);
-    delete $scope.activitySearchResults[$index].calFactor;
-    delete $scope.activitySearchResults[$index]._id;
-    $scope.loggedActivities.push($scope.newActivity);
-    console.log($scope.loggedActivities);
-    $scope.searchActivities();
-    return $scope.loggedActivities;
-  }
+
+  activityComp.addActivity = function($index) {
+    activityComp.newActivity = activityComp.activitySearchResults[$index];
+    var userTimeFactor = activityComp.activityduration / 60;
+    activityComp.newActivity.caloriesBurned = Math.round(activityComp.activitySearchResults[$index].calFactor * userTimeFactor);
+    console.log(activityComp.newActivity)
+    delete activityComp.activitySearchResults[$index].calFactor;
+    delete activityComp.activitySearchResults[$index]._id;
+    activityComp.loggedActivities.activities.push(activityComp.newActivity);
+    console.log(activityComp.loggedActivities.activities);
+    activityComp.searchActivities();
+    console.log('trying to send ', log);
+    Log.update(log, function success(data){
+        console.log('success res', data);
+    }, function error(data){
+        console.log('error', data);
+    });
+};
 
 }
 
-ActivityCtrl.$inject = ['$scope', 'Activity', 'ActivitySearch', 'Auth', 'User'];
+ActivityCtrl.$inject = ['Activity', 'ActivitySearch', 'Auth', 'User', 'Log'];
