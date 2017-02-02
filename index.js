@@ -10,7 +10,7 @@ var request = require('request');
 //JSON web token dependencies including secret keyboard
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
-var secret = process.env.JWT_SECRET;
+var secret = process.env.JWT_SECRET || 'mysupersecret';
 
 
 //Mongoose models and connection
@@ -18,7 +18,7 @@ var mongoose = require('mongoose');
 var User = require('./models/user');
 var Activity = require('./models/activity');
 var Log = require('./models/log');
-mongoose.connect('mongodb://localhost/meancoach');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/meancoach');
 
 //Setup Path directory (static)
 app.use(express.static(path.join(__dirname, 'static')));
