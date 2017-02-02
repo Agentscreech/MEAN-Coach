@@ -3,21 +3,24 @@ angular
     .component('foods', {
         templateUrl: 'app/components/foods/foods.html',
         controller: FoodsCtrl,
-        controllerAs: "foods",
+        controllerAs: "food",
         // bindToController: true
     });
 
-function FoodsCtrl($scope, $http, $interval, Auth) {
+function FoodsCtrl($scope, $http, $interval, Auth, Log) {
+    var food = this;
 
     $scope.currentCals = 0;
     $scope.searchTerm = undefined;
     $scope.chosenFoods = [];
     $scope.chosenFoodMeasures = [];
-    $scope.mealList = {
-        time: "",
-        foods: [],
-        userId: Auth.currentUser().id
+    food.log = {
+        logs: [{
+            date: moment().format('MMMM Do YYYY'),
+        }]
     };
+    $scope.mealList = food.log.logs;
+    console.log($scope.mealList);
     $scope.measureQty = 1;
     $scope.savedMeals = [];
     $scope.savedMealDate = "";
@@ -95,14 +98,15 @@ function FoodsCtrl($scope, $http, $interval, Auth) {
     // Add food to meal and reset search
     $scope.addFood = function($event) {
         var qtyCals = parseInt(event.target.id);
-        $scope.mealList.foods.push({
+        $scope.mealList.logs.foods.push({
             name: $scope.chosenFoodName,
-            kCals: qtyCals
+            kcals: qtyCals
         });
         $scope.chosenFoodName = "";
         $scope.chosenFoods = [];
         document.querySelector('#currentChosenFood').remove();
         $scope.searchTerm = undefined;
+        console.log($scope.mealList.logs.foods[0].name);
     };
 
 
@@ -114,14 +118,29 @@ function FoodsCtrl($scope, $http, $interval, Auth) {
         var time = date.getHours() + ":" + date.getMinutes();
 
         $scope.mealList.time = time;
+        $scope.mealList.user_id = Auth.currentUser().id;
         $scope.savedMeals.push($scope.mealList);
         console.log($scope.savedMeals);
 
         // mealList is what gets submitted to DB:
-        $scope.mealList = {
-            time: "",
-            foods: []
-        };
+        // $scope.mealList = {
+        //     time: "",
+        //     foods: []
+        // };
+
+        // var req = {
+        //     url: 'api/logs',
+        //     method: 'POST',
+        //     body: $scope.mealList
+        // };
+
+        Log.update($scope.mealList, function success(data){
+            console.log('success res', data);
+        }, function error(data){
+            console.log('error', data);
+        });
+
+
         $scope.chosenFoods = [];
     };
 
@@ -141,4 +160,4 @@ function FoodsCtrl($scope, $http, $interval, Auth) {
 
 }
 
-FoodsCtrl.$inject = ['$scope', '$http', '$interval', 'Auth'];
+FoodsCtrl.$inject = ['$scope', '$http', '$interval', 'Auth', 'Log'];

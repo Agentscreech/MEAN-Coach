@@ -1,4 +1,7 @@
 angular.module('App')
+.factory('Log', ["$resource", function($resource){
+  return $resource('/api/logs/:id', {id: '@user_id'});
+}])
 .factory('User', ['$resource', function($resource) {
     return $resource('/api/users/:id/userSettings', {id: '@user_id'},{stripTrailingSlashes:false});
 }])

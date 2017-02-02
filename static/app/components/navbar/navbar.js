@@ -7,14 +7,29 @@ angular
         bindToController: true
     });
 
-function NavbarzCtrl($scope, $state, Auth) {
+function NavbarzCtrl($scope, $state, Auth, $window) {
     var vm = this;
-    vm.isLoggedIn = Auth.isLoggedIn();
-    console.log(vm.isLoggedIn);
-     if (vm.isLoggedIn){
-         vm.id = Auth.currentUser().id;
-         console.log("This is nav current user: ", vm.id);
-     }
+    // vm.bool = Auth.isLoggedIn();
+    $scope.isLoggedIn = function() {
+          if(Auth.isLoggedIn()){
+          $scope.navId = Auth.currentUser().id;         }
+         return Auth.isLoggedIn();
+    };
+    // // vm.id = Auth.currentUser().id;
+    // vm.isLoggedIn = function(){
+    //     vm.bool = Auth.isLoggedIn();
+    //     vm.id = Auth.currentUser().id;
+    //     return vm.bool ;
+    // };
+    // console.log(vm.bool);
+    // console.log("This is nav current user: ", vm.id);
+    // vm.goProfile = function(){
+    //     console.log('trying to go to profile');
+    //     if (vm.bool){
+    //         vm.id = Auth.currentUser().id;
+    //         $state.go('profileState', {id: vm.id});
+    //     }
+    // };
 
 
 
@@ -27,4 +42,4 @@ function NavbarzCtrl($scope, $state, Auth) {
         vm.currentNavItem = "/home";
     };
 }
-NavbarzCtrl.$inject = ['$scope', '$state', 'Auth'];
+NavbarzCtrl.$inject = ['$scope', '$state', 'Auth', "$window"];

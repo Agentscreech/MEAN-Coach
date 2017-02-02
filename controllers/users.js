@@ -10,7 +10,6 @@ router.route('/').get(function(err, users) {
   });
 })
 .post (function(req, res) {
-
   //Find user in case email already exists
   User.findOne({ email: req.body.email }, function(err, user) {
     if(user) return res.status(400).send({ message: 'Email already exists'});
