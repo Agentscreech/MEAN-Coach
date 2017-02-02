@@ -13,6 +13,7 @@ router.route('/').get(function(req, res) {
 });
 
 router.route('/search/:searchterm').get(function(req, res) {
+  console.log("SEARCH REQ: ", req);
   console.log("Searching for: ", req.params.searchterm);
   Activity.find({ "name": { "$regex": req.params.searchterm, "$options": "i" } },
   function(err,activities) {
