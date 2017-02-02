@@ -21,4 +21,15 @@
       <button ng-click="activityComp.addActivity($index); activityTimeInput = false" ng-show="activityTimeInput" type="submit" name="addActivity">Add</button>
   </div>
 
+  <!-- Activity log list -->
+  <div id="activities-log">
+      <div ng-repeat="activity in activityComp.activityList">
+          <!-- <h6><strong>{{log.date}}</strong></h6> -->
+          <p class="chosen-food-item-name">{{activity.name}}</p>
+          <p><strong>kCals:</strong> {{activity.caloriesBurned}}</p>
+          <hr/>
+          <!-- <div ng-repeat="food in log.foods track by $index" class="chosen-food-header"> -->
+          </div>
+      </div>
+
 </div>

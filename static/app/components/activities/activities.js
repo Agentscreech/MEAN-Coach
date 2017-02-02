@@ -4,6 +4,9 @@ angular
         templateUrl: 'app/components/activities/activities.html',
         controller: ActivityCtrl,
         controllerAs: "activityComp",
+        bindings: {
+          activityList: '<'
+        }
     });
 
 function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log){
