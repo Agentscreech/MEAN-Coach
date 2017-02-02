@@ -51,7 +51,7 @@ var activities = [{
         calFactor: 2.62
     },
     {
-        name: "Fooball (Touch/Two Hand)",
+        name: "Football (Touch/Two Hand)",
         calFactor: 3.81
     },
     {

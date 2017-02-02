@@ -1,12 +1,10 @@
 <nav>
-  <div class="nav-wrapper">
-    <a href="#" class="brand-logo left">M.E.A.N Coach</a>
-    <ul class="right">
-      <li><a class="black-text" ui-sref="homeState()">Home </a></li>
-      <li><a class="black-text" ui-sref="signupState()" ng-if="!isLoggedIn()">Signup</a></li>
-      <li><a class="black-text" ui-sref="loginState()" ng-if="!isLoggedIn()">Login</a></li>
-      <li><a class="black-text" ng-click="logout()" ng-if="isLoggedIn()">Logout</a></li>
-      <li><a class="black-text" ui-sref="profileState({id: navId})" ng-if="isLoggedIn()"> Profile</a></li>
-    </ul>
-  </div>
+  <a ui-sref="homeState()" class="brand-logo left">M.E.A.N Coach</a>
+  <ul class="right">
+<!--     <li><a ui-sref="homeState()">Home </a></li> -->
+<!--     <li><a ui-sref="signupState()" ng-if="!isLoggedIn()">Signup</a></li> -->
+    <li><a ui-sref="loginState()" ng-if="!isLoggedIn()">Log In</a></li>
+    <li><a ng-click="logout()" ng-if="isLoggedIn()">Log Out</a></li>
+    <li><a ui-sref="profileState({id: navId})" ng-if="isLoggedIn()"> Profile</a></li>
+  </ul>
 </nav>

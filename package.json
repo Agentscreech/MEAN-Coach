@@ -4,6 +4,7 @@
   "description": "Fitness & Nutrition Tracker",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "NODE_ENV=test ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R nyan"
   },
   "repository": {
@@ -36,5 +37,8 @@
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "supertest": "^3.0.0"
-  }
+  },
+  "engines": {
+    "node": "7.2.0"
+  },
 }
