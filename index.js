@@ -53,7 +53,7 @@ app.use(function (err, req, res, next) {
 
 app.use('/api/activities', require('./controllers/activities'));
 app.use('/api/foods', require('./controllers/foods'));
-
+app.use('/api/logs', require('./controllers/logs.js'));
 
 //POST route - if authenticated, return a signed JWT
 app.post('/api/auth', function(req, res) {

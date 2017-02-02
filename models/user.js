@@ -1,6 +1,25 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
+var LogSchema = mongoose.Schema({
+    // user_id:{ type: Number, ref: 'User' }, //USER "FOREIGN KEY" reference should look like [{ type: Schema.Types.ObjectId, ref: 'User' }] in production
+    activities: [{
+        name: String,
+        caloriesBurned: String
+    }],
+    foods: [{
+        name: String,
+        UPC: String,
+        kcals: Number
+    }],
+    updated: {
+        type: Date,
+        default: Date.now
+    }
+}, {
+    collection: 'log'
+});
+
 var UserSchema = mongoose.Schema({
     name: String,
     email: {
@@ -17,7 +36,8 @@ var UserSchema = mongoose.Schema({
     gender: String,
     age: Number,
     goal: Number,
-    isMetric: Boolean
+    isMetric: Boolean,
+    logs: [LogSchema]
 }, {
     collection: 'users'
 });
