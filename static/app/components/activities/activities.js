@@ -31,26 +31,26 @@ function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User, Log){
     Activity.getActivities().then(function(activity) {
       $scope.allActivities = activity.data;
     });
-  }
+};
 
   $scope.clickSearch = function($event) {
     $scope.clickSearchTerm = event.srcElement.innerText;
     $scope.activitySearchTerm = $scope.clickSearchTerm;
     console.log($scope.activitySearchTerm);
     $scope.searchActivities();
-  }
+};
 
   //Return currentUser weight to calculate respective calories per activity
   $scope.findWeight = function() {
     $scope.currentUser = Auth.currentUser();
     User.get({id: $scope.currentUser.id }, function success(user) {
       $scope.userWeight = user.weight;
-    })
-  }
+  });
+  };
 
   //Return activity based on user search term
   $scope.searchActivities = function(activity) {
-    $scope.findWeight()
+    $scope.findWeight();
     if ($scope.activitySearchTerm !== undefined) {
       var serviceActivitySearch = $scope.activitySearchTerm;
       ActivitySearch.search(serviceActivitySearch).then(function(activity) {
@@ -61,14 +61,14 @@ function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User, Log){
         console.log("Computed calories array: ", $scope.activitySearchResults);
       });
     }
-  }
+};
 
   //Add activity to current user log
   $scope.addActivity = function($index) {
     $scope.newActivity = $scope.activitySearchResults[$index];
     var userTimeFactor = $scope.activity.duration / 60;
     $scope.newActivity.caloriesBurned = Math.round($scope.activitySearchResults[$index].calFactor * userTimeFactor);
-    console.log($scope.newActivity)
+    console.log($scope.newActivity);
     delete $scope.activitySearchResults[$index].calFactor;
     delete $scope.activitySearchResults[$index]._id;
     $scope.loggedActivities.activities.push($scope.newActivity);
@@ -80,7 +80,7 @@ function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User, Log){
     }, function error(data){
         console.log('error', data);
     });
-  }
+};
 
 }
 

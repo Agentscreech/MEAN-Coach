@@ -6,7 +6,8 @@ router.route('/:id')
 .get(function(req, res) {
   User.findById(req.params.id, function(err, log) {
     if (err) return res.status(500).send(err);
-    return res.send(log);
+    console.log('returning ', log.logs);
+    return res.send(log.logs);
   });
 })
 .put(function(req,res){
