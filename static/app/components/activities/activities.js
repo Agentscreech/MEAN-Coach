@@ -6,14 +6,24 @@ angular
         controllerAs: "activity",
     });
 
-function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User){
+function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User, Log){
+  var today = moment().format('MMMM Do YYYY');
   $scope.activitySearchTerm = undefined;
   $scope.activity.duration;
   $scope.activitySearchResults = [];
   $scope.newActivity = {};
-  $scope.loggedActivities = [];
+  // $scope.loggedActivities = [];
   $scope.userWeight = null;
   $scope.clickSearchTerm = null;
+
+  var log = {
+      user_id: Auth.currentUser().id,
+      logs: {
+          date: today,
+          activities: []
+      }
+  };
+  $scope.loggedActivities = log.logs;
 
   //Return all activities
   $scope.findActivities = function(activity) {
@@ -58,14 +68,20 @@ function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User){
     $scope.newActivity = $scope.activitySearchResults[$index];
     var userTimeFactor = $scope.activity.duration / 60;
     $scope.newActivity.caloriesBurned = Math.round($scope.activitySearchResults[$index].calFactor * userTimeFactor);
+    console.log($scope.newActivity)
     delete $scope.activitySearchResults[$index].calFactor;
     delete $scope.activitySearchResults[$index]._id;
-    $scope.loggedActivities.push($scope.newActivity);
-    console.log($scope.loggedActivities);
+    $scope.loggedActivities.activities.push($scope.newActivity);
+    console.log($scope.loggedActivities.activities);
     $scope.searchActivities();
-    return $scope.loggedActivities;
+    console.log('trying to send ', log);
+    Log.update(log, function success(data){
+        console.log('success res', data);
+    }, function error(data){
+        console.log('error', data);
+    });
   }
 
 }
 
-ActivityCtrl.$inject = ['$scope', 'Activity', 'ActivitySearch', 'Auth', 'User'];
+ActivityCtrl.$inject = ['$scope', 'Activity', 'ActivitySearch', 'Auth', 'User', 'Log'];
