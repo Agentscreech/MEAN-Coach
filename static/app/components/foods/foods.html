@@ -4,17 +4,17 @@
         <hr/>
 
         <!-- Add a meal (chosen foods) section -->
-        <div id="chosen-foods" ng-show="chosenFoods.length > 0 || mealList.logs.foods.length > 0">
+        <div id="chosen-foods" ng-show="chosenFoods.length > 0 || mealList.foods.length > 0">
             <h4>Add meal:</h4>
 
                 <!-- Saved foods -->
                 <div id="saved-foods">
-                    <div ng-repeat="food in mealList.logs.foods" class="chosen-food-header" id="savedFood">
+                    <div ng-repeat="food in mealList.foods track by $index" class="chosen-food-header" id="savedFood">
                         <span class="saved-food-item">
                             <button ng-click="removeChosenFood()">X</button>
                             <h6 class="chosen-food-item-name"><strong>{{food.name}}</strong></h6>
                         </span>
-                        <p><strong>kCals:</strong> {{food.kCals}}</p>
+                        <p><strong>kCals:</strong> {{food.kcals}}</p>
                     </div>
                 </div>
 
@@ -61,9 +61,9 @@
             <div ng-repeat="log in savedMeals">
                 <h6><strong>{{log.time}}</strong></h6>
                 <hr/>
-                <div ng-repeat="food in log.foods" class="chosen-food-header">
+                <div ng-repeat="food in log.foods track by $index" class="chosen-food-header">
                     <p class="chosen-food-item-name">{{food.name}}</p>
-                    <p><strong>kCals:</strong> {{food.kCals}}</p>
+                    <p><strong>kCals:</strong> {{food.kcals}}</p>
                 </div>
             </div>
         </div>

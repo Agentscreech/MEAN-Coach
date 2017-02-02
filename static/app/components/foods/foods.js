@@ -10,17 +10,19 @@ angular
 function FoodsCtrl($scope, $http, $interval, Auth, Log) {
     var food = this;
 
+    var today = moment().format('MMMM Do YYYY');
     $scope.currentCals = 0;
     $scope.searchTerm = undefined;
     $scope.chosenFoods = [];
     $scope.chosenFoodMeasures = [];
-    food.log = {
-        logs: [{
-            date: moment().format('MMMM Do YYYY'),
-        }]
+    var log = {
+        user_id: Auth.currentUser().id,
+        logs: {
+            date: today,
+            foods: []
+        }
     };
-    $scope.mealList = food.log.logs;
-    console.log($scope.mealList);
+    $scope.mealList = log.logs;
     $scope.measureQty = 1;
     $scope.savedMeals = [];
     $scope.savedMealDate = "";
@@ -98,7 +100,7 @@ function FoodsCtrl($scope, $http, $interval, Auth, Log) {
     // Add food to meal and reset search
     $scope.addFood = function($event) {
         var qtyCals = parseInt(event.target.id);
-        $scope.mealList.logs.foods.push({
+        $scope.mealList.foods.push({
             name: $scope.chosenFoodName,
             kcals: qtyCals
         });
@@ -106,7 +108,7 @@ function FoodsCtrl($scope, $http, $interval, Auth, Log) {
         $scope.chosenFoods = [];
         document.querySelector('#currentChosenFood').remove();
         $scope.searchTerm = undefined;
-        console.log($scope.mealList.logs.foods[0].name);
+        console.log($scope.mealList.foods[0]);
     };
 
 
@@ -117,8 +119,8 @@ function FoodsCtrl($scope, $http, $interval, Auth, Log) {
         var date = new Date();
         var time = date.getHours() + ":" + date.getMinutes();
 
-        $scope.mealList.time = time;
-        $scope.mealList.user_id = Auth.currentUser().id;
+        // $scope.mealList.time = time;
+        // $scope.mealList.user_id = Auth.currentUser().id;
         $scope.savedMeals.push($scope.mealList);
         console.log($scope.savedMeals);
 
@@ -133,8 +135,8 @@ function FoodsCtrl($scope, $http, $interval, Auth, Log) {
         //     method: 'POST',
         //     body: $scope.mealList
         // };
-
-        Log.update($scope.mealList, function success(data){
+        console.log('trying to send ', log);
+        Log.update(log, function success(data){
             console.log('success res', data);
         }, function error(data){
             console.log('error', data);
