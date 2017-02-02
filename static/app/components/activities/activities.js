@@ -13,6 +13,7 @@ function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User){
   $scope.newActivity = {};
   $scope.loggedActivities = [];
   $scope.userWeight = null;
+  $scope.clickSearchTerm = null;
 
   //Return all activities
   $scope.findActivities = function(activity) {
@@ -20,6 +21,13 @@ function ActivityCtrl($scope, Activity, ActivitySearch, Auth, User){
     Activity.getActivities().then(function(activity) {
       $scope.allActivities = activity.data;
     });
+  }
+
+  $scope.clickSearch = function($event) {
+    $scope.clickSearchTerm = event.srcElement.innerText;
+    $scope.activitySearchTerm = $scope.clickSearchTerm;
+    console.log($scope.activitySearchTerm);
+    $scope.searchActivities();
   }
 
   //Return currentUser weight to calculate respective calories per activity

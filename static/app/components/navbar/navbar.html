@@ -1,6 +1,15 @@
 <nav>
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo left">M.E.A.N Coach</a>
+    <div class="logo-text-wrapper">
+      <p><a href="#" class="brand-logo left" style="color: black;">M.E.A.N Coach</a></p>
+    </div>
+    <div style="display: inline-block; margin-left: 300px">
+      <img src="./images/logo.png" alt="runner" style="height: 60px; width: 60px"/>
+      <img src="./images/arrow.png" alt="arrow" style="height: 60px; width: 60px" />
+      <img src="./images/arrow.png" alt="arrow" style="height: 50px; width: 50px" />
+      <img src="./images/arrow.png" alt="arrow" style="height: 40px; width: 40px" />
+    </div>
+  </div>
     <ul class="right">
       <li><a class="black-text" ui-sref="homeState()">Home </a></li>
       <li><a class="black-text" ui-sref="signupState()" ng-if="!isLoggedIn()">Signup</a></li>
