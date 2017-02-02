@@ -9,7 +9,7 @@ angular
         }
     });
 
-function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log){
+function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval){
   activityComp = this;
 
   var today = moment().format('MMMM Do YYYY');
@@ -29,6 +29,17 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log){
       }
   };
   activityComp.loggedActivities = log.logs;
+
+  //Delay search for 1 second after done typing
+  var interval = 1000;
+  activityComp.delayBeforeSearch = function() {
+      $interval.cancel(interval);
+      interval = $interval(function() {
+          activityComp.searchActivities();
+          $interval.cancel(interval);
+          console.log(activityComp.activitySearchTerm);
+      }, 1000);
+  };
 
   //Return all activities
   activityComp.findActivities = function(activity) {
@@ -55,8 +66,9 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log){
 
   //Return activity based on user search term
   activityComp.searchActivities = function(activity) {
+    activityComp.activitySearchResults = [];
     activityComp.findWeight()
-    if (activityComp.activitySearchTerm !== undefined) {
+    if (activityComp.activitySearchTerm !== undefined && activityComp.activitySearchTerm !== "") {
       var serviceActivitySearch = activityComp.activitySearchTerm;
       ActivitySearch.search(serviceActivitySearch).then(function(activity) {
         activityComp.activitySearchResults = activity.data;
@@ -90,4 +102,4 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log){
 
 }
 
-ActivityCtrl.$inject = ['Activity', 'ActivitySearch', 'Auth', 'User', 'Log'];
+ActivityCtrl.$inject = ['Activity', 'ActivitySearch', 'Auth', 'User', 'Log', '$interval'];

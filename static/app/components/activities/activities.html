@@ -9,11 +9,10 @@
     </li>
   </ul>
   <form ng-submit="activityComp.searchActivities()" id="activity-search-form">
-    <input type="text" id="activity-search" placeholder="Search activities" ng-model="activityComp.activitySearchTerm">
-    <button type="submit" name="activity-search">Search</button>
+    <input type="text" id="activity-search" placeholder="Search activities" ng-model="activityComp.activitySearchTerm" ng-keydown="activityComp.delayBeforeSearch()">
   </form>
 
-  <div ng-repeat="Activity in activityComp.activitySearchResults track by $index" class="can-add-activity">
+  <div ng-repeat="Activity in activityComp.activitySearchResults track by $index" class="can-add-activity" ng-show="activityComp.activitySearchResults.length > 0 ">
       <p><strong>{{Activity.name}}</strong></p>
       <span>Calories / Hour: <span><strong>{{Activity.calFactor}}</strong></span>
       <a class="btn-floating btn-small waves-effect waves-light blue" ng-click="activityTimeInput = true" type="sumbit"><i class="material-icons">add</i></a>
