@@ -13,6 +13,7 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval){
   activityComp = this;
 
   var today = moment().format('MMMM Do YYYY');
+  activityComp.allActivitiesClicked = true;
   activityComp.activitySearchTerm = undefined;
   activityComp.activityduration = 0;
   activityComp.activitySearchResults = [];
@@ -81,7 +82,6 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval){
 };
 
   //Add activity to current user log
-
   activityComp.addActivity = function($index) {
     activityComp.newActivity = activityComp.activitySearchResults[$index];
     var userTimeFactor = activityComp.activityduration / 60;

@@ -21,6 +21,7 @@ function FoodsCtrl($http, $interval, Auth, Log) {
     foodComp.searchTerm = undefined;
     foodComp.chosenFoods = [];
     foodComp.chosenFoodMeasures = [];
+    foodComp.soloFoodSearch = true
     var log = {
         user_id: Auth.currentUser().id,
         logs: {
