@@ -1,7 +1,19 @@
-<div class="add-container">
-  <h3>Activities</h3>
+<div class="add-container right">
+  <span class="add-name-header">
+    <img src="../../../images/dumbbell.svg" alt="activities">
+    <h3 class="fnt-black">Activities</h3>
+  </span>
   <hr/>
-  <button ng-click="activityComp.findActivities(); activityComp.allActivitiesClicked = true" type="submit" name="activity-button" class="wide-button" id="all-activities-btn">List All Activities</button><span><button ng-click="activityComp.allActivitiesClicked = false">X</button></span>
+
+  <div id="all-activities-buttons">
+    <button ng-click="activityComp.findActivities(); activityComp.allActivitiesClicked = true" type="submit" name="activity-button" class="button button-green" id="all-activities-btn">
+      List All Activities
+    </button>
+    <span><button class="button button-gray" ng-show="activityComp.allActivitiesClicked === true" ng-click="activityComp.allActivitiesClicked = false">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button></span>
+  </div>
+
   <ul id="all-activities" ng-if="activityComp.allActivitiesClicked">
     <li ng-repeat="Activity in activityComp.allActivities" ng-click="activityComp.clickSearch(event); activityComp.allActivitiesClicked = false">
       {{Activity.name}}
@@ -16,8 +28,13 @@
       <p><strong>{{Activity.name}}</strong></p>
       <span>Calories / Hour: <span><strong>{{Activity.calFactor}}</strong></span>
       <a class="btn-floating btn-small waves-effect waves-light blue" ng-click="activityTimeInput = true; activityAddButton = false" type="sumbit"><i class="material-icons">add</i></a>
-      <input type="integer" ng-model="activityComp.activityduration" ng-show="activityTimeInput" style="width: 60px;"><span ng-show="activityTimeInput">(Minutes)</span>
-      <button ng-click="activityComp.addActivity($index); activityTimeInput = false" ng-if="activityAddButton = true" ng-show="activityTimeInput" type="submit" name="addActivity">Add</button>
+      <span>
+        <form style="display: inline">
+          <input type="integer" ng-model="activityComp.activityduration[$index]" ng-show="activityTimeInput" style="width: 60px;" required>
+          <span ng-show="activityTimeInput">(Minutes)</span>
+          <button ng-click="activityComp.addActivity($index); activityTimeInput = false" ng-if="activityAddButton = true" ng-show="activityTimeInput" type="submit" name="addActivity" required>Add</button>
+        </form>
+      </span>
   </div>
 
   <!-- Activity log list -->

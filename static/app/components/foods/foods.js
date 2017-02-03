@@ -133,7 +133,7 @@ function FoodsCtrl($window, $http, $interval, Auth, Log, DeleteFood) {
         // console.log('trying to append ', foodComp.mealList.foods[0]);
         console.log('trying to send ', log);
         Log.update(log, function success(data){
-            foodComp.mealList = [];
+            foodComp.mealList.foods = [];
             foodComp.chosenFoods = [];
             // console.log('success res', data);
             // Profile.getLogs(user_id).then(function(res) {

@@ -1,20 +1,16 @@
-<nav>
-  <div class="nav-wrapper">
-    <div class="logo-text-wrapper">
-      <p><a ui-sref="homeState()" class="brand-logo left" style="color: black;">M.E.A.N Coach</a></p>
+<div id="nav">
+  <div class="container" id="nav-container">
+    <a ui-sref="homeState()" class="left">
+      <img src="../../../images/brand-logo.svg" alt="MEAN Coach logo" id="brand-logo-nav">
+    </a>
+    <div class="vertical-center" id="nav-links">
+      <a ui-sref="loginState()" ng-if="!isLoggedIn()">Log In</a>
+      <a ui-sref="signupState()" ng-if="!isLoggedIn()" class="nav-button">Sign Up</a>
+      <a ui-sref="profileState({id: navId})" ng-if="isLoggedIn()">Daily Log</a>
+      <a ng-click="logout()" ng-if="isLoggedIn()">Sign Out</a>
+      <a ui-sref="userSettingsState({id: navId})" ng-if="isLoggedIn()" class="nav-button">
+        <i class="fa fa-cog" aria-hidden="true"></i>
+      </a>
     </div>
-    <div style="display: inline-block; margin-left: 300px">
-      <img src="./images/logo.png" alt="runner" style="height: 60px; width: 60px"/>
-      <img src="./images/arrow.png" alt="arrow" style="height: 60px; width: 60px" />
-      <img src="./images/arrow.png" alt="arrow" style="height: 50px; width: 50px" />
-      <img src="./images/arrow.png" alt="arrow" style="height: 40px; width: 40px" />
-    </div>
-    <ul class="right">
-      <!-- <li><a ui-sref="homeState()">Home </a></li> -->
-      <li><a ui-sref="signupState()" ng-if="!isLoggedIn()">Signup</a></li>
-      <li><a ui-sref="loginState()" ng-if="!isLoggedIn()">Login</a></li>
-      <li><a ng-click="logout()" ng-if="isLoggedIn()">Logout</a></li>
-      <li><a ui-sref="profileState({id: navId})" ng-if="isLoggedIn()"> Profile</a></li>
-    </ul>
   </div>
-</nav>
+</div>

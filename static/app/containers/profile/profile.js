@@ -16,6 +16,7 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Acti
         $window.location.href = '/profile/' + profileComp.profile.id;
     }
     profileComp.currentCals = 0;
+    profileComp.goal = 0;
     $scope.$watch('profileComp.currentCals',function(newVal, oldVal){
         if(profileComp.currentCals && profileComp.goal) {
             if (profileComp.currentCals > profileComp.goal){
@@ -51,11 +52,10 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Acti
         else {
             $("#current-cals-num").css("color", "#00CA6A");
             $("#cal-fill").css({"background-color": "#00CA6A", "height": calPercent + "%"});
-            $("#current-cals").css("background-color", "rgba(0,202,106,.25)");
+            $("#current-cals").css("background-color", "rgba(#bcffdb)");
             // profileComp.isOver = false;
         }
     });
-    profileComp.goal = 0;
     profileComp.foods = [];
     profileComp.isOver = false;
     profileComp.overBy = null;
@@ -103,18 +103,18 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Acti
         // Change color and height of calories fill ring based on total
         var calPercent = (profileComp.currentCals / profileComp.goal).toFixed(3) * 100;
         if (calPercent > 100) {
-            $("#current-cals-num").css("color", "#fd0332");
-            $("#cal-fill").css({"background-color": "#fd0332", "height": "100%"});
+            $("#current-cals-num").css("color", "#F43B37");
+            $("#cal-fill").css({"background-color": "#F43B37", "height": "100%"});
         }
         else if (calPercent >= 80 && calPercent < 100) {
             $("#current-cals-num").css("color", "#ff9803");
             $("#cal-fill").css({"background-color": "#ff9803", "height": calPercent + "%"});
-            $("#current-cals").css("background-color", "rgba(255,152,3,.3)");
+            $("#current-cals").css("background-color", "#f9e5af");
         }
         else {
             $("#current-cals-num").css("color", "#00CA6A");
             $("#cal-fill").css({"background-color": "#00CA6A", "height": calPercent + "%"});
-            $("#current-cals").css("background-color", "rgba(0,202,106,.25)");
+            $("#current-cals").css("background-color", "rgba(#bcffdb)");
         }
 
     }, function error(data){
@@ -162,41 +162,41 @@ profileComp.onClose = function () {
     User.get({id: profileComp.profile.id}, function success(userData){
         console.log('this is user goal', userData.goal);
         profileComp.goal = userData.goal;
-        if(profileComp.currentCals && profileComp.goal) {
-            if (profileComp.currentCals > profileComp.goal){
-                profileComp.isOver = true;
-                profileComp.overBy = profileComp.currentCals - profileComp.goal;
-                console.log('over by ', profileComp.overBy);
-                Activity.getActivities().then(function(list){
-                    var actv = list.data[Math.floor(Math.random()*list.data.length)];
-                    console.log('Activity chosen', actv);
-                    profileComp.suggestion = actv.name;
-                    profileComp.duration = Math.round(profileComp.overBy /(actv.calFactor * 60)*60);
-                    console.log('length of thing', profileComp.duration);
-                });
-            } else if (profileComp.currentCals < profileComp.goal){
-                console.log('not over,', profileComp.currentCals);
-            } else {
-                console.log('¯\\_(ツ)_/¯');
-            }
-        }
-
-        // Change color and height of calories fill ring based on total
-        var calPercent = (profileComp.currentCals / profileComp.goal).toFixed(3) * 100;
-        if (calPercent > 100) {
-            $("#current-cals-num").css("color", "#fd0332");
-            $("#cal-fill").css({"background-color": "#fd0332", "height": "100%"});
-        }
-        else if (calPercent >= 80 && calPercent < 100) {
-            $("#current-cals-num").css("color", "#ff9803");
-            $("#cal-fill").css({"background-color": "#ff9803", "height": calPercent + "%"});
-            $("#current-cals").css("background-color", "rgba(255,152,3,.3)");
-        }
-        else {
-            $("#current-cals-num").css("color", "#00CA6A");
-            $("#cal-fill").css({"background-color": "#00CA6A", "height": calPercent + "%"});
-            $("#current-cals").css("background-color", "rgba(0,202,106,.25)");
-        }
+        // if(profileComp.currentCals && profileComp.goal) {
+        //     if (profileComp.currentCals > profileComp.goal){
+        //         profileComp.isOver = true;
+        //         profileComp.overBy = profileComp.currentCals - profileComp.goal;
+        //         console.log('over by ', profileComp.overBy);
+        //         Activity.getActivities().then(function(list){
+        //             var actv = list.data[Math.floor(Math.random()*list.data.length)];
+        //             console.log('Activity chosen', actv);
+        //             profileComp.suggestion = actv.name;
+        //             profileComp.duration = Math.round(profileComp.overBy /(actv.calFactor * 60)*60);
+        //             console.log('length of thing', profileComp.duration);
+        //         });
+        //     } else if (profileComp.currentCals < profileComp.goal){
+        //         console.log('not over,', profileComp.currentCals);
+        //     } else {
+        //         console.log('¯\\_(ツ)_/¯');
+        //     }
+        // }
+        //
+        // // Change color and height of calories fill ring based on total
+        // var calPercent = (profileComp.currentCals / profileComp.goal).toFixed(3) * 100;
+        // if (calPercent > 100) {
+        //     $("#current-cals-num").css("color", "#fd0332");
+        //     $("#cal-fill").css({"background-color": "#fd0332", "height": "100%"});
+        // }
+        // else if (calPercent >= 80 && calPercent < 100) {
+        //     $("#current-cals-num").css("color", "#ff9803");
+        //     $("#cal-fill").css({"background-color": "#ff9803", "height": calPercent + "%"});
+        //     $("#current-cals").css("background-color", "rgba(255,152,3,.3)");
+        // }
+        // else {
+        //     $("#current-cals-num").css("color", "#00CA6A");
+        //     $("#cal-fill").css({"background-color": "#00CA6A", "height": calPercent + "%"});
+        //     $("#current-cals").css("background-color", "rgba(0,202,106,.25)");
+        // }
 
     }, function error(data){
         console.log(data);

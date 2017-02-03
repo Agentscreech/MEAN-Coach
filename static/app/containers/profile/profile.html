@@ -1,12 +1,16 @@
-<div id="profile-container">
-    <h3 class="fnt-black">Daily Log:</h3>      <input input-date type="text" ng-model="profileComp.currentTime" format="mm/dd/yyyy" months-full="{{ profileComp.month }}" months-short="{{ profileComp.monthShort }}" weekdays-full="{{ profileComp.weekdaysFull }}" weekdays-short="{{ profileComp.weekdaysShort }}"
-        weekdays-letter="{{ profileComp.weekdaysLetter }}" disable="disable" min="{{ profileComp.minDate }}" max="{{ profileComp.maxDate }}" first-day="1" on-close="profileComp.onClose()"/>
+<div class="container" id="profile-container">
+<div class="daily-log-header">
+    <div class="container">
+        <h4><span class="fnt-black">{{profileComp.profile.email.split("@")[0].charAt(0).toUpperCase() + profileComp.profile.email.split("@")[0].slice(1)}}'s Daily Log:</span> {{profileComp.today}}</h4>
+    </div>
+</div>
+    <h3 class="fnt-black">Daily Log: {{}}</h3> <span><input input-date type="text" ng-model="profileComp.currentTime" format="mm/dd/yyyy" months-full="{{ profileComp.month }}" months-short="{{ profileComp.monthShort }}" weekdays-full="{{ profileComp.weekdaysFull }}" weekdays-short="{{ profileComp.weekdaysShort }}"
+            weekdays-letter="{{ profileComp.weekdaysLetter }}" disable="disable" min="{{ profileComp.minDate }}" max="{{ profileComp.maxDate }}" first-day="1" on-close="profileComp.onClose()" /></span>
     <hr/>
 
-    <span>
-			{{profileComp.profile.email}}, you haven't entered any information yet! Get started here:
-		<button class="btn" ui-sref="userSettingsState({id:profileComp.profile.id})"><i class="large material-icons">settings_applications</i></button>
-	</span>
+
+
+
 
     <div id="profile-header">
         <div id="current-cals">
@@ -23,7 +27,8 @@
             <p>{{profileComp.suggestion}} for {{profileComp.duration}} minutes</p>
         </div>
     </div>
-
-    <foods food-list="profileComp.foods" current-cals="profileComp.currentCals"></foods>
-    <activities activity-list="profileComp.activities" current-cals="profileComp.currentCals"></activities>
+    <div class="vertical-center row" id="add-containers">
+        <foods food-list="profileComp.foods" current-cals="profileComp.currentCals"></foods>
+        <activities activity-list="profileComp.activities" current-cals="profileComp.currentCals"></activities>
+    </div>
 </div>

@@ -1,18 +1,19 @@
-<div>
-	<h1>This is signup container</h1>
+<div class="user-form-container" id="signup-container">
+  <div class="user-form">
+    <form ng-submit="userSignup()">
+      <legend><h3 class="fnt-black txt-gray">Sign Up</h3></legend>
+
+      <div class="form-group">
+        <label for="email">Email <span ng-if="signupComp.error">EMAIL ALREADY EXISTS</span></label>
+        <input type="email" class="form-control" id="email" placeholder="test@test.com" ng-model="user.email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="********" ng-model="user.password">
+      </div>
+
+      <button type="submit" class="button button-green">Sign Up</button>
+
+    </form>
+  </div>
 </div>
-
-<form ng-submit="userSignup()">
-  <legend>Signup</legend>
-
-  <div class="form-group">
-    <label for="email">Email <span ng-if="signupComp.error">EMAIL ALREADY EXISTS</span></label>
-    <input type="email" class="form-control" id="email" placeholder="test@test.com" ng-model="user.email">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="********" ng-model="user.password">
-  </div>
-
-  <button type="submit" class="btn btn-primary">Signup</button>
-</form>
