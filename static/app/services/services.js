@@ -19,10 +19,25 @@ angular.module('App')
   };
   }])
 
+  //Delete Activity
   .factory('DeleteActivity', ['$http', function($http) {
     return {
       delete: function(deleteId) {
-        var URL = '/api/logs/' + deleteId.user_id + "?" + deleteId._id;
+        var URL = '/api/logs/delete/activity/' + deleteId.user_id + "?" + deleteId._id;
+        var req = {
+          url: URL,
+          method: "DELETE"
+        }
+        return $http(req);
+      }
+    };
+  }])
+
+  //Delete Food
+  .factory('DeleteFood', ['$http', function($http) {
+    return {
+      delete: function(deleteId) {
+        var URL = '/api/logs/delete/food/' + deleteId.user_id + "?" + deleteId._id;
         var req = {
           url: URL,
           method: "DELETE"

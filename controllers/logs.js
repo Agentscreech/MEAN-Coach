@@ -2,6 +2,69 @@ var express = require('express');
 var User = require('../models/user');
 var router = express.Router();
 
+router.route('/delete/activity/:id')
+.delete(function(req, res) {
+    console.log("Delete req.query: ", req.query)
+    User.findById(req.params.id, function(err, user) {
+      if (err) return res.status(500).send(err);
+      for(var i = 0; i < user.logs.length; i++) {
+        console.log("LOGS: ", user.logs[i].activities);
+        for(var j = 0; j < user.logs[i].activities.length; j++) {
+          console.log("ACTIVITIES: ", user.logs[i].activities[j]._id);
+          if(user.logs[i].activities[j]._id == Object.keys(req.query)[0]) {
+            // console.log("Found a match");
+            user.logs[i].activities[j].remove({_id: Object.keys(req.query)[0] }, function(err) {
+              if (err) console.log(err);
+              console.log("DELETED!");
+            })
+          }
+        }
+      }
+      user.save(function(err){
+        if (err){
+          res.send(err);
+          }
+          else {
+            res.send('ok');
+          }
+      })
+    })
+});
+
+router.route('/delete/food/:id')
+.delete(function(req, res) {
+    console.log("Delete req.query: ", req.query)
+    User.findById(req.params.id, function(err, user) {
+      if (err) return res.status(500).send(err);
+      for(var i = 0; i < user.logs.length; i++) {
+        console.log("LOGS: ", user.logs[i].foods);
+        for(var j = 0; j < user.logs[i].foods.length; j++) {
+          console.log("ACTIVITIES: ", user.logs[i].foods[j]._id);
+          if(user.logs[i].foods[j]._id == Object.keys(req.query)[0]) {
+            // console.log("Found a match");
+            user.logs[i].foods[j].remove({_id: Object.keys(req.query)[0] }, function(err) {
+              if (err) console.log(err);
+              console.log("DELETED!");
+            })
+          }
+        }
+      }
+      user.save(function(err){
+        if (err){
+          res.send(err);
+          }
+          else {
+            res.send('ok');
+          }
+      })
+    })
+});
+
+
+
+
+
+
 router.route('/:id')
 .get(function(req, res) {
   User.findById(req.params.id, function(err, log) {
@@ -26,32 +89,5 @@ router.route('/:id')
     console.log('after push',user.logs);
   });
 })
-
-.delete(function(req, res) {
-    console.log("Delete req.query: ", req.query)
-    User.findById(req.params.id, function(err, user) {
-      if (err) return res.status(500).send(err);
-      for(var i = 0; i < user.logs.length; i++) {
-        console.log("LOGS: ", user.logs[i].activities);
-        for(var j = 0; j < user.logs[i].activities.length; j++) {
-          console.log("ACTIVITIES: ", user.logs[i].activities[j]._id);
-          if(user.logs[i].activities[j]._id == Object.keys(req.query)[0]) {
-            console.log("Found a match");
-            user.logs[i].activities[j].remove({_id: Object.keys(req.query)[0] }, function(err) {
-              if (err) console.log(err);
-              console.log("DELETED!");
-            })
-          }
-        }
-      }
-      user.save(function(err){
-        if (err){
-          res.send(err);
-        } else {
-          res.send('ok');
-        }
-      })
-      })
-    });
 
 module.exports = router;

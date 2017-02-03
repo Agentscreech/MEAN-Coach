@@ -106,12 +106,12 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval, Dele
 
   //Delete activity from current user log
   activityComp.deleteActivity = function($index) {
-    console.log("activity id: ", activityComp.activityList[$index]._id);
+    // console.log("activity id: ", activityComp.activityList[$index]._id);
     deleteId._id = activityComp.activityList[$index]._id;
     deleteId.user_id = Auth.currentUser().id;
-    console.log("Delete id: ", deleteId);
+    // console.log("Delete id: ", deleteId);
     DeleteActivity.delete(deleteId).then(function(res) {
-      console.log("Activity deleted", res);
+      // console.log("Activity deleted", res);
       return true;
     }, function error(data) {
       console.log(data);

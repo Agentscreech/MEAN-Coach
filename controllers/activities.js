@@ -22,4 +22,9 @@ router.route('/search/:searchterm').get(function(req, res) {
   });
 });
 
+// router.route('/:deleteId').delete(function(req, res) {
+//   console.log("delete Id req: ", req):
+//
+// })
+
 module.exports = router;

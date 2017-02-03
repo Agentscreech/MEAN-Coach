@@ -10,7 +10,7 @@ angular
         // bindToController: true
     });
 
-function FoodsCtrl($http, $interval, Auth, Log) {
+function FoodsCtrl($http, $interval, Auth, Log, DeleteFood) {
     var foodComp = this;
 
     // console.log(food.foodList);
@@ -22,6 +22,11 @@ function FoodsCtrl($http, $interval, Auth, Log) {
     foodComp.chosenFoods = [];
     foodComp.chosenFoodMeasures = [];
     foodComp.soloFoodSearch = true
+    var deleteId = {
+        user_id: Auth.currentUser().id,
+        _id: null
+        }
+
     var log = {
         user_id: Auth.currentUser().id,
         logs: {
@@ -168,6 +173,20 @@ function FoodsCtrl($http, $interval, Auth, Log) {
         foodComp.mealList.foods.pop();
     };
 
+    //Delete activity from current user log
+    foodComp.deleteFood = function($index) {
+    //   console.log("food id: ", foodComp.foodList[$index]._id);
+      deleteId._id = foodComp.foodList[$index]._id;
+      deleteId.user_id = Auth.currentUser().id;
+      console.log("Delete id: ", deleteId);
+      DeleteFood.delete(deleteId).then(function(res) {
+        // console.log("Activity deleted", res);
+        return true;
+      }, function error(data) {
+        console.log(data);
+      });
+    };
+
 }
 
-FoodsCtrl.$inject = ['$http', '$interval', 'Auth', 'Log'];
+FoodsCtrl.$inject = ['$http', '$interval', 'Auth', 'Log', 'DeleteFood'];
