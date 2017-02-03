@@ -1,12 +1,12 @@
-<div class="container" id="profile-container">
 <div class="daily-log-header">
     <div class="container">
-        <h4><span class="fnt-black">{{profileComp.profile.email.split("@")[0].charAt(0).toUpperCase() + profileComp.profile.email.split("@")[0].slice(1)}}'s Daily Log:</span> {{profileComp.today}}</h4>
+        <h4><span class="fnt-black">{{profileComp.profile.email.split("@")[0].charAt(0).toUpperCase() + profileComp.profile.email.split("@")[0].slice(1)}}'s Daily Log</span></h4>
     </div>
 </div>
+
+<div class="container" id="profile-container">
     <span><input input-date type="text" ng-model="profileComp.currentTime" format="mm/dd/yyyy" months-full="{{ profileComp.month }}" months-short="{{ profileComp.monthShort }}" weekdays-full="{{ profileComp.weekdaysFull }}" weekdays-short="{{ profileComp.weekdaysShort }}"
             weekdays-letter="{{ profileComp.weekdaysLetter }}" disable="disable" min="{{ profileComp.minDate }}" max="{{ profileComp.maxDate }}" first-day="1" on-close="profileComp.onClose()" /></span>
-    <hr/>
 
 	<div id="profile-header">
 		<div id="current-cals">
