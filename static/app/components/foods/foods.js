@@ -10,7 +10,7 @@ angular
         // bindToController: true
     });
 
-function FoodsCtrl($http, $interval, Auth, Log) {
+function FoodsCtrl($window, $http, $interval, Auth, Log) {
     var foodComp = this;
 
     // console.log(food.foodList);
@@ -21,7 +21,7 @@ function FoodsCtrl($http, $interval, Auth, Log) {
     foodComp.searchTerm = undefined;
     foodComp.chosenFoods = [];
     foodComp.chosenFoodMeasures = [];
-    foodComp.soloFoodSearch = true
+    foodComp.soloFoodSearch = true;
     var log = {
         user_id: Auth.currentUser().id,
         logs: {
@@ -145,6 +145,7 @@ function FoodsCtrl($http, $interval, Auth, Log) {
         // };
         console.log('trying to send ', log);
         Log.update(log, function success(data){
+            $window.location.reload();
             console.log('success res', data);
         }, function error(data){
             console.log('error', data);
@@ -170,4 +171,4 @@ function FoodsCtrl($http, $interval, Auth, Log) {
 
 }
 
-FoodsCtrl.$inject = ['$http', '$interval', 'Auth', 'Log'];
+FoodsCtrl.$inject = ['$window','$http', '$interval', 'Auth', 'Log'];

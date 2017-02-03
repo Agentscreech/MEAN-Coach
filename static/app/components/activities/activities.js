@@ -9,7 +9,7 @@ angular
         }
     });
 
-function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval, DeleteActivity){
+function ActivityCtrl($window, Activity, ActivitySearch, Auth, User, Log, $interval, DeleteActivity){
   activityComp = this;
 
   var today = moment().format('MMMM Do YYYY');
@@ -24,7 +24,7 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval, Dele
   var deleteId = {
       user_id: Auth.currentUser().id,
       _id: null
-      }
+    };
 
   var log = {
       user_id: Auth.currentUser().id,
@@ -59,20 +59,20 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval, Dele
     activityComp.activitySearchTerm = activityComp.clickSearchTerm;
     console.log(activityComp.activitySearchTerm);
     activityComp.searchActivities();
-  }
+  };
 
   //Return currentUser weight to calculate respective calories per activity
   activityComp.findWeight = function() {
     activityComp.currentUser = Auth.currentUser();
     User.get({id: activityComp.currentUser.id }, function success(user) {
       activityComp.userWeight = user.weight;
-    })
-  }
+    });
+  };
 
   //Return activity based on user search term
   activityComp.searchActivities = function(activity) {
     activityComp.activitySearchResults = [];
-    activityComp.findWeight()
+    activityComp.findWeight();
     if (activityComp.activitySearchTerm !== undefined && activityComp.activitySearchTerm !== "") {
       var serviceActivitySearch = activityComp.activitySearchTerm;
       ActivitySearch.search(serviceActivitySearch).then(function(activity) {
@@ -90,7 +90,7 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval, Dele
     activityComp.newActivity = activityComp.activitySearchResults[$index];
     var userTimeFactor = activityComp.activityduration / 60;
     activityComp.newActivity.caloriesBurned = Math.round(activityComp.activitySearchResults[$index].calFactor * userTimeFactor);
-    console.log(activityComp.newActivity)
+    console.log(activityComp.newActivity);
     delete activityComp.activitySearchResults[$index].calFactor;
     delete activityComp.activitySearchResults[$index]._id;
     activityComp.loggedActivities.activities.push(activityComp.newActivity);
@@ -98,6 +98,7 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval, Dele
     activityComp.searchActivities();
     console.log('trying to send ', log);
     Log.update(log, function success(data){
+        $window.location.reload();
         console.log('success res', data);
     }, function error(data){
         console.log('error', data);
@@ -112,7 +113,7 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval, Dele
     console.log("Delete id: ", deleteId);
     DeleteActivity.delete(deleteId).then(function(res) {
       console.log("Activity deleted", res);
-      return true;
+      $window.location.reload();
     }, function error(data) {
       console.log(data);
     });
@@ -120,4 +121,4 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval, Dele
 
 }
 
-ActivityCtrl.$inject = ['Activity', 'ActivitySearch', 'Auth', 'User', 'Log', '$interval', 'DeleteActivity'];
+ActivityCtrl.$inject = ['$window','Activity', 'ActivitySearch', 'Auth', 'User', 'Log', '$interval', 'DeleteActivity'];
