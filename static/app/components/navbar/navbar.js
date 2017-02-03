@@ -41,5 +41,9 @@ function NavbarzCtrl($scope, $state, Auth, $window) {
     vm.$onInit = function() {
         vm.currentNavItem = "/home";
     };
+
+    $scope.userSettings = function() {
+        $state.go('profileState', { id: user.id});
+    }
 }
 NavbarzCtrl.$inject = ['$scope', '$state', 'Auth', "$window"];

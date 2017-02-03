@@ -5,9 +5,12 @@
     </a>
     <div class="vertical-center" id="nav-links">
       <a ui-sref="loginState()" ng-if="!isLoggedIn()">Log In</a>
-      <a ui-sref="signupState()" ng-if="!isLoggedIn()" id="signup-button">Sign Up</a>
+      <a ui-sref="signupState()" ng-if="!isLoggedIn()" class="nav-button">Sign Up</a>
       <a ui-sref="profileState({id: navId})" ng-if="isLoggedIn()">Daily Log</a>
-      <a ng-click="logout()" ng-if="isLoggedIn()">Log Out</a>
+      <a ng-click="logout()" ng-if="isLoggedIn()">Sign Out</a>
+      <a ui-sref="userSettingsState({id: navId})" ng-if="isLoggedIn()" class="nav-button">
+        <i class="fa fa-cog" aria-hidden="true"></i>
+      </a>
     </div>
   </div>
 </div>
