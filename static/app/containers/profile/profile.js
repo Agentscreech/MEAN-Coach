@@ -59,10 +59,27 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Acti
                 console.log('¯\\_(ツ)_/¯');
             }
         }
+
+        // Change color and height of calories fill ring based on total
+        var calPercent = (profileComp.currentCals / profileComp.goal).toFixed(3) * 100;
+        if (calPercent > 100) {
+            $("#current-cals-num").css("color", "#fd0332");
+            $("#cal-fill").css({"background-color": "#fd0332", "height": "100%"});
+        }
+        else if (calPercent >= 80 && calPercent < 100) {
+            $("#current-cals-num").css("color", "#ff9803");
+            $("#cal-fill").css({"background-color": "#ff9803", "height": calPercent + "%"});
+            $("#current-cals").css("background-color", "rgba(255,152,3,.3)");
+        }
+        else {
+            $("#current-cals-num").css("color", "#2ecc71");
+            $("#cal-fill").css({"background-color": "#2ecc71", "height": calPercent + "%"});
+            $("#current-cals").css("background-color", "rgba(46,204,113,.25)")
+        }
+
     }, function error(data){
         console.log(data);
     });
-
 
 
 }
