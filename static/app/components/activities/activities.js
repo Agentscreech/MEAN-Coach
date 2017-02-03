@@ -9,7 +9,7 @@ angular
         }
     });
 
-function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval){
+function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval, DeleteActivity){
   activityComp = this;
 
   var today = moment().format('MMMM Do YYYY');
@@ -21,6 +21,10 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval){
   // activityComp.loggedActivities = [];
   activityComp.userWeight = null;
   activityComp.clickSearchTerm = null;
+  var deleteId = {
+      user_id: Auth.currentUser().id,
+      _id: null
+      }
 
   var log = {
       user_id: Auth.currentUser().id,
@@ -48,7 +52,7 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval){
     Activity.getActivities().then(function(activity) {
       activityComp.allActivities = activity.data;
     });
-};
+  };
 
   activityComp.clickSearch = function($event) {
     activityComp.clickSearchTerm = event.srcElement.innerText;
@@ -79,7 +83,7 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval){
         console.log("Computed calories array: ", activityComp.activitySearchResults);
       });
     }
-};
+  };
 
   //Add activity to current user log
   activityComp.addActivity = function($index) {
@@ -98,8 +102,22 @@ function ActivityCtrl(Activity, ActivitySearch, Auth, User, Log, $interval){
     }, function error(data){
         console.log('error', data);
     });
-};
+  };
+
+  //Delete activity from current user log
+  activityComp.deleteActivity = function($index) {
+    console.log("activity id: ", activityComp.activityList[$index]._id);
+    deleteId._id = activityComp.activityList[$index]._id;
+    deleteId.user_id = Auth.currentUser().id;
+    console.log("Delete id: ", deleteId);
+    DeleteActivity.delete(deleteId).then(function(res) {
+      console.log("Activity deleted", res);
+      return true;
+    }, function error(data) {
+      console.log(data);
+    });
+  };
 
 }
 
-ActivityCtrl.$inject = ['Activity', 'ActivitySearch', 'Auth', 'User', 'Log', '$interval'];
+ActivityCtrl.$inject = ['Activity', 'ActivitySearch', 'Auth', 'User', 'Log', '$interval', 'DeleteActivity'];
