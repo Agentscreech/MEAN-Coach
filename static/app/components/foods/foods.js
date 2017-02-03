@@ -126,6 +126,7 @@ function FoodsCtrl($window, $http, $interval, Auth, Log, DeleteFood) {
 
     // Save food to your daily log
     foodComp.saveFood = function() {
+        console.log("hit")
 
         foodComp.mealList.foods.forEach(function(food){
             foodComp.foodList.push(food);

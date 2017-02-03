@@ -46,6 +46,7 @@
             </div>
 
         <button class="button button-green" ng-if="foodComp.hideSaveMeal" ng-click="foodComp.saveFood()">SAVE MEAL</button>
+
     </div>
 
     <!-- Search for foods -->
@@ -65,12 +66,14 @@
     <!-- Meal log list -->
     <div id="foods-log">
         <div ng-repeat="food in foodComp.foodList track by $index">
-            <!-- <h6><strong>{{log.date}}</strong></h6> -->
-            <p class="chosen-food-item-name">{{food.name}}</p>
-            <p><strong>kCals:</strong> {{food.kcals}}</p>
-              <span><a ng-click="foodComp.deleteFood($index)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a></span>
+            <div class="saved-item-name">
+              <span>
+                <p class="chosen-food-item-name"><span class="fnt-black">{{food.name}}</span> <br>
+                {{food.kcals}} kCals</p>
+              </span>
+              <div><a ng-click="activityComp.deleteActivity($index)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a></div>
+            </div>
             <hr/>
-            <!-- <div ng-repeat="food in log.foods track by $index" class="chosen-food-header"> -->
             </div>
         </div>
     </div>
