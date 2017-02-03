@@ -7,21 +7,19 @@ angular
         templateUrl: 'app/components/foods/foods.html',
         controller: FoodsCtrl,
         controllerAs: "foodComp",
-        // bindToController: true
     });
 
-function FoodsCtrl($http, $interval, Auth, Log, DeleteFood) {
-    var foodComp = this;
 
-    // console.log(food.foodList);
-    // console.log(foodComp.foodList);
+function FoodsCtrl($window, $http, $interval, Auth, Log, DeleteFood) {
+
+    var foodComp = this;
 
     var today = moment().format('MMMM Do YYYY');
     foodComp.currentCals = 0;
     foodComp.searchTerm = undefined;
     foodComp.chosenFoods = [];
     foodComp.chosenFoodMeasures = [];
-    foodComp.soloFoodSearch = true
+    foodComp.soloFoodSearch = true;
     var deleteId = {
         user_id: Auth.currentUser().id,
         _id: null
@@ -121,7 +119,6 @@ function FoodsCtrl($http, $interval, Auth, Log, DeleteFood) {
         foodComp.chosenFoods = [];
         document.querySelector('#currentChosenFood').remove();
         foodComp.searchTerm = undefined;
-        console.log(foodComp.mealList.foods[0]);
     };
 
 
@@ -132,24 +129,13 @@ function FoodsCtrl($http, $interval, Auth, Log, DeleteFood) {
         var date = new Date();
         var time = date.getHours() + ":" + date.getMinutes();
 
-        // foodComp.mealList.time = time;
-        // foodComp.mealList.user_id = Auth.currentUser().id;
+
         foodComp.savedMeals.push(foodComp.mealList);
         console.log(foodComp.savedMeals);
 
-        // mealList is what gets submitted to DB:
-        // foodComp.mealList = {
-        //     time: "",
-        //     foods: []
-        // };
-
-        // var req = {
-        //     url: 'api/logs',
-        //     method: 'POST',
-        //     body: foodComp.mealList
-        // };
         console.log('trying to send ', log);
         Log.update(log, function success(data){
+            $window.location.reload();
             console.log('success res', data);
         }, function error(data){
             console.log('error', data);
@@ -175,13 +161,11 @@ function FoodsCtrl($http, $interval, Auth, Log, DeleteFood) {
 
     //Delete activity from current user log
     foodComp.deleteFood = function($index) {
-    //   console.log("food id: ", foodComp.foodList[$index]._id);
       deleteId._id = foodComp.foodList[$index]._id;
       deleteId.user_id = Auth.currentUser().id;
       console.log("Delete id: ", deleteId);
       DeleteFood.delete(deleteId).then(function(res) {
-        // console.log("Activity deleted", res);
-        return true;
+        $window.location.reload();
       }, function error(data) {
         console.log(data);
       });
@@ -189,4 +173,4 @@ function FoodsCtrl($http, $interval, Auth, Log, DeleteFood) {
 
 }
 
-FoodsCtrl.$inject = ['$http', '$interval', 'Auth', 'Log', 'DeleteFood'];
+FoodsCtrl.$inject = ['$window','$http', '$interval', 'Auth', 'Log', 'DeleteFood'];
