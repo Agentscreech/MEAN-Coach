@@ -1,72 +1,78 @@
-<div id="add-log-items">
-    <div class="add-container">
-        <h3>Foods</h3>
-        <hr/>
+<div class="add-container left">
+    <span class="add-name-header">
+      <img src="../../../images/food.svg" alt="activities">
+      <h3 class="fnt-black">Foods</h3>
+    </span>
+    <hr/>
 
-        <!-- Add a meal (chosen foods) section -->
-        <div id="chosen-foods" ng-show="foodComp.chosenFoods.length > 0 || foodComp.mealList.foods.length > 0">
-            <h4>Add meal:</h4>
+    <!-- Add a meal (chosen foods) section -->
+    <div id="chosen-foods" ng-show="foodComp.chosenFoods.length > 0 || foodComp.mealList.foods.length > 0">
+        <h4 class="fnt-black">Add meal:</h4>
 
-                <!-- Saved foods -->
-                <div id="saved-foods">
-                    <div ng-repeat="food in foodComp.mealList.foods track by $index" class="chosen-food-header" id="savedFood">
-                        <span class="saved-food-item">
-                            <button ng-click="foodComp.removeChosenFood()">X</button>
-                            <h6 class="chosen-food-item-name"><strong>{{food.name}}</strong></h6>
-                        </span>
-                        <p><strong>kCals:</strong> {{food.kcals}}</p>
-                    </div>
-                </div>
-
-                <!-- Set quantity for chosen food -->
-                <div class="chosen-food-item" ng-repeat="chosenFood in foodComp.chosenFoods" id="currentChosenFood">
-                    <span class="chosen-food-header">
-                        <h5 class="chosen-food-item-name"><strong>{{chosenFood.name}}</strong></h5>
-                        <button ng-click="foodComp.remove(event)">X</button>
+            <!-- Saved foods -->
+            <div id="saved-foods">
+                <div ng-repeat="food in foodComp.mealList.foods track by $index" class="chosen-food-header" id="savedFood">
+                    <span class="saved-food-item">
+                        <button class="nav-button" ng-click="foodComp.removeChosenFood()">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                        <h6 class="chosen-food-item-name"><strong>{{food.name}}</strong></h6>
                     </span>
-                    <p>Choose quantity:</p>
-                    <form ng-submit="foodComp.findFoods()" class="food-measure" ng-repeat="measure in foodComp.chosenFoodMeasures">
-                        <label>{{measure.qty}} {{measure.label}}</label>
-                        <hr/>
-                            <div class="adjust-measure">
-                                <span class="measure-qty">
-                                    <p><strong>Serving:</strong></p>
-                                    <input type="text" class="food-measure-input" ng-model="foodComp.measureQty">
-                                </span>
-                                <p><strong>kCals:</strong> {{foodComp.measureQty * measure.value}}</p>
-                                <button ng-click="foodComp.addFood(event); foodComp.soloFoodSearch = true" id="{{foodComp.measureQty * measure.value}}">ADD</button>
-                            </div>
-                    </form>
-                </div>
-
-            <button ng-click="foodComp.saveFood()">SAVE MEAL</button>
-        </div>
-
-        <!-- Search for foods -->
-        <form ng-submit="foodComp.findFoods()" id="food-search-form" ng-if="foodComp.soloFoodSearch">
-            <input type="text" id="food-search" placeholder="Search foods" ng-model="foodComp.searchTerm" ng-keydown="foodComp.delayBeforeSearch()">
-        </form>
-        <p ng-show="foodComp.searchResults === null && foodComp.searchTerm !== '' ">No results found for "{{foodComp.searchTerm}}"</p>
-
-        <!-- Search results -->
-        <ul id="food-results" ng-show="foodComp.searchResults.length > 0">
-            <li ng-repeat="result in foodComp.searchResults" ng-click="foodComp.chooseFood(event); foodComp.soloFoodSearch = false" id={{result.ndbno}}>
-                {{result.name}}
-                <hr/>
-            </li>
-        </ul>
-
-        <!-- Meal log list -->
-        <div id="foods-log">
-            <div ng-repeat="food in foodComp.foodList track by $index">
-                <!-- <h6><strong>{{log.date}}</strong></h6> -->
-                <p class="chosen-food-item-name">{{food.name}}</p>
-                <p><strong>kCals:</strong> {{food.kcals}}</p>
-                  <span><a ng-click="foodComp.deleteFood($index)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a></span>
-                <hr/>
-                <!-- <div ng-repeat="food in log.foods track by $index" class="chosen-food-header"> -->
+                    <p><strong>kCals:</strong> {{food.kcals}}</p>
                 </div>
             </div>
-        </div>
 
+            <!-- Set quantity for chosen food -->
+            <div class="chosen-food-item" ng-repeat="chosenFood in foodComp.chosenFoods" id="currentChosenFood">
+                <span class="chosen-food-header">
+                    <h3 class="fnt-black chosen-food-item-name"><strong>{{chosenFood.name}}</strong></h3>
+                    <button class="nav-button" ng-click="foodComp.remove(event)">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </span>
+                <p>Choose quantity:</p>
+                <form ng-submit="foodComp.findFoods()" class="food-measure" ng-repeat="measure in foodComp.chosenFoodMeasures">
+                    <label>{{measure.qty}} {{measure.label}}</label>
+                    <hr/>
+                        <div class="adjust-measure">
+                            <span class="measure-qty">
+                                <p><strong>Serving:</strong></p>
+                                <input type="text" class="food-measure-input" ng-model="foodComp.measureQty">
+                            </span>
+                            <p><strong>kCals:</strong> {{foodComp.measureQty * measure.value}}</p>
+                            <button class="button button-green" ng-click="foodComp.addFood(event); foodComp.soloFoodSearch = true" id="{{foodComp.measureQty * measure.value}}">ADD</button>
+                        </div>
+                </form>
+            </div>
+
+        <button class="button button-green ng-click="foodComp.saveFood()">SAVE MEAL</button>
     </div>
+
+    <!-- Search for foods -->
+    <form ng-submit="foodComp.findFoods()" id="food-search-form" ng-if="foodComp.soloFoodSearch">
+        <input type="text" id="food-search" placeholder="Search foods" ng-model="foodComp.searchTerm" ng-keydown="foodComp.delayBeforeSearch()">
+    </form>
+    <p ng-show="foodComp.searchResults === null && foodComp.searchTerm !== '' ">No results found for "{{foodComp.searchTerm}}"</p>
+
+    <!-- Search results -->
+    <ul id="food-results" ng-show="foodComp.searchResults.length > 0">
+        <li ng-repeat="result in foodComp.searchResults" ng-click="foodComp.chooseFood(event); foodComp.soloFoodSearch = false" id={{result.ndbno}}>
+            {{result.name}}
+            <hr/>
+        </li>
+    </ul>
+
+    <!-- Meal log list -->
+    <div id="foods-log">
+        <div ng-repeat="food in foodComp.foodList track by $index">
+            <!-- <h6><strong>{{log.date}}</strong></h6> -->
+            <p class="chosen-food-item-name">{{food.name}}</p>
+            <p><strong>kCals:</strong> {{food.kcals}}</p>
+              <span><a ng-click="foodComp.deleteFood($index)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a></span>
+            <hr/>
+            <!-- <div ng-repeat="food in log.foods track by $index" class="chosen-food-header"> -->
+            </div>
+        </div>
+    </div>
+
+</div>
