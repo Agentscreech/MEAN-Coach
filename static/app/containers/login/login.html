@@ -1,18 +1,19 @@
-<div>
-	<h1>This is login container</h1>
+<div class="user-form-container">
+  <div class="user-form">
+    <form ng-submit="userLogin()">
+      <legend><h3 class="fnt-black txt-gray">Welcome back!</h3></legend>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="user@email.com" ng-model="user.email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="********" ng-model="user.password">
+      </div>
+
+      <button type="submit" class="button button-green">Log In</button>
+
+    </form>
+  </div>
 </div>
-
-<form ng-submit="userLogin()">
-  <legend>Login</legend>
-
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" placeholder="user@email.com" ng-model="user.email">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="********" ng-model="user.password">
-  </div>
-
-  <button type="submit" class="btn btn-primary">Login</button>
-</form>

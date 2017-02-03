@@ -64,18 +64,18 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Acti
         // Change color and height of calories fill ring based on total
         var calPercent = (profileComp.currentCals / profileComp.goal).toFixed(3) * 100;
         if (calPercent > 100) {
-            $("#current-cals-num").css("color", "#fd0332");
-            $("#cal-fill").css({"background-color": "#fd0332", "height": "100%"});
+            $("#current-cals-num").css("color", "#F43B37");
+            $("#cal-fill").css({"background-color": "#F43B37", "height": "100%"});
         }
         else if (calPercent >= 80 && calPercent < 100) {
             $("#current-cals-num").css("color", "#ff9803");
             $("#cal-fill").css({"background-color": "#ff9803", "height": calPercent + "%"});
-            $("#current-cals").css("background-color", "rgba(255,152,3,.3)");
+            $("#current-cals").css("background-color", "#f9e5af");
         }
         else {
             $("#current-cals-num").css("color", "#00CA6A");
             $("#cal-fill").css({"background-color": "#00CA6A", "height": calPercent + "%"});
-            $("#current-cals").css("background-color", "rgba(0,202,106,.25)")
+            $("#current-cals").css("background-color", "#bcffdb")
         }
 
     }, function error(data){
