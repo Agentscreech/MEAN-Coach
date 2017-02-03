@@ -1,19 +1,26 @@
 <div id="profile-container">
-	<h1>This is profile container</h1>
+	<h3 class="fnt-black">Daily Log: February 1, 2017</h3>
+	<hr/>
 
 	<span>
 			{{profileComp.profile.email}}, you haven't entered any information yet! Get started here:
 		<button class="btn" ui-sref="userSettingsState({id:profileComp.profile.id})"><i class="large material-icons">settings_applications</i></button>
 	</span>
 
-	<div id="current-cals">
-		<h1 ng-model="profileComp.currentCals">{{profileComp.currentCals}}</h1>
-		<h3>calories</h3>
-	</div>
-	<div ng-if="profileComp.isOver" class="warning-message">
-		<p>You are over your calorie goal for the day by {{profileComp.overBy}} calories.</p>
-		<p>Here is a random activity you can do to get back to your goal.</p>
-		<p>{{profileComp.suggestion}} for {{profileComp.duration}} minutes</p>
+	<div id="profile-header">
+		<div id="current-cals">
+			<div id="current-cals-value">
+				<h1 ng-model="profileComp.currentCals" id="current-cals-num"><span class="fnt-black">{{profileComp.currentCals}}</span></h1>
+				<h3>calories</h3>
+			</div>
+			<div id="cal-ring-inside"></div>
+			<div id="cal-fill"></div>
+		</div>
+		<div ng-if="profileComp.isOver" class="warning-message">
+			<p>You are over your calorie goal for the day by {{profileComp.overBy}} calories.</p>
+			<p>Here is a random activity you can do to get back to your goal.</p>
+			<p>{{profileComp.suggestion}} for {{profileComp.duration}} minutes</p>
+		</div>
 	</div>
 
 	<foods food-list="profileComp.foods"></foods>
