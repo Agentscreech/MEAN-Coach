@@ -65,6 +65,10 @@ hr {
 	color: #475151 !important;
 }
 
+.txt-red {
+	color: #F43B37 !important;
+}
+
 .txt-green {
 	color: #00ca6a;
 }
@@ -676,6 +680,26 @@ footer {
 
 .saved-item-name span {
 	width: 66%;
+}
+
+.warning-message {
+	padding: 15px 30px 30px 30px;
+	margin-left: 20px;
+	border-radius: 6px;
+	background-color: white;
+	width: 50%;
+	color: #384047;
+	box-shadow: 0 0 40px rgba(0,0,0,.05);
+	margin-top: 8px;
+	position: relative;
+}
+
+#caret {
+	position: absolute;
+	top: 37%;
+	left: -15px;
+	width: 40px;
+	height: 40px;
 }
 
 

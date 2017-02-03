@@ -16,7 +16,8 @@
 			<div id="cal-fill"></div>
 		</div>
 		<div ng-if="profileComp.isOver" class="warning-message">
-			<p>You are over your calorie goal for the day by {{profileComp.overBy}} calories.</p>
+			<img src=../../../images/caret.svg id="caret">
+			<p class="fnt-black">You are over your calorie goal for the day by <span class="txt-red">{{profileComp.overBy}}</span> calories.</p>
 			<p>Here is a random activity you can do to get back to your goal.</p>
 			<p>{{profileComp.suggestion}} for {{profileComp.duration}} minutes</p>
 		</div>
