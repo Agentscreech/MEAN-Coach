@@ -9,6 +9,7 @@ angular.module('App')
 function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Activity) {
     var profileComp = this;
     var today = moment().format('MMMM Do YYYY');
+    profileComp.today = today;
     profileComp.profile = Auth.currentUser();
     var user_id = profileComp.profile.id;
     if ($stateParams.id !== profileComp.profile.id) {
@@ -72,9 +73,9 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Acti
             $("#current-cals").css("background-color", "rgba(255,152,3,.3)");
         }
         else {
-            $("#current-cals-num").css("color", "#2ecc71");
-            $("#cal-fill").css({"background-color": "#2ecc71", "height": calPercent + "%"});
-            $("#current-cals").css("background-color", "rgba(46,204,113,.25)")
+            $("#current-cals-num").css("color", "#00CA6A");
+            $("#cal-fill").css({"background-color": "#00CA6A", "height": calPercent + "%"});
+            $("#current-cals").css("background-color", "rgba(0,202,106,.25)")
         }
 
     }, function error(data){
