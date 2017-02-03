@@ -1,6 +1,6 @@
 MEAN-Coach
 ==================
-A ![mean](mean_logo.jpg) app that tracks your food and activities.
+A ![mean](mean_logo_small.jpg) app that tracks your food and activities.
 
 This application allows users to signup, enter personal stats and foods/activities each day, and track progress as a user based on target daily calories.
 
@@ -42,6 +42,15 @@ You may add and delete food items and activities at will.
 
 ### Technologies
 
-This application is built on the [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle) stack and utilizes [Materialize](http://materializecss.com/) styling framework.
+This application is built on the [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle)) stack and utilizes [Materialize](http://materializecss.com/) styling framework.
 
 We are using the [USDA's API](https://ndb.nal.usda.gov/ndb/api/doc) for the list of food items.
+
+### Future Features
+
+* Improve UX with what fields do what and clarify what they are for.
+* Add custom activity form so you can track more specific activities.
+* When selecting prior dates, show days that you hit your goal.
+* Graphing your progress and other trends over a period.
+* Create favorite meals.
+* Gamify it where each consecutive day you hit your goal, the more points you get.
