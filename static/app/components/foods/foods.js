@@ -16,6 +16,7 @@ function FoodsCtrl($window, $http, $interval, Auth, Log, DeleteFood) {
     var foodComp = this;
 
     var today = moment().format('MMMM Do YYYY');
+    foodComp.hideSaveMeal = false;
     foodComp.currentCals = 0;
     foodComp.searchTerm = undefined;
     foodComp.chosenFoods = [];
