@@ -3,14 +3,9 @@
 	<hr/>
 
 	<span>
-			{{profileComp.profile.email}}, you haven't entered any information yet! Get started here:
+			{{profileComp.profile.email.split("@")[0].charAt(0).toUpperCase() + profileComp.profile.email.split("@")[0].slice(1)}}, you haven't entered any information yet! Get started here:
 		<button class="btn" ui-sref="userSettingsState({id:profileComp.profile.id})"><i class="large material-icons">settings_applications</i></button>
 	</span>
-
-	<form>
-  Log Date:
-  <input type="date" name="logdate" ng-model="profileComp.calendarDate">
-</form>
 
 	<div id="profile-header">
 		<div id="current-cals">
