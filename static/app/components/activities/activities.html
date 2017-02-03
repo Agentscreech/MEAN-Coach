@@ -1,7 +1,19 @@
-<div class="add-container">
-  <h3>Activities</h3>
+<div class="add-container right">
+  <span class="add-name-header">
+    <img src="../../../images/dumbbell.svg" alt="activities">
+    <h3 class="fnt-black">Activities</h3>
+  </span>
   <hr/>
-  <button ng-click="activityComp.findActivities(); activityComp.allActivitiesClicked = true" type="submit" name="activity-button" class="wide-button" id="all-activities-btn">List All Activities</button><span><button ng-click="activityComp.allActivitiesClicked = false">X</button></span>
+
+  <div id="all-activities-buttons">
+    <button ng-click="activityComp.findActivities(); activityComp.allActivitiesClicked = true" type="submit" name="activity-button" class="button button-green" id="all-activities-btn">
+      List All Activities
+    </button>
+    <span><button class="button button-gray" ng-show="activityComp.allActivitiesClicked === true" ng-click="activityComp.allActivitiesClicked = false">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button></span>
+  </div>
+
   <ul id="all-activities" ng-if="activityComp.allActivitiesClicked">
     <li ng-repeat="Activity in activityComp.allActivities" ng-click="activityComp.clickSearch(event); activityComp.allActivitiesClicked = false">
       {{Activity.name}}

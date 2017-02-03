@@ -13,7 +13,7 @@ function ActivityCtrl($window, Activity, ActivitySearch, Auth, User, Log, $inter
   activityComp = this;
 
   var today = moment().format('MMMM Do YYYY');
-  activityComp.allActivitiesClicked = true;
+  activityComp.allActivitiesClicked = false;
   activityComp.activitySearchTerm = undefined;
   activityComp.activityduration = 0;
   activityComp.activitySearchResults = [];

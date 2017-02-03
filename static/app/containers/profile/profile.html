@@ -1,6 +1,10 @@
-<div id="profile-container">
-	<h3 class="fnt-black">Daily Log: {{profileComp.today}}</h3>
-	<hr/>
+<div class="daily-log-header">
+	<div class="container">
+		<h4><span class="fnt-black">{{profileComp.profile.email.split("@")[0].charAt(0).toUpperCase() + profileComp.profile.email.split("@")[0].slice(1)}}'s Daily Log:</span> {{profileComp.today}}</h4>
+	</div>
+</div>
+
+<div class="container" id="profile-container">
 
 	<div id="profile-header">
 		<div id="current-cals">
@@ -18,6 +22,9 @@
 		</div>
 	</div>
 
-	<foods food-list="profileComp.foods"></foods>
-	<activities activity-list="profileComp.activities"></activities>
+	<div class="vertical-center row" id="add-containers">
+		<foods food-list="profileComp.foods"></foods>
+		<activities activity-list="profileComp.activities"></activities>
+	</div>
+	      
 </div>
