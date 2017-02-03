@@ -16,7 +16,7 @@ var LogSchema = mongoose.Schema(
         type: Date,
         default: Date.now
     }
-},{_id: false});
+});
 
 var UserSchema = mongoose.Schema({
     name: String,
