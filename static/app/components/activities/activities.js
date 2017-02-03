@@ -65,13 +65,14 @@ function ActivityCtrl($window, Activity, ActivitySearch, Auth, User, Log, $inter
     activityComp.currentUser = Auth.currentUser();
     User.get({id: activityComp.currentUser.id }, function success(user) {
       activityComp.userWeight = user.weight;
+      console.log("User Weight: ", activityComp.userWeight);
     });
   };
+  activityComp.findWeight();
 
   //Return activity based on user search term
   activityComp.searchActivities = function(activity) {
     activityComp.activitySearchResults = [];
-    activityComp.findWeight();
     if (activityComp.activitySearchTerm !== undefined && activityComp.activitySearchTerm !== "") {
       var serviceActivitySearch = activityComp.activitySearchTerm;
       ActivitySearch.search(serviceActivitySearch).then(function(activity) {
@@ -87,7 +88,7 @@ function ActivityCtrl($window, Activity, ActivitySearch, Auth, User, Log, $inter
   //Add activity to current user log
   activityComp.addActivity = function($index) {
     activityComp.newActivity = activityComp.activitySearchResults[$index];
-    var userTimeFactor = activityComp.activityduration / 60;
+    var userTimeFactor = activityComp.activityduration[$index] / 60;
     activityComp.newActivity.caloriesBurned = Math.round(activityComp.activitySearchResults[$index].calFactor * userTimeFactor);
     console.log(activityComp.newActivity);
     delete activityComp.activitySearchResults[$index].calFactor;
