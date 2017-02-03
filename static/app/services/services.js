@@ -19,6 +19,19 @@ angular.module('App')
   };
   }])
 
+  .factory('DeleteActivity', ['$http', function($http) {
+    return {
+      delete: function(deleteId) {
+        var URL = '/api/logs/' + deleteId.user_id + "?" + deleteId._id;
+        var req = {
+          url: URL,
+          method: "DELETE"
+        }
+        return $http(req);
+      }
+    };
+  }])
+
   //Get activities by user search term
   .factory('ActivitySearch', ['$http', function($http) {
     return {

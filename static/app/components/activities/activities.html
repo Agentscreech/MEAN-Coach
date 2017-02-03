@@ -22,10 +22,11 @@
 
   <!-- Activity log list -->
   <div id="activities-log">
-      <div ng-repeat="activity in activityComp.activityList">
+      <div ng-repeat="activity in activityComp.activityList track by $index">
           <!-- <h6><strong>{{log.date}}</strong></h6> -->
           <p class="chosen-food-item-name">{{activity.name}}</p>
           <p><strong>kCals:</strong> {{activity.caloriesBurned}}</p>
+          <span><a ng-click="activityComp.deleteActivity($index)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a></span>
           <hr/>
           <!-- <div ng-repeat="food in log.foods track by $index" class="chosen-food-header"> -->
           </div>
