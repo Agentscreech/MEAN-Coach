@@ -10,10 +10,10 @@
 		<h1 ng-model="profileComp.currentCals">{{profileComp.currentCals}}</h1>
 		<h3>calories</h3>
 	</div>
-	<div class="warning-message">
-		<p>You are over your calorie goal for the day.</p>
+	<div ng-if="profileComp.isOver" class="warning-message">
+		<p>You are over your calorie goal for the day by {{profileComp.overBy}} calories.</p>
 		<p>Here is a random activity you can do to get back to your goal.</p>
-		<p>{{profileComp.suggestion}} for {{profileComp.duration}}</p>
+		<p>{{profileComp.suggestion}} for {{profileComp.duration}} minutes</p>
 	</div>
 
 	<foods food-list="profileComp.foods"></foods>

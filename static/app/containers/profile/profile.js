@@ -6,8 +6,7 @@ angular.module('App')
     });
 
 
-function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User) {
-    var todaysLogs = {};
+function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Activity) {
     var profileComp = this;
     var today = moment().format('MMMM Do YYYY');
     profileComp.profile = Auth.currentUser();
@@ -17,33 +16,12 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User) {
     }
     profileComp.currentCals = 0;
     profileComp.goal = 0;
-    $scope.$watch('profileComp.currentCals', function(newVal, oldVal){
-        if(profileComp.currentCals && profileComp.goal){
-            if (profileComp.currentCal > profileComp.goal){
-                var over = profileComp.currentCals - profileComp.goal;
-                console.log('over by ', over);
-            } else if (profileComp.currentCal < profileComp.goal){
-                console.log('not over,', profileComp.currentCals);
-            } else {
-                console.log('¯\\_(ツ)_/¯');
-            }
-        }
-    });
-    $scope.$watch('profileComp.goal', function(newVal, oldVal){
-        if(profileComp.currentCals && profileComp.goal){
-            if (profileComp.currentCal > profileComp.goal){
-                var over = profileComp.currentCals - profileComp.goal;
-                console.log('over by ', over);
-            } else if (profileComp.currentCal < profileComp.goal){
-                console.log('not over,', profileComp.currentCals);
-            } else {
-                console.log('¯\\_(ツ)_/¯');
-            }
-        }
-    });
-
     profileComp.foods = [];
+    profileComp.isOver = false;
+    profileComp.overBy = null;
     profileComp.activities = [];
+    profileComp.suggestion = '';
+    profileComp.duration = null;
     Profile.getLogs(user_id).then(function(res) {
         var logs = res.data;
         logs.forEach(function(log) {
@@ -55,30 +33,38 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User) {
                 log.activities.forEach(function(activity) {
                     profileComp.activities.push(activity);
                     profileComp.currentCals -= activity.caloriesBurned;
-
                 });
             }
         });
-        // console.log('to foods component', profileComp.foods);
-        // console.log('to activities component', profileComp.activities);
     });
 
     User.get({id: profileComp.profile.id}, function success(userData){
         console.log('this is user goal', userData.goal);
         profileComp.goal = userData.goal;
-        // if (profileComp.currentCal > profileComp.goal){
-        //     var over = profileComp.currentCals - profileComp.goal;
-        //     console.log('over by ', over);
-        // } else if (profileComp.currentCal < profileComp.goal){
-        //     console.log('not over,', profileComp.currentCals);
-        // } else {
-        //     console.log('¯\\_(ツ)_/¯');
-        // }
+        if(profileComp.currentCals && profileComp.goal) {
+            if (profileComp.currentCals > profileComp.goal){
+                profileComp.isOver = true;
+                profileComp.overBy = profileComp.currentCals - profileComp.goal;
+                console.log('over by ', profileComp.overBy);
+                Activity.getActivities().then(function(list){
+                    var actv = list.data[Math.floor(Math.random()*list.data.length)];
+                    console.log('Activity chosen', actv);
+                    profileComp.suggestion = actv.name;
+                    profileComp.duration = Math.round(profileComp.overBy /(actv.calFactor * 60)*60);
+                    console.log('length of thing', profileComp.duration);
+                });
+            } else if (profileComp.currentCals < profileComp.goal){
+                console.log('not over,', profileComp.currentCals);
+            } else {
+                console.log('¯\\_(ツ)_/¯');
+            }
+        }
     }, function error(data){
         console.log(data);
     });
 
 
+
 }
 
-ProfileCompCtrl.$inject = ['$scope','$stateParams', '$window', 'Profile', 'Auth', 'User'];
+ProfileCompCtrl.$inject = ['$scope','$stateParams', '$window', 'Profile', 'Auth', 'User', 'Activity'];
