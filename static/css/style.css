@@ -534,6 +534,10 @@ footer {
 	margin-left: 10px;
 }
 
+#save-meal-btn {
+	margin-top: 20px;
+}
+
 .chosen-food-item {
 	display: flex;
 	align-items: flex-start;
@@ -657,4 +661,69 @@ footer {
 	margin-left: 10px;
 	z-index: 10;
 	padding: 9px 20px 10px 20px;
+}
+
+.saved-item {
+	display: flex;
+	flex-direction: column;
+}
+
+.saved-item-name {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.saved-item-name span {
+	width: 66%;
+}
+
+
+/*** USER SETTINGS STYLES ***/
+
+.switch {
+	margin-top: 0;
+	margin-bottom: 25px;
+	padding: 11px;
+}
+
+.card-panel {
+	padding: 15px 30px 30px 30px;
+	padding-right: 46px;
+	border-radius: 6px;
+	background-color: white;
+	width: 95%;
+	min-width: 320px;
+	box-shadow: 0 0 40px rgba(0,0,0,.05);
+}
+
+.card-panel-gray {
+	padding: 15px 30px 30px 30px;
+	padding-right: 46px;
+	border-radius: 6px;
+	background-color: #5A6168;
+	width: 50%;
+	color: white;
+	box-shadow: 0 0 40px rgba(0,0,0,.05);
+	margin-top: 8px;
+}
+
+.card-panel-gray h1 {
+	line-height: .5;
+	margin-bottom: 30px;
+}
+
+.card-panel-gray li {
+	font-weight: 300;
+}
+
+#settings-panels {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	width: 100%;
+}
+
+#settings-container {
+	margin-bottom: 80px;
 }

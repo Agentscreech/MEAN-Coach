@@ -124,6 +124,7 @@ function FoodsCtrl($window, $http, $interval, Auth, Log, DeleteFood) {
 
     // Save food to your daily log
     foodComp.saveFood = function() {
+        console.log("hit")
 
         // Get timestamp
         var date = new Date();
