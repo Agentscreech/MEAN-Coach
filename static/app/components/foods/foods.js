@@ -2,7 +2,8 @@ angular
     .module("App")
     .component('foods', {
         bindings: {
-            foodList: '<'
+            foodList: '<',
+            currentCals: '='
         },
         templateUrl: 'app/components/foods/foods.html',
         controller: FoodsCtrl,
@@ -125,24 +126,36 @@ function FoodsCtrl($window, $http, $interval, Auth, Log, DeleteFood) {
     // Save food to your daily log
     foodComp.saveFood = function() {
 
-        // Get timestamp
-        var date = new Date();
-        var time = date.getHours() + ":" + date.getMinutes();
-
-
-        foodComp.savedMeals.push(foodComp.mealList);
-        console.log(foodComp.savedMeals);
-
+        foodComp.mealList.foods.forEach(function(food){
+            foodComp.foodList.push(food);
+            foodComp.currentCals += food.kcals;
+        });
+        // console.log('trying to append ', foodComp.mealList.foods[0]);
         console.log('trying to send ', log);
         Log.update(log, function success(data){
-            $window.location.reload();
-            console.log('success res', data);
+            foodComp.mealList = [];
+            foodComp.chosenFoods = [];
+            // console.log('success res', data);
+            // Profile.getLogs(user_id).then(function(res) {
+            //     var logs = res.data;
+            //     logs.forEach(function(log) {
+            //         if (log.date == today) {
+            //             log.foods.forEach(function(food) {
+            //                 profileComp.foods.push(food);
+            //                 profileComp.currentCals += food.kcals;
+            //             });
+            //             log.activities.forEach(function(activity) {
+            //                 profileComp.activities.push(activity);
+            //                 profileComp.currentCals -= activity.caloriesBurned;
+            //             });
+            //         }
+            //     });
+            // });
         }, function error(data){
             console.log('error', data);
         });
 
 
-        foodComp.chosenFoods = [];
     };
 
 
@@ -165,7 +178,8 @@ function FoodsCtrl($window, $http, $interval, Auth, Log, DeleteFood) {
       deleteId.user_id = Auth.currentUser().id;
       console.log("Delete id: ", deleteId);
       DeleteFood.delete(deleteId).then(function(res) {
-        $window.location.reload();
+          foodComp.currentCals -= foodComp.foodList[$index].kcals;
+          foodComp.foodList.splice($index, 1);
       }, function error(data) {
         console.log(data);
       });

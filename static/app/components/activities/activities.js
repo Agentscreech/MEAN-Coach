@@ -5,7 +5,8 @@ angular
         controller: ActivityCtrl,
         controllerAs: "activityComp",
         bindings: {
-          activityList: '<'
+          activityList: '<',
+          currentCals: '='
         }
     });
 
@@ -91,13 +92,15 @@ function ActivityCtrl($window, Activity, ActivitySearch, Auth, User, Log, $inter
     activityComp.newActivity.caloriesBurned = Math.round(activityComp.activitySearchResults[$index].calFactor * userTimeFactor);
     console.log(activityComp.newActivity);
     delete activityComp.activitySearchResults[$index].calFactor;
-    delete activityComp.activitySearchResults[$index]._id;
+    // delete activityComp.activitySearchResults[$index]._id;
     activityComp.loggedActivities.activities.push(activityComp.newActivity);
     console.log(activityComp.loggedActivities.activities);
     activityComp.searchActivities();
     console.log('trying to send ', log);
     Log.update(log, function success(data){
-        $window.location.reload();
+        activityComp.currentCals -= activityComp.newActivity.caloriesBurned;
+        activityComp.activityList.push(activityComp.newActivity);
+        activityComp.activitySearchResults = [];
         console.log('success res', data);
     }, function error(data){
         console.log('error', data);
@@ -112,7 +115,9 @@ function ActivityCtrl($window, Activity, ActivitySearch, Auth, User, Log, $inter
     // console.log("Delete id: ", deleteId);
     DeleteActivity.delete(deleteId).then(function(res) {
       console.log("Activity deleted", res);
-      $window.location.reload();
+      activityComp.currentCals += activityComp.activityList[$index].caloriesBurned;
+      activityComp.activityList.splice($index, 1);
+      // $window.location.reload();
     }, function error(data) {
       console.log(data);
     });

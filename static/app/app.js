@@ -1,4 +1,4 @@
-angular.module('App', ['ui.router', 'ngResource'])
+angular.module('App', ['ui.router', 'ngResource','ui.materialize'])
 .config([
   '$stateProvider',
   '$urlRouterProvider',
