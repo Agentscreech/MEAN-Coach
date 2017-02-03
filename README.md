@@ -1,6 +1,6 @@
 MEAN-Coach
 ==================
-A ![mean](/mean-logo.jpg) app that tracks your food and activities.
+A ![mean](mean_logo.jpg) app that tracks your food and activities.
 
 This application allows users to signup, enter personal stats and foods/activities each day, and track progress as a user based on target daily calories.
 
