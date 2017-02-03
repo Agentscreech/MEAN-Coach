@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)http://localhost:3000/profile/5892269460455f46e308a8d0 -->
+<html lang="en" class="wf-fontawesome-n4-active wf-active"><script src="./MEAN Coach_files/webfontloader.js"></script><script data-x-lastpass="">(function(){var c=0;if("undefined"!==typeof CustomEvent&&"function"===typeof window.dispatchEvent){var a=function(a){try{if("object"===typeof a&&(a=JSON.stringify(a)),"string"===typeof a)return window.dispatchEvent(new CustomEvent("lprequeststart",{detail:{data:a,requestID:++c}})),c}catch(f){}},b=function(a){try{window.dispatchEvent(new CustomEvent("lprequestend",{detail:a}))}catch(f){}};"undefined"!==typeof XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.send&&(XMLHttpRequest.prototype.send=
+function(c){return function(f){var d=this,e=a(f);e&&d.addEventListener("loadend",function(){b({requestID:e,statusCode:d.status})});return c.apply(d,arguments)}}(XMLHttpRequest.prototype.send));"function"===typeof fetch&&(fetch=function(c){return function(f,d){var e=a(d),g=c.apply(this,arguments);if(e){var h=function(a){b({requestID:e,statusCode:a&&a.status})};g.then(h)["catch"](h)}return g}}(fetch))}})();
+(function(){if("undefined"!==typeof CustomEvent){var c=function(a){if(a.lpsubmit)return a;var b=function(){try{this.dispatchEvent(new CustomEvent("lpsubmit"))}catch(k){}return a.apply(this,arguments)};b.lpsubmit=!0;return b};window.addEventListener("DOMContentLoaded",function(){if(document&&document.forms&&0<document.forms.length)for(var a=0;a<document.forms.length;++a)document.forms[a].submit=c(document.forms[a].submit)},!0);document.createElement=function(a){return function(){var b=a.apply(this,
+arguments);b&&"FORM"===b.nodeName&&b.submit&&(b.submit=c(b.submit));return b}}(document.createElement)}})();
+</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MEAN Coach</title>
+    <!--<base href="/">--><base href=".">
+    <script src="./MEAN Coach_files/jquery-3.1.1.min.js"></script>
+    <script src="./MEAN Coach_files/materialize.min.js"></script>
+    <script src="./MEAN Coach_files/moment.min.js"></script>
+    <!-- Dependencies -->
+    <script src="./MEAN Coach_files/angular.min.js"></script>
+    <script src="./MEAN Coach_files/angular-ui-router.js"></script>
+    <script src="./MEAN Coach_files/angular-resource.js"></script>
+    <script src="./MEAN Coach_files/angular-materialize.min.js"></script>
+        <!-- Main App Script -->
+    <script src="./MEAN Coach_files/app.js"></script>
+    <script src="./MEAN Coach_files/rootScope.js"></script>
+    <script src="./MEAN Coach_files/parallax.js"></script>
+
+     <!-- Containers / Components -->
+     <script src="./MEAN Coach_files/home.js"></script>
+     <script src="./MEAN Coach_files/login.js"></script>
+     <script src="./MEAN Coach_files/signup.js"></script>
+     <script src="./MEAN Coach_files/profile.js"></script>
+     <script src="./MEAN Coach_files/userSettings.js"></script>
+     <script src="./MEAN Coach_files/navbar.js"></script>
+     <script src="./MEAN Coach_files/activities.js"></script>
+     <script src="./MEAN Coach_files/foods.js"></script>
+
+    <!-- Services -->
+    <script src="./MEAN Coach_files/services.js"></script>
+
+    <!-- Styles -->
+    <link href="./MEAN Coach_files/icon" rel="stylesheet">
+    <link rel="stylesheet" href="./MEAN Coach_files/materialize.min.css">
+    <script src="./MEAN Coach_files/0b8790a92d.js"></script>
+
+    <link href="./MEAN Coach_files/css" rel="stylesheet">
+    <link rel="stylesheet" href="./MEAN Coach_files/style.css"><link rel="stylesheet" href="./MEAN Coach_files/0b8790a92d.css" media="all">
+  <style>#inputCreated_root {outline: none;}</style></head><script src="./MEAN Coach_files/stats.js"></script>
+
+  <body ng-app="App" style="" class="ng-scope">
+      <navbarz class="ng-isolate-scope"><div id="nav">
+  <div class="container" id="nav-container">
+    <a ui-sref="homeState()" class="left" href="http://localhost:3000/">
+      <img src="./MEAN Coach_files/brand-logo.svg" alt="MEAN Coach logo" id="brand-logo-nav">
+    </a>
+    <div class="vertical-center" id="nav-links">
+      <!-- ngIf: !isLoggedIn() -->
+      <!-- ngIf: !isLoggedIn() -->
+      <!-- ngIf: isLoggedIn() --><a ui-sref="profileState({id: navId})" ng-if="isLoggedIn()" class="ng-scope" href="http://localhost:3000/profile/5892269460455f46e308a8d0">Daily Log</a><!-- end ngIf: isLoggedIn() -->
+      <!-- ngIf: isLoggedIn() --><a ng-click="logout()" ng-if="isLoggedIn()" class="ng-scope">Sign Out</a><!-- end ngIf: isLoggedIn() -->
+      <!-- ngIf: isLoggedIn() --><a ui-sref="userSettingsState({id: navId})" ng-if="isLoggedIn()" class="nav-button ng-scope" href="http://localhost:3000/profile/5892269460455f46e308a8d0/userSettings">
+        <i class="fa fa-cog" aria-hidden="true"></i>
+      </a><!-- end ngIf: isLoggedIn() -->
+    </div>
+  </div>
+</div></navbarz>
+      <!-- uiView: --><div ui-view="" class="ng-scope"><profile-comp class="ng-scope ng-isolate-scope"><div class="container" id="profile-container">
+<div class="daily-log-header">
+    <div class="container">
+        <h4 class="ng-binding"><span class="fnt-black ng-binding">Geeidontknowrick's Daily Log:</span> February 3rd 2017</h4>
+    </div>
+</div>
+    <span><input input-date="" type="text" ng-model="profileComp.currentTime" format="mm/dd/yyyy" months-full="[&quot;January&quot;,&quot;February&quot;,&quot;March&quot;,&quot;April&quot;,&quot;May&quot;,&quot;June&quot;,&quot;July&quot;,&quot;August&quot;,&quot;September&quot;,&quot;October&quot;,&quot;November&quot;,&quot;December&quot;]" months-short="[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;]" weekdays-full="[&quot;Sunday&quot;,&quot;Monday&quot;,&quot;Tuesday&quot;,&quot;Wednesday&quot;,&quot;Thursday&quot;,&quot;Friday&quot;,&quot;Saturday&quot;]" weekdays-short="" weekdays-letter="[&quot;S&quot;,&quot;M&quot;,&quot;T&quot;,&quot;W&quot;,&quot;T&quot;,&quot;F&quot;,&quot;S&quot;]" disable="disable" min="2016-02-04T21:32:20.892Z" max="2017-02-03T21:32:20.892Z" first-day="1" on-close="profileComp.onClose()" class="ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty picker__input" readonly="" id="P948943674" tabindex="-1" aria-haspopup="true" aria-expanded="false" aria-readonly="false" aria-owns="P948943674_root"><div class="picker" id="P948943674_root" tabindex="0" aria-hidden="true"><div class="picker__holder"><div class="picker__frame"><div class="picker__wrap"><div class="picker__box"><div class="picker__date-display"><div class="picker__weekday-display">Friday</div><div class="picker__month-display"><div>Feb</div></div><div class="picker__day-display"><div>3</div></div><div class="picker__year-display"><div>2017</div></div></div><div class="picker__calendar-container"><div class="picker__header"><div class="picker__month">February</div><div class="picker__year">2017</div><div class="picker__nav--prev" data-nav="-1" role="button" aria-controls="P948943674_table" title="Previous month"> </div><div class="picker__nav--next picker__nav--disabled" data-nav="1" role="button" aria-controls="P948943674_table" title="Next month"> </div></div><table class="picker__table" id="P948943674_table" role="grid" aria-controls="P948943674" aria-readonly="true"><thead><tr><th class="picker__weekday" scope="col" title="Monday">M</th><th class="picker__weekday" scope="col" title="Tuesday">T</th><th class="picker__weekday" scope="col" title="Wednesday">W</th><th class="picker__weekday" scope="col" title="Thursday">T</th><th class="picker__weekday" scope="col" title="Friday">F</th><th class="picker__weekday" scope="col" title="Saturday">S</th><th class="picker__weekday" scope="col" title="Sunday">S</th></tr></thead><tbody><tr><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1485763200000" role="gridcell" aria-label="01/30/2017">30</div></td><td role="presentation"><div class="picker__day picker__day--outfocus" data-pick="1485849600000" role="gridcell" aria-label="01/31/2017">31</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1485936000000" role="gridcell" aria-label="02/01/2017">1</div></td><td role="presentation"><div class="picker__day picker__day--infocus" data-pick="1486022400000" role="gridcell" aria-label="02/02/2017">2</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--today picker__day--selected picker__day--highlighted" data-pick="1486108800000" role="gridcell" aria-label="02/03/2017" aria-selected="true" aria-activedescendant="true">3</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1486195200000" role="gridcell" aria-label="02/04/2017" aria-disabled="true">4</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1486281600000" role="gridcell" aria-label="02/05/2017" aria-disabled="true">5</div></td></tr><tr><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1486368000000" role="gridcell" aria-label="02/06/2017" aria-disabled="true">6</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1486454400000" role="gridcell" aria-label="02/07/2017" aria-disabled="true">7</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1486540800000" role="gridcell" aria-label="02/08/2017" aria-disabled="true">8</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1486627200000" role="gridcell" aria-label="02/09/2017" aria-disabled="true">9</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1486713600000" role="gridcell" aria-label="02/10/2017" aria-disabled="true">10</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1486800000000" role="gridcell" aria-label="02/11/2017" aria-disabled="true">11</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1486886400000" role="gridcell" aria-label="02/12/2017" aria-disabled="true">12</div></td></tr><tr><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1486972800000" role="gridcell" aria-label="02/13/2017" aria-disabled="true">13</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1487059200000" role="gridcell" aria-label="02/14/2017" aria-disabled="true">14</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1487145600000" role="gridcell" aria-label="02/15/2017" aria-disabled="true">15</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1487232000000" role="gridcell" aria-label="02/16/2017" aria-disabled="true">16</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1487318400000" role="gridcell" aria-label="02/17/2017" aria-disabled="true">17</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1487404800000" role="gridcell" aria-label="02/18/2017" aria-disabled="true">18</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1487491200000" role="gridcell" aria-label="02/19/2017" aria-disabled="true">19</div></td></tr><tr><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1487577600000" role="gridcell" aria-label="02/20/2017" aria-disabled="true">20</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1487664000000" role="gridcell" aria-label="02/21/2017" aria-disabled="true">21</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1487750400000" role="gridcell" aria-label="02/22/2017" aria-disabled="true">22</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1487836800000" role="gridcell" aria-label="02/23/2017" aria-disabled="true">23</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1487923200000" role="gridcell" aria-label="02/24/2017" aria-disabled="true">24</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1488009600000" role="gridcell" aria-label="02/25/2017" aria-disabled="true">25</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1488096000000" role="gridcell" aria-label="02/26/2017" aria-disabled="true">26</div></td></tr><tr><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1488182400000" role="gridcell" aria-label="02/27/2017" aria-disabled="true">27</div></td><td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled" data-pick="1488268800000" role="gridcell" aria-label="02/28/2017" aria-disabled="true">28</div></td><td role="presentation"><div class="picker__day picker__day--outfocus picker__day--disabled" data-pick="1488355200000" role="gridcell" aria-label="03/01/2017" aria-disabled="true">1</div></td><td role="presentation"><div class="picker__day picker__day--outfocus picker__day--disabled" data-pick="1488441600000" role="gridcell" aria-label="03/02/2017" aria-disabled="true">2</div></td><td role="presentation"><div class="picker__day picker__day--outfocus picker__day--disabled" data-pick="1488528000000" role="gridcell" aria-label="03/03/2017" aria-disabled="true">3</div></td><td role="presentation"><div class="picker__day picker__day--outfocus picker__day--disabled" data-pick="1488614400000" role="gridcell" aria-label="03/04/2017" aria-disabled="true">4</div></td><td role="presentation"><div class="picker__day picker__day--outfocus picker__day--disabled" data-pick="1488700800000" role="gridcell" aria-label="03/05/2017" aria-disabled="true">5</div></td></tr><tr><td role="presentation"><div class="picker__day picker__day--outfocus picker__day--disabled" data-pick="1488787200000" role="gridcell" aria-label="03/06/2017" aria-disabled="true">6</div></td><td role="presentation"><div class="picker__day picker__day--outfocus picker__day--disabled" data-pick="1488873600000" role="gridcell" aria-label="03/07/2017" aria-disabled="true">7</div></td><td role="presentation"><div class="picker__day picker__day--outfocus picker__day--disabled" data-pick="1488960000000" role="gridcell" aria-label="03/08/2017" aria-disabled="true">8</div></td><td role="presentation"><div class="picker__day picker__day--outfocus picker__day--disabled" data-pick="1489046400000" role="gridcell" aria-label="03/09/2017" aria-disabled="true">9</div></td><td role="presentation"><div class="picker__day picker__day--outfocus picker__day--disabled" data-pick="1489132800000" role="gridcell" aria-label="03/10/2017" aria-disabled="true">10</div></td><td role="presentation"><div class="picker__day picker__day--outfocus picker__day--disabled" data-pick="1489219200000" role="gridcell" aria-label="03/11/2017" aria-disabled="true">11</div></td><td role="presentation"><div class="picker__day picker__day--outfocus picker__day--disabled" data-pick="1489305600000" role="gridcell" aria-label="03/12/2017" aria-disabled="true">12</div></td></tr></tbody></table></div><div class="picker__footer"><button class="btn-flat picker__today" type="button" data-pick="1486108800000" disabled="" aria-controls="P948943674">Today</button><button class="btn-flat picker__clear" type="button" data-clear="1" disabled="" aria-controls="P948943674">Clear</button><button class="btn-flat picker__close" type="button" data-close="true" disabled="" aria-controls="P948943674">Close</button></div></div></div></div></div></div></span>
+    <hr>
+
+    <div id="profile-header">
+        <div id="current-cals">
+            <div id="current-cals-value">
+                <h1 ng-model="profileComp.currentCals" id="current-cals-num" class="ng-pristine ng-valid ng-not-empty ng-touched" style="color: rgb(0, 202, 106);"><span class="fnt-black ng-binding">381</span></h1>
+                <h3>calories</h3>
+            </div>
+            <div id="cal-ring-inside"></div>
+            <div id="cal-fill" style="background-color: rgb(0, 202, 106); height: 19.1%;"></div>
+        </div>
+        <!-- ngIf: profileComp.isOver -->
+    </div>
+    <div class="vertical-center row" id="add-containers">
+        <foods food-list="profileComp.foods" current-cals="profileComp.currentCals" class="ng-isolate-scope"><div class="add-container left">
+    <span class="add-name-header">
+      <img src="./MEAN Coach_files/food.svg" alt="activities">
+      <h3 class="fnt-black">Foods</h3>
+    </span>
+    <hr>
+
+    <!-- Add a meal (chosen foods) section -->
+    <div id="chosen-foods" ng-show="foodComp.chosenFoods.length &gt; 0 || foodComp.mealList.foods.length &gt; 0" class="ng-hide">
+        <h4 class="fnt-black">Add meal:</h4>
+
+            <!-- Saved foods -->
+            <div id="saved-foods">
+                <!-- ngRepeat: food in foodComp.mealList.foods track by $index -->
+            </div>
+
+            <!-- Set quantity for chosen food -->
+            <!-- ngRepeat: chosenFood in foodComp.chosenFoods -->
+
+        <!-- ngIf: foodComp.hideSaveMeal -->
+    </div>
+
+    <!-- Search for foods -->
+    <!-- ngIf: foodComp.soloFoodSearch --><form ng-submit="foodComp.findFoods()" id="food-search-form" ng-if="foodComp.soloFoodSearch" class="ng-pristine ng-valid ng-scope">
+        <input type="text" id="food-search" placeholder="Search foods" ng-model="foodComp.searchTerm" ng-keydown="foodComp.delayBeforeSearch()" class="ng-pristine ng-untouched ng-valid ng-empty">
+    </form><!-- end ngIf: foodComp.soloFoodSearch -->
+    <p ng-show="foodComp.searchResults === null &amp;&amp; foodComp.searchTerm !== &#39;&#39; " class="ng-binding ng-hide">No results found for ""</p>
+
+    <!-- Search results -->
+    <ul id="food-results" ng-show="foodComp.searchResults.length &gt; 0" class="ng-hide">
+        <!-- ngRepeat: result in foodComp.searchResults -->
+    </ul>
+
+    <!-- Meal log list -->
+    <div id="foods-log">
+        <!-- ngRepeat: food in foodComp.foodList track by $index --><div ng-repeat="food in foodComp.foodList track by $index" class="ng-scope">
+            <!-- <h6><strong>{{log.date}}</strong></h6> -->
+            <p class="chosen-food-item-name ng-binding">A DELICIOUS VEGETARIAN ALTERNATIVE TO CHICKEN, UPC: 845561000669</p>
+            <p class="ng-binding"><strong>kCals:</strong> 140</p>
+              <span><a ng-click="foodComp.deleteFood($index)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a></span>
+            <hr>
+            <!-- <div ng-repeat="food in log.foods track by $index" class="chosen-food-header"> -->
+            </div><!-- end ngRepeat: food in foodComp.foodList track by $index --><div ng-repeat="food in foodComp.foodList track by $index" class="ng-scope">
+            <!-- <h6><strong>{{log.date}}</strong></h6> -->
+            <p class="chosen-food-item-name ng-binding">AHOLD, FLATBREAD PIZZA, UPC: 688267147609</p>
+            <p class="ng-binding"><strong>kCals:</strong> 241</p>
+              <span><a ng-click="foodComp.deleteFood($index)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a></span>
+            <hr>
+            <!-- <div ng-repeat="food in log.foods track by $index" class="chosen-food-header"> -->
+            </div><!-- end ngRepeat: food in foodComp.foodList track by $index -->
+        </div>
+    </div>
+
+
+</foods>
+        <activities activity-list="profileComp.activities" current-cals="profileComp.currentCals" class="ng-isolate-scope"><div class="add-container right">
+  <span class="add-name-header">
+    <img src="./MEAN Coach_files/dumbbell.svg" alt="activities">
+    <h3 class="fnt-black">Activities</h3>
+  </span>
+  <hr>
+
+  <div id="all-activities-buttons">
+    <button ng-click="activityComp.findActivities(); activityComp.allActivitiesClicked = true" type="submit" name="activity-button" class="button button-green" id="all-activities-btn">
+      List All Activities
+    </button>
+    <span><button class="button button-gray ng-hide" ng-show="activityComp.allActivitiesClicked === true" ng-click="activityComp.allActivitiesClicked = false">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button></span>
+  </div>
+
+  <!-- ngIf: activityComp.allActivitiesClicked -->
+  <form ng-submit="activityComp.searchActivities()" id="activity-search-form" class="ng-pristine ng-valid">
+    <input type="text" id="activity-search" placeholder="Search activities" ng-model="activityComp.activitySearchTerm" ng-keydown="activityComp.delayBeforeSearch()" class="ng-pristine ng-untouched ng-valid ng-empty">
+  </form>
+
+  <!-- ngRepeat: Activity in activityComp.activitySearchResults track by $index -->
+
+  <!-- Activity log list -->
+  <div id="activities-log">
+      <!-- ngRepeat: activity in activityComp.activityList track by $index -->
+      </div>
+
+</div>
+</activities>
+    </div>
+</div>
+</profile-comp></div>
+
+  
+
+<div class="hiddendiv common"></div><script aria-hidden="true" type="application/x-lastpass" id="hiddenlpsubmitdiv" style="display: none;"></script></body></html>
