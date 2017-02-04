@@ -49,6 +49,7 @@ We are using the [USDA's API](https://ndb.nal.usda.gov/ndb/api/doc) for the list
 ### Future Features
 
 * Improve UX with what fields do what and clarify what they are for.
+* Add custom food field in case the API doens't have your food.
 * Add custom activity form so you can track more specific activities.
 * When selecting prior dates, show days that you hit your goal.
 * Graphing your progress and other trends over a period.
