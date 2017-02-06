@@ -1,26 +1,24 @@
-<div id="hero-container" class="hero-image col 12s">
+<div id="hero-container" class="hero-bkg col 12s">
   <div class="container">
     <div class="left" id="hero-text-container">
-      <h1>Your personal <br/><span class="fnt-black">fitness coach</span>.</h1>
-      <div class="card-content white-text">
-        <h4><span class="fnt-black">M.E.A.N. Coach</span> is your very own personal fitness tracker. You can set goals and log your progress each day. The application has access to a robust library of foods and activities for you to choose from.</h4>
-      </div>
-      <div class="card-action">
-        <a ui-sref="signupState()" class="button button-primary">Get Started</a>
-      </div>
+      <h1><span class="fnt-black">Your personal <br/>fitness coach</span>.</h1>
+      <p class="white-text"><span class="fnt-black">M.E.A.N. Coach</span> is your very own personal fitness tracker. You can set goals and log your progress each day. The application has access to a robust library of foods and activities for you to choose from.</p>
+      <a ui-sref="signupState()" class="button button-primary">Get Started</a>
     </div>
+    <img src="../../../images/phone-hero.png" alt="mobile example" id="hero-phone"> 
   </div>
 </div>
 
 <div class="bkg-white">
   <div class="container" id="features-container">
     <img src="../../../images/features_phone.jpg" id="features-phone">
+    <img src="../../../images/features_phone_horiz.jpg" id="features-phone-horiz">
     <div class="txt-gray" id="features-copy">
       <h2>Your personal fitness coach.</h2>
       <p>Let M.E.A.N. Coach take the guess work out of tracking your health and nutrition.</p>
       <p>
         "M.E.A.N. Coach helped me lose 8lbs in month! It has all the foods that I normally eat. I love how it suggests activities that I can do to reach my daily goals."
-        <p>- Samantha Smith</p>
+        <p><em>&mdash; Samantha Smith</em></p>
       </p>
     </div>
   </div>
@@ -30,21 +28,21 @@
   <div class="container" id="benefits-container">
     <div class="card">
       <div class="card-content">
-        <img class="card-image" src="./images/fitness.png" alt="dumbbell" />
+        <img class="card-image" src="./images/stopclock.svg" alt="dumbbell" />
         <span class="card-title"><h3 class="fnt-black">Your Daily Coach</h3></span>
         <p class="txt-gray">M.E.A.N. Coach is an easy to use fitness application that allows you to set fitness goals and challenge yourself.</p>
       </div>
     </div>
     <div class="card">
       <div class="card-content">
-        <img class="card-image" src="./images/fitness.png" alt="dumbbell" />
+        <img class="card-image" src="./images/food.svg" alt="dumbbell" />
         <span class="card-title"><h3 class="fnt-black">Track Your Nutrition</h3></span>
         <p class="txt-gray">You are what you eat: keeping track of your nutrition is the healthiest and most effective way to lose weight.</p>
       </div>
     </div>
     <div class="card">
       <div class="card-content">
-        <img class="card-image" src="./images/fitness.png" alt="dumbbell" />
+        <img class="card-image" src="./images/mobile.svg" alt="dumbbell" />
         <span class="card-title"><h3 class="fnt-black">On-the-Go Updating</h3></span>
         <p class="txt-gray">Track your health from anywhere, anytime. M.E.A.N. Coach is designed to be mobile friendly so you can keep your log up-to-date, even on-the-go!</p>
       </div>
@@ -53,15 +51,10 @@
 </div>
 
 <!-- Footer -->
-<footer>
+<div id="cta-container">
   <div class="container">
-    <div class="row">
-      <a ui-sref="signupState()" class="button button-primary">Get Started</a>
+      <h2 class="fnt-black">An easy way to plan your diet.</h2>
+      <p>M.E.A.N. Coach is the simplest way to track your daily calories and make sure you're staying on track. Get moving!</p>
+      <a ui-sref="signupState()" class="button button-primary">Sign Up</a>
     </div>
-  </div>
-  <div class="footer-copyright">
-    <div class="container">
-    © 2014 Copyright Text
-    </div>
-  </div>
-</footer>
+</div>

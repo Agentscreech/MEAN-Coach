@@ -1,16 +1,17 @@
 <div id="nav">
   <div class="container" id="nav-container">
     <a ui-sref="homeState()" class="left">
-      <img src="../../../images/brand-logo.svg" alt="MEAN Coach logo" id="brand-logo-nav">
+      <img src="../../../images/brand-logo-desktop.svg" alt="MEAN Coach logo" id="brand-logo-nav-desktop">
+      <img src="../../../images/brand-logo-mobile.svg" alt="MEAN Coach logo" id="brand-logo-nav-mobile">
     </a>
     <div class="vertical-center" id="nav-links">
       <a ui-sref="loginState()" ng-if="!isLoggedIn()">Log In</a>
-      <a ui-sref="signupState()" ng-if="!isLoggedIn()" class="nav-button">Sign Up</a>
+      <button ui-sref="signupState()" ng-if="!isLoggedIn()" class="nav-button fnt-black">Sign Up</button>
       <a ui-sref="profileState({id: navId})" ng-if="isLoggedIn()">Daily Log</a>
       <a ng-click="logout()" ng-if="isLoggedIn()">Sign Out</a>
-      <a ui-sref="userSettingsState({id: navId})" ng-if="isLoggedIn()" class="nav-button">
+      <button ui-sref="userSettingsState({id: navId})" ng-if="isLoggedIn()" class="nav-button">
         <i class="fa fa-cog" aria-hidden="true"></i>
-      </a>
+      </button>
     </div>
   </div>
 </div>

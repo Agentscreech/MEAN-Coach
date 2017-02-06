@@ -37,24 +37,11 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Acti
                 console.log('¯\\_(ツ)_/¯');
             }
         }
+
+        // Set calories meter
         var calPercent = (profileComp.currentCals / profileComp.goal).toFixed(3) * 100;
-        if (calPercent > 100) {
-            $("#current-cals-num").css("color", "#fd0332");
-            $("#cal-fill").css({"background-color": "#fd0332", "height": "100%"});
-            // profileComp.isOver = true;
-        }
-        else if (calPercent >= 80 && calPercent < 100) {
-            $("#current-cals-num").css("color", "#ff9803");
-            $("#cal-fill").css({"background-color": "#ff9803", "height": calPercent + "%"});
-            $("#current-cals").css("background-color", "rgba(255,152,3,.3)");
-            //  profileComp.isOver = false;
-        }
-        else {
-            $("#current-cals-num").css("color", "#00CA6A");
-            $("#cal-fill").css({"background-color": "#00CA6A", "height": calPercent + "%"});
-            $("#current-cals").css("background-color", "rgba(#bcffdb)");
-            // profileComp.isOver = false;
-        }
+        $("#cal-fill").css("height", (100-calPercent) + "%");
+        
     });
     profileComp.foods = [];
     profileComp.isOver = false;
@@ -100,22 +87,9 @@ function ProfileCompCtrl($scope,$stateParams, $window, Profile, Auth, User, Acti
             }
         }
 
-        // Change color and height of calories fill ring based on total
+        // Set calories meter
         var calPercent = (profileComp.currentCals / profileComp.goal).toFixed(3) * 100;
-        if (calPercent > 100) {
-            $("#current-cals-num").css("color", "#F43B37");
-            $("#cal-fill").css({"background-color": "#F43B37", "height": "100%"});
-        }
-        else if (calPercent >= 80 && calPercent < 100) {
-            $("#current-cals-num").css("color", "#ff9803");
-            $("#cal-fill").css({"background-color": "#ff9803", "height": calPercent + "%"});
-            $("#current-cals").css("background-color", "#f9e5af");
-        }
-        else {
-            $("#current-cals-num").css("color", "#00CA6A");
-            $("#cal-fill").css({"background-color": "#00CA6A", "height": calPercent + "%"});
-            $("#current-cals").css("background-color", "rgba(#bcffdb)");
-        }
+        $("#cal-fill").css("height", (100-calPercent) + "%");
 
     }, function error(data){
         console.log(data);
