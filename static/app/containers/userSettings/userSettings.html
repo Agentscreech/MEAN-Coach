@@ -1,21 +1,29 @@
-<div class="daily-log-header">
-    <div class="container">
-        <h4><span class="fnt-black">User Settings</span></h4>
-    </div>
-</div>
-
 <div class="container" id="settings-container">
 
-    <br>
-    <h3>Fill out the following to get your estimated Base Metabolic Rate (BMR)</h3>
-    <p>This is used to suggest a daily caloric intake value.</p>
+    <h2 class="fnt-black">User Settings</h2>
+    <p>Calculate your Base Metabolic Rate (BMR) and set your daily goal.</p>
     <!--TODO: maybe wrap this in an NG-if to show only when you have all the numbers needed-->
 
         <div id="settings-panels">
 
-        <div>
+            <div class="card-panel-left">
+                <div ng-if="userSettingsComp.bmr" class="left-align">
+                    <h3 class="fnt-black">Your BMR:</h3>
+                    <h1 class="txt-green">{{userSettingsComp.bmr}}</h1>
+                    <p>The following are suggestions to maintain your weight for a daily calorie goal based on activity level:</p>
+                    <ul>
+                        <li><span class="fnt-black">Sedentary:</span> {{userSettingsComp.bmr * 1.2 | number:0}}</li>
+                        <li><span class="fnt-black">Low Activity (2&ndash;3 times/week):</span> {{userSettingsComp.bmr * 1.4 | number:0}}</li>
+                        <li><span class="fnt-black">Moderate Activity (4&ndash;5 times/week):</span> {{userSettingsComp.bmr * 1.6 | number:0}}</li>
+                        <li><span class="fnt-black">High Activity (6&ndash;7 times/week):</span> {{userSettingsComp.bmr * 1.8 | number:0}}</li>
+                    </ul>
+                    <p>If you would like to lose 1 lb per week, you need to burn 500 more calories than you consume per day. </p>
+                </div>
+            </div>
 
             <form class="card-panel">
+                <h3 class="fnt-black">1. Your Stats</h3>
+                <hr/>
                 <div class="row">
 
                     <div class="switch">
@@ -45,45 +53,30 @@
                         <input type="number" ng-model="userSettingsComp.age">
                         <label for="age" class="active">Age:</label>
                     </div>
-                    <div class="col s12 m6 l4 input-field">
-                        <p>
-                            <label for="gender">Gender:</label>
-                            <input class="with-gap" type="radio" name="gender" ng-model="userSettingsComp.gender" id="Male" value="Male">
-                            <label for="Male"> Male</label>
-                            <input type="radio" class="with-gap" name="gender" ng-model="userSettingsComp.gender" id="Female" value="Female">
-                            <label for="Female"> Female</label>
-                        </p>
+                    <div class="col s12 m6 l4 input-field gender-select">
+                        <label for="gender">Gender:</label><br/>
+                        <input class="with-gap" type="radio" name="gender" ng-model="userSettingsComp.gender" id="Male" value="Male">
+                        <label for="Male"> Male</label>
+                        <input type="radio" class="with-gap" name="gender" ng-model="userSettingsComp.gender" id="Female" value="Female">
+                        <label for="Female"> Female</label>
                     </div>
                 </div>
-                <button class="button button-gray"  ng-click="userSettingsComp.calcBMR(userSettingsComp.weight, userSettingsComp.height, userSettingsComp.age, userSettingsComp.gender)">Calculate</button>
+                <button class="button button-green"  ng-click="userSettingsComp.calcBMR(userSettingsComp.weight, userSettingsComp.height, userSettingsComp.age, userSettingsComp.gender)">Save Stats &amp; Get BMR</button>
+
+                <div id="set-goal">
+                    <h3 class="fnt-black">2. Your Daily Goal</h3>
+                    <hr/>
+                    <div class="input-field">
+                        <input type="number" ng-model="userSettingsComp.goal" placeholder="Calories per day">
+                        <label for="goal" class="active">Goal: (calories)</label>
+                    </div>
+
+                    <button class="button button-green" ng-if="userSettingsComp.bmr" ng-click="userSettingsComp.updateUser()">Set Target Calories</button>
+                </div>
+
             </form>
-            <div class="card-panel">
-                <div class="input-field col s12 m6 l4">
-                    <input type="number" ng-model="userSettingsComp.goal" placeholder="Calories per day">
-                    <label for="goal" class="active">Goal: (cal)</label>
-                </div>
-
-                <button class="button button-green" ng-if="userSettingsComp.bmr" ng-click="userSettingsComp.updateUser()">Set Target Calories</button>
-            </div>
-
 
         </div>
 
-            <div class="card-panel-gray">
-                <div ng-if="userSettingsComp.bmr" class="left-align">
-                    <h3>Your BMR:</h3>
-                    <h1 class="txt-green">{{userSettingsComp.bmr}}</h1>
-                    <p>The following are suggestions to maintain your weight for a daily calorie goal based on activity level:</p>
-                    <ul>
-                        <li><span class="fnt-black">Sedentary:</span> {{userSettingsComp.bmr * 1.2 | number:0}}</li>
-                        <li><span class="fnt-black">Low Activity (2-3 times/week):</span> {{userSettingsComp.bmr * 1.4 | number:0}}</li>
-                        <li><span class="fnt-black">Moderate Activity(4-5 times/week):</span> {{userSettingsComp.bmr * 1.6 | number:0}}</li>
-                        <li><span class="fnt-black">High Activity (6-7 times/week):</span> {{userSettingsComp.bmr * 1.8 | number:0}}</li>
-                    </ul>
-                    <p>If you would like to lose 1 lb per week, you need to burn 500 more calories than you consume per day. </p>
-                </div>
-            </div>
         
-        </div>
-
 </div>

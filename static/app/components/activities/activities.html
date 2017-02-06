@@ -1,10 +1,13 @@
-<div class="add-container right">
+<div class="add-container">
   <span class="add-name-header">
     <img src="../../../images/dumbbell.svg" alt="activities">
-    <h3 class="fnt-black">Activities</h3>
+    <h3 class="fnt-black">Activity Log</h3>
   </span>
   <hr/>
 
+  <label>Add an activity:</label>
+
+  <!-- All activities -->
   <div id="all-activities-buttons">
     <button ng-click="activityComp.findActivities(); activityComp.allActivitiesClicked = true" type="submit" name="activity-button" class="button button-green" id="all-activities-btn">
       List All Activities
@@ -14,27 +17,34 @@
     </button></span>
   </div>
 
-  <ul id="all-activities" ng-if="activityComp.allActivitiesClicked">
-    <li ng-repeat="Activity in activityComp.allActivities" ng-click="activityComp.clickSearch(event); activityComp.allActivitiesClicked = false">
+    <!-- All activities -->
+  <ul class="all-activities" id="all-activities-list" ng-if="activityComp.allActivitiesClicked">
+    <li ng-repeat="Activity in activityComp.allActivities" ng-click="activityTimeInput = true; activityComp.clickSearch(event); activityComp.allActivitiesClicked = false">
       {{Activity.name}}
       <hr/>
     </li>
   </ul>
+
+  <!-- Search for activity -->
   <form ng-submit="activityComp.searchActivities()" id="activity-search-form">
     <input type="text" id="activity-search" placeholder="Search activities" ng-model="activityComp.activitySearchTerm" ng-keydown="activityComp.delayBeforeSearch()">
   </form>
 
-  <div ng-repeat="Activity in activityComp.activitySearchResults track by $index" class="can-add-activity" ng-show="activityComp.activitySearchResults.length > 0 ">
-      <p><strong>{{Activity.name}}</strong></p>
-      <span>Calories / Hour: <span><strong>{{Activity.calFactor}}</strong></span>
-      <a class="btn-floating btn-small waves-effect waves-light blue" ng-click="activityTimeInput = true; activityAddButton = false" type="sumbit"><i class="material-icons">add</i></a>
-      <span>
-        <form style="display: inline">
-          <input type="integer" ng-model="activityComp.activityduration[$index]" ng-show="activityTimeInput" style="width: 60px;" required>
-          <span ng-show="activityTimeInput">(Minutes)</span>
-          <button ng-click="activityComp.addActivity($index); activityTimeInput = false" ng-if="activityAddButton = true" ng-show="activityTimeInput" type="submit" name="addActivity" required>Add</button>
-        </form>
-      </span>
+  <div class="all-activities" ng-show="activityComp.activitySearchResults.length > 0">
+    <div ng-repeat="Activity in activityComp.activitySearchResults track by $index" class="can-add-activity">
+        <span ng-click="activityTimeInput = true; activityAddButton = false" class="activity-result-item">
+          <p class="fnt-black">{{Activity.name}}</p>
+          <span>kCals/hr: <span class="fnt-black">{{Activity.calFactor}}</span>
+        </span>
+        <div id="activity-qty-container">
+          <form class="activity-qty">
+            <input type="integer" ng-model="activityComp.activityduration[$index]" ng-show="activityTimeInput" required>
+            <span ng-show="activityTimeInput = true">Minutes</span>
+            <button ng-click="activityComp.addActivity($index); !activityTimeInput" ng-if="activityAddButton = true" ng-show="activityTimeInput = true" type="submit" name="addActivity" class="button button-green" required>ADD</button>
+          </form>
+        </div>
+        <hr/>
+    </div>
   </div>
 
   <!-- Activity log list -->
@@ -45,7 +55,7 @@
               <p class="chosen-food-item-name"><span class="fnt-black">{{activity.name}}</span> <br>
               {{activity.caloriesBurned}} kCals</p>
             </span>
-            <div><a ng-click="activityComp.deleteActivity($index)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a></div>
+            <button ng-click="activityComp.deleteActivity($index)" class="button nav-button"><i class="fa fa-times" aria-hidden="true"></i></button>
           </div>
           <hr/>
       </div>
