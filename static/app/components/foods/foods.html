@@ -14,9 +14,9 @@
 
             <!-- Saved foods -->
             <div id="saved-foods">
-                <div ng-repeat="food in foodComp.mealList.foods track by $index" class="chosen-food-header">
+                <div ng-repeat="food in foodComp.mealList.foods track by $index" class="chosen-food-header" id="saved-food-{{$index}}">
                     <span class="saved-food-item">
-                        <button class="nav-button" ng-click="foodComp.removeChosenFood()">
+                        <button class="nav-button" ng-click="foodComp.removeChosenFood($index)">
                           <i class="fa fa-times" aria-hidden="true"></i>
                         </button>
                         <h6 class="chosen-food-item-name"><strong>{{food.name}}</strong></h6>
@@ -34,16 +34,19 @@
                     </button>
                 </span>
                 <label>Choose quantity:</label>
-                <form ng-submit="foodComp.findFoods()" class="food-measure" ng-repeat="measure in foodComp.chosenFoodMeasures">
+                <form ng-submit="foodComp.findFoods()" class="food-measure" ng-repeat="measure in foodComp.chosenFoodMeasures track by $index">
                     <label>{{measure.qty}} {{measure.label}}</label>
                     <hr/>
                         <div class="adjust-measure">
                             <span class="measure-qty">
                                 <label class="servings"></label>
-                                <input type="text" class="food-measure-input" ng-model="foodComp.measureQty">
+                                <input type="text" class="food-measure-input" ng-model="foodComp.measureQtys[$index]">
                             </span>
-                            <label><strong>kCals:</strong> {{foodComp.measureQty * measure.value}}</label>
-                            <button class="button button-green" ng-click="foodComp.addFood(event); foodComp.soloFoodSearch = true; foodComp.hideSaveMeal = true" id="{{foodComp.measureQty * measure.value}}">ADD</button>
+                            <label><strong>kCals:</strong> {{foodComp.measureQtys[$index] * measure.value}}</label>
+                            <button class="button button-green" ng-click="foodComp.addFood(event); foodComp.soloFoodSearch = true; foodComp.hideSaveMeal = true" id="{{foodComp.measureQtys[$index] * measure.value}}">
+                                <span class="measure-add-text">ADD</span>
+                                <span class="measure-add-icon"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                            </button>
                         </div>
                 </form>
             </div>
