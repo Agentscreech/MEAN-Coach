@@ -43,10 +43,7 @@
                                 <input type="text" class="food-measure-input" ng-model="foodComp.measureQtys[$index]">
                             </span>
                             <label><strong>kCals:</strong> {{foodComp.measureQtys[$index] * measure.value}}</label>
-                            <button class="button button-green" ng-click="foodComp.addFood(event); foodComp.soloFoodSearch = true; foodComp.hideSaveMeal = true" id="{{foodComp.measureQtys[$index] * measure.value}}">
-                                <span class="measure-add-text">ADD</span>
-                                <span class="measure-add-icon"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                            </button>
+                            <button class="button button-green" ng-click="foodComp.addFood(event); foodComp.soloFoodSearch = true; foodComp.hideSaveMeal = true" id="{{foodComp.measureQtys[$index] * measure.value}}">ADD</button>
                         </div>
                 </form>
             </div>
@@ -83,6 +80,4 @@
             <hr/>
             </div>
         </div>
-    </div>
-
 </div>
